@@ -4,7 +4,7 @@
   "description": "Lorven Studios AI - Mobile-First Content Platform",
   "private": true,
   "type": "module",
-  "homepage": "https://aniket.github.io/Lorven-AI",
+  "homepage": "https://wharf-street-studios.github.io/lorven-ai",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

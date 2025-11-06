@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 
 export default defineConfig({
-  base: '/Lorven-AI/',
+  base: '/lorven-ai/',
   plugins: [react()],
   resolve: {
     alias: {
