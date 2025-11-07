@@ -46,37 +46,39 @@ const CreateAccountAvatar: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Header */}
-      <div className="px-6 py-4 border-b-2 border-gray-200">
+      <div className="px-6 py-5 border-b border-gray-200 bg-white/80 backdrop-blur-xl sticky top-0 z-10 shadow-soft">
         <button
           onClick={() => navigate(-1)}
-          className="text-2xl"
+          className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-300 hover:scale-110 active:scale-95"
         >
-          ←
+          <span className="text-xl">←</span>
         </button>
       </div>
 
       {/* Content */}
-      <div className="p-6">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Choose Your Avatar
-        </h1>
-        <p className="text-gray-600 mb-8">
-          Select a preset or upload your own
-        </p>
+      <div className="p-6 max-w-md mx-auto">
+        <div className="mb-8 animate-fade-in">
+          <h1 className="text-4xl font-bold text-gray-900 mb-3 tracking-tight">
+            Choose Your Avatar
+          </h1>
+          <p className="text-gray-600 text-lg">
+            Select a preset or upload your own
+          </p>
+        </div>
 
         {/* Upload Custom Avatar */}
-        <div className="mb-8">
-          <button className="w-full h-32 border-2 border-dashed border-gray-300 rounded-xl hover:border-gray-400 transition-all duration-200 flex flex-col items-center justify-center space-y-2">
-            <span className="text-4xl">📷</span>
-            <span className="text-sm text-gray-600 font-medium">Upload Custom Avatar</span>
+        <div className="mb-8 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+          <button className="w-full h-32 border-2 border-dashed border-gray-300 rounded-2xl hover:border-primary-500 hover:bg-primary-50 transition-all duration-300 flex flex-col items-center justify-center space-y-2 shadow-soft hover:shadow-medium group bg-white">
+            <span className="text-5xl group-hover:scale-110 transition-transform duration-300">📷</span>
+            <span className="text-sm text-gray-600 font-semibold group-hover:text-primary-600 transition-colors">Upload Custom Avatar</span>
           </button>
         </div>
 
         {/* Preset Avatars */}
-        <div>
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+        <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
+          <h2 className="text-lg font-bold text-gray-900 mb-4">
             Preset Avatars
           </h2>
           <div className="grid grid-cols-3 gap-4">
@@ -84,10 +86,10 @@ const CreateAccountAvatar: React.FC = () => {
               <button
                 key={index}
                 onClick={() => setSelectedAvatar(avatar)}
-                className={`aspect-square rounded-xl border-2 transition-all duration-200 flex items-center justify-center text-5xl
+                className={`aspect-square rounded-2xl border-2 transition-all duration-300 flex items-center justify-center text-5xl shadow-soft hover:shadow-medium transform
                   ${selectedAvatar === avatar
-                    ? 'border-gray-900 bg-gray-50 scale-95'
-                    : 'border-gray-300 hover:border-gray-400 hover:bg-gray-50'
+                    ? 'border-primary-500 bg-gradient-to-br from-primary-50 to-accent-50 scale-95 shadow-medium'
+                    : 'border-gray-300 hover:border-primary-400 hover:bg-gradient-to-br hover:from-primary-50 hover:to-accent-50 bg-white hover:scale-105'
                   }
                 `}
               >
@@ -97,7 +99,7 @@ const CreateAccountAvatar: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-8 space-y-4">
+        <div className="mt-8 space-y-4 animate-slide-up" style={{ animationDelay: '0.3s' }}>
           <Button
             variant="primary"
             size="large"
@@ -110,7 +112,7 @@ const CreateAccountAvatar: React.FC = () => {
 
           <button
             onClick={handleCompleteSetup}
-            className="w-full text-center text-gray-500 text-sm"
+            className="w-full text-center text-gray-600 hover:text-gray-900 text-sm font-semibold transition-colors duration-300"
             disabled={loading}
           >
             Skip for now
