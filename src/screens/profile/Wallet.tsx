@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTokens } from '../../context/TokenContext';
 import { Button, Card, BottomNavigation } from '../../components/ui';
@@ -14,9 +14,14 @@ const Wallet: React.FC = () => {
   const navigate = useNavigate();
   const { balance, transactions, purchaseTokens } = useTokens();
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
   const handlePurchase = (tokens: number, price: number) => {
     // Mock purchase - in real app would integrate with Stripe
-    if (confirm(`Purchase ${tokens} tokens for $${price}?`)) {
+    if (confirm(`Purchase ${tokens} Epiko Tokens for $${price}?`)) {
       purchaseTokens(tokens);
       alert('Purchase successful!');
     }
@@ -42,13 +47,13 @@ const Wallet: React.FC = () => {
             <span className="text-5xl">💎</span>
             <span className="text-5xl font-bold">{balance}</span>
           </div>
-          <p className="text-sm opacity-80">Tokens</p>
+          <p className="text-sm opacity-80">Epiko Tokens</p>
         </Card>
       </div>
 
       {/* Token Packages */}
       <div className="px-6 pb-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Purchase Tokens</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-4">Purchase Epiko Tokens</h2>
         <div className="grid grid-cols-2 gap-4">
           {tokenPackages.map((pkg) => (
             <Card
@@ -66,7 +71,7 @@ const Wallet: React.FC = () => {
                 {pkg.tokens}
                 {pkg.bonus > 0 && <span className="text-sm text-green-600"> +{pkg.bonus}</span>}
               </p>
-              <p className="text-sm text-gray-600 mb-3">tokens</p>
+              <p className="text-sm text-gray-600 mb-3">Epiko Tokens</p>
               <Button
                 variant={pkg.popular ? 'primary' : 'outline'}
                 size="small"
