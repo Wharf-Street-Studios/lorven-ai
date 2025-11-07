@@ -182,16 +182,19 @@ const HomeScreen: React.FC = () => {
 
         {/* Discovery Feed CTA */}
         <section>
-          <Button
-            variant="primary"
-            size="large"
-            fullWidth
-            onClick={() => navigate('/discover')}
-            className="flex items-center justify-center gap-2"
-          >
-            <Search className="w-5 h-5" />
-            Explore Discovery Feed
-          </Button>
+          <div className="flex items-center justify-center gap-2">
+            <Button
+              variant="primary"
+              size="large"
+              fullWidth
+              onClick={() => navigate('/discover')}
+            >
+              <span className="flex items-center justify-center gap-2">
+                <Search className="w-5 h-5" />
+                Explore Discovery Feed
+              </span>
+            </Button>
+          </div>
         </section>
       </main>
 
