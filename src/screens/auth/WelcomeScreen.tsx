@@ -63,12 +63,6 @@ const WelcomeScreen: React.FC = () => {
         >
           Sign In
         </Button>
-        <button
-          onClick={() => navigate('/discover')}
-          className="w-full text-center text-sm text-gray-600 hover:text-gray-900 transition-colors py-2"
-        >
-          Browse as Guest
-        </button>
       </div>
 
       {/* Footer */}

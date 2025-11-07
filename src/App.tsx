@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { TokenProvider } from './context/TokenContext';
+import ProtectedRoute from './components/ProtectedRoute';
 
 // Auth Screens
 import WelcomeScreen from './screens/auth/WelcomeScreen';
@@ -42,43 +43,43 @@ function App() {
       <TokenProvider>
         <div className="min-h-screen bg-white">
           <Routes>
-            {/* Auth Routes */}
+            {/* Public Auth Routes */}
             <Route path="/welcome" element={<WelcomeScreen />} />
-            <Route path="/" element={<DiscoveryFeed />} />
             <Route path="/social-sign-in" element={<SocialSignIn />} />
             <Route path="/create-account" element={<CreateAccountDetails />} />
             <Route path="/create-account/avatar" element={<CreateAccountAvatar />} />
             <Route path="/sign-in" element={<SignInScreen />} />
 
-            {/* Home & Navigation */}
+            {/* Protected Routes - Require Authentication */}
+            <Route path="/" element={<ProtectedRoute><DiscoveryFeed /></ProtectedRoute>} />
+            <Route path="/discover" element={<ProtectedRoute><DiscoveryFeed /></ProtectedRoute>} />
             <Route path="/home" element={<Navigate to="/discover" replace />} />
-            <Route path="/tools" element={<ToolsMenu />} />
 
-            {/* AI Tools */}
-            <Route path="/tools/face-swap" element={<FaceSwapTool />} />
-            <Route path="/tools/ai-avatar" element={<AIAvatarTool />} />
-            <Route path="/tools/couple-photo" element={<CouplePhotoTool />} />
-            <Route path="/tools/baby-predictor" element={<BabyPredictorTool />} />
-            <Route path="/tools/gender-swap" element={<GenderSwapTool />} />
-            <Route path="/tools/age-transform" element={<AgeTransformTool />} />
-            <Route path="/tools/enhance" element={<EnhanceTool />} />
+            {/* Tools */}
+            <Route path="/tools" element={<ProtectedRoute><ToolsMenu /></ProtectedRoute>} />
+            <Route path="/tools/face-swap" element={<ProtectedRoute><FaceSwapTool /></ProtectedRoute>} />
+            <Route path="/tools/ai-avatar" element={<ProtectedRoute><AIAvatarTool /></ProtectedRoute>} />
+            <Route path="/tools/couple-photo" element={<ProtectedRoute><CouplePhotoTool /></ProtectedRoute>} />
+            <Route path="/tools/baby-predictor" element={<ProtectedRoute><BabyPredictorTool /></ProtectedRoute>} />
+            <Route path="/tools/gender-swap" element={<ProtectedRoute><GenderSwapTool /></ProtectedRoute>} />
+            <Route path="/tools/age-transform" element={<ProtectedRoute><AgeTransformTool /></ProtectedRoute>} />
+            <Route path="/tools/enhance" element={<ProtectedRoute><EnhanceTool /></ProtectedRoute>} />
 
-            {/* Social Routes */}
-            <Route path="/discover" element={<DiscoveryFeed />} />
-            <Route path="/search" element={<SearchExplore />} />
-            <Route path="/reel/:id" element={<ReelView />} />
-            <Route path="/profile/:username" element={<CreatorProfile />} />
+            {/* Social */}
+            <Route path="/search" element={<ProtectedRoute><SearchExplore /></ProtectedRoute>} />
+            <Route path="/reel/:id" element={<ProtectedRoute><ReelView /></ProtectedRoute>} />
+            <Route path="/profile/:username" element={<ProtectedRoute><CreatorProfile /></ProtectedRoute>} />
 
             {/* Profile & Settings */}
-            <Route path="/profile" element={<UserProfile />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/plans" element={<ChoosePlan />} />
-            <Route path="/wallet" element={<Wallet />} />
-            <Route path="/rewards" element={<Rewards />} />
-            <Route path="/notifications" element={<Notifications />} />
+            <Route path="/profile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
+            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path="/plans" element={<ProtectedRoute><ChoosePlan /></ProtectedRoute>} />
+            <Route path="/wallet" element={<ProtectedRoute><Wallet /></ProtectedRoute>} />
+            <Route path="/rewards" element={<ProtectedRoute><Rewards /></ProtectedRoute>} />
+            <Route path="/notifications" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
 
-            {/* Catch all */}
-            <Route path="*" element={<Navigate to="/discover" replace />} />
+            {/* Catch all - redirect to welcome if not authenticated */}
+            <Route path="*" element={<Navigate to="/welcome" replace />} />
           </Routes>
         </div>
       </TokenProvider>
