@@ -32,6 +32,7 @@ import CreatorProfile from './screens/social/CreatorProfile';
 // Profile & Settings
 import UserProfile from './screens/profile/UserProfile';
 import Dashboard from './screens/profile/Dashboard';
+import Settings from './screens/profile/Settings';
 import ChoosePlan from './screens/profile/ChoosePlan';
 import Wallet from './screens/profile/Wallet';
 import Rewards from './screens/profile/Rewards';
@@ -72,6 +73,7 @@ function App() {
 
             {/* Profile & Settings */}
             <Route path="/profile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
+            <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/plans" element={<ProtectedRoute><ChoosePlan /></ProtectedRoute>} />
             <Route path="/wallet" element={<ProtectedRoute><Wallet /></ProtectedRoute>} />

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useTokens } from '../../context/TokenContext';
 import { Button, BottomNavigation } from '../../components/ui';
-import { Settings, Edit, Bell, Lock, LogOut, User, Grid, Heart, MoreVertical, Wallet, Sparkles, Image as ImageIcon } from 'lucide-react';
+import { Settings } from 'lucide-react';
 
 const mockUserCreations = [
   { id: 1, emoji: '🎨', likes: 45, tool: 'Face Swap' },
@@ -18,18 +18,8 @@ const mockLikedContent = [
 
 const UserProfile: React.FC = () => {
   const navigate = useNavigate();
-  const { user, signOut } = useAuth();
-  const { balance } = useTokens();
+  const { user } = useAuth();
   const [activeTab, setActiveTab] = useState<'grid' | 'liked'>('grid');
-  const [showSettings, setShowSettings] = useState(false);
-  const [showEditProfile, setShowEditProfile] = useState(false);
-
-  const handleSignOut = () => {
-    if (confirm('Are you sure you want to sign out?')) {
-      signOut();
-      navigate('/');
-    }
-  };
 
   if (!user) {
     return (
@@ -60,56 +50,13 @@ const UserProfile: React.FC = () => {
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-gray-900">Profile</h1>
           <button
-            onClick={() => setShowSettings(!showSettings)}
+            onClick={() => navigate('/settings')}
             className="p-2 hover:bg-gray-100 rounded-lg transition-all"
           >
             <Settings className="w-6 h-6 text-gray-700" />
           </button>
         </div>
       </header>
-
-      {/* Settings Dropdown */}
-      {showSettings && (
-        <div className="bg-white border-b-2 border-gray-200 px-6 py-4">
-          <div className="space-y-2">
-            <button
-              onClick={() => {
-                setShowEditProfile(true);
-                setShowSettings(false);
-              }}
-              className="w-full text-left px-4 py-3 hover:bg-gray-50 rounded-lg transition-colors flex items-center gap-2"
-            >
-              <Edit className="w-5 h-5" />
-              Edit Profile
-            </button>
-            <button
-              onClick={() => navigate('/wallet')}
-              className="w-full text-left px-4 py-3 hover:bg-gray-50 rounded-lg transition-colors flex items-center gap-2"
-            >
-              <Wallet className="w-5 h-5" />
-              Wallet & Tokens
-            </button>
-            <button
-              onClick={() => navigate('/notifications')}
-              className="w-full text-left px-4 py-3 hover:bg-gray-50 rounded-lg transition-colors flex items-center gap-2"
-            >
-              <Bell className="w-5 h-5" />
-              Notifications
-            </button>
-            <button className="w-full text-left px-4 py-3 hover:bg-gray-50 rounded-lg transition-colors flex items-center gap-2">
-              <Lock className="w-5 h-5" />
-              Privacy Settings
-            </button>
-            <button
-              onClick={handleSignOut}
-              className="w-full text-left px-4 py-3 hover:bg-red-50 rounded-lg transition-colors text-red-600 flex items-center gap-2"
-            >
-              <LogOut className="w-5 h-5" />
-              Sign Out
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* Profile Info */}
       <div className="p-6">
