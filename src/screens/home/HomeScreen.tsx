@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useTokens } from '../../context/TokenContext';
 import { Card, Button, BottomNavigation } from '../../components/ui';
+import { Search, Gem, Bell, User, TrendingUp, Heart, ArrowRight } from 'lucide-react';
 
 const aiTools = [
   { id: 'face-swap', name: 'Face Swap', icon: '🎭', path: '/tools/face-swap', popular: true },
@@ -38,31 +39,39 @@ const HomeScreen: React.FC = () => {
     <div className="min-h-screen bg-gray-50 pb-20">
       {/* Header */}
       <header className="bg-white border-b-2 border-gray-200 px-6 py-4 sticky top-0 z-10">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mb-3">
           <h1 className="text-2xl font-bold text-gray-900">
             Lorven Studios AI
           </h1>
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3">
             <button
               onClick={() => navigate('/wallet')}
               className="flex items-center space-x-1 bg-gray-100 px-3 py-2 rounded-lg hover:bg-gray-200 transition-all"
             >
-              <span className="text-lg">💎</span>
+              <Gem className="w-4 h-4 text-blue-600" />
               <span className="font-bold text-gray-900">{balance}</span>
             </button>
-            <button onClick={() => navigate('/notifications')} className="relative">
-              <span className="text-2xl">🔔</span>
-              <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-[10px] text-white flex items-center justify-center">
+            <button onClick={() => navigate('/notifications')} className="relative p-2 hover:bg-gray-100 rounded-lg">
+              <Bell className="w-5 h-5 text-gray-700" />
+              <span className="absolute top-1 right-1 w-4 h-4 bg-red-500 rounded-full text-[10px] text-white flex items-center justify-center">
                 3
               </span>
             </button>
-            <button onClick={() => navigate('/profile')}>
-              <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-xl">
-                {user?.avatar || '👤'}
+            <button onClick={() => navigate('/profile')} className="p-1">
+              <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+                <User className="w-5 h-5 text-gray-700" />
               </div>
             </button>
           </div>
         </div>
+        {/* Search Bar */}
+        <button
+          onClick={() => navigate('/search')}
+          className="w-full bg-gray-100 rounded-lg px-4 py-2.5 flex items-center space-x-2 hover:bg-gray-200 transition-all"
+        >
+          <Search className="w-5 h-5 text-gray-500" />
+          <span className="text-gray-500 text-sm">Search tools, creators...</span>
+        </button>
       </header>
 
       {/* Main Content */}
@@ -70,14 +79,16 @@ const HomeScreen: React.FC = () => {
         {/* Popular Tools Section */}
         <section>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold text-gray-900">
-              🔥 Popular Tools
+            <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+              <TrendingUp className="w-6 h-6 text-orange-500" />
+              Popular Tools
             </h2>
             <button
               onClick={() => navigate('/tools')}
-              className="text-sm text-gray-600 font-medium hover:text-gray-900"
+              className="text-sm text-gray-600 font-medium hover:text-gray-900 flex items-center gap-1"
             >
-              View All →
+              View All
+              <ArrowRight className="w-4 h-4" />
             </button>
           </div>
           <div className="grid grid-cols-3 gap-3">
@@ -176,8 +187,10 @@ const HomeScreen: React.FC = () => {
             size="large"
             fullWidth
             onClick={() => navigate('/discover')}
+            className="flex items-center justify-center gap-2"
           >
-            🔍 Explore Discovery Feed
+            <Search className="w-5 h-5" />
+            Explore Discovery Feed
           </Button>
         </section>
       </main>

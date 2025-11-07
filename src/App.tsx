@@ -43,7 +43,8 @@ function App() {
         <div className="min-h-screen bg-white">
           <Routes>
             {/* Auth Routes */}
-            <Route path="/" element={<WelcomeScreen />} />
+            <Route path="/welcome" element={<WelcomeScreen />} />
+            <Route path="/" element={<DiscoveryFeed />} />
             <Route path="/social-sign-in" element={<SocialSignIn />} />
             <Route path="/create-account" element={<CreateAccountDetails />} />
             <Route path="/create-account/avatar" element={<CreateAccountAvatar />} />
@@ -77,7 +78,7 @@ function App() {
             <Route path="/notifications" element={<Notifications />} />
 
             {/* Catch all */}
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<Navigate to="/discover" replace />} />
           </Routes>
         </div>
       </TokenProvider>
