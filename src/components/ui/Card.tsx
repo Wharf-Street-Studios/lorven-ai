@@ -5,17 +5,19 @@ interface CardProps {
   onClick?: () => void;
   className?: string;
   hover?: boolean;
+  style?: React.CSSProperties;
 }
 
-const Card: React.FC<CardProps> = ({ children, onClick, className = '', hover = false }) => {
-  const baseStyles = 'bg-white border-2 border-gray-300 rounded-xl p-4 transition-all duration-200';
-  const hoverStyles = hover ? 'hover:border-gray-900 hover:shadow-md cursor-pointer active:scale-95' : '';
+const Card: React.FC<CardProps> = ({ children, onClick, className = '', hover = false, style }) => {
+  const baseStyles = 'bg-white rounded-2xl transition-all duration-300 shadow-soft';
+  const hoverStyles = hover ? 'hover:shadow-medium cursor-pointer active:scale-[0.98] transform' : '';
   const clickableStyles = onClick ? 'cursor-pointer' : '';
 
   return (
     <div
       onClick={onClick}
       className={`${baseStyles} ${hoverStyles} ${clickableStyles} ${className}`}
+      style={style}
     >
       {children}
     </div>
