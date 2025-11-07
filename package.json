@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "lint": "tsc --noEmit",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist -t true",
+    "deploy": "gh-pages -d dist --dotfiles",
     "publish": "git push && npm run deploy"
   },
   "dependencies": {
