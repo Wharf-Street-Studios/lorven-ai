@@ -42,9 +42,9 @@ const SignInScreen: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="px-6 py-5 border-b border-gray-200 bg-white/80 backdrop-blur-xl sticky top-0 z-10 shadow-soft">
+      <div className="px-6 py-5 border-b-2 border-gray-300 bg-white sticky top-0 z-10 shadow-medium">
         <button
           onClick={() => navigate(-1)}
           className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-300 hover:scale-110 active:scale-95"
@@ -95,7 +95,10 @@ const SignInScreen: React.FC = () => {
           />
 
           <div className="flex justify-end">
-            <button className="text-sm text-primary-600 hover:text-primary-700 font-semibold transition-colors duration-300">
+            <button
+              onClick={() => navigate('/forgot-password')}
+              className="text-sm text-primary-600 hover:text-primary-700 font-semibold transition-colors duration-300 underline"
+            >
               Forgot Password?
             </button>
           </div>

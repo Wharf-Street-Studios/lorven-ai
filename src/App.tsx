@@ -10,6 +10,7 @@ import CreateAccountDetails from './screens/auth/CreateAccountDetails';
 import CreateAccountAvatar from './screens/auth/CreateAccountAvatar';
 import SignInScreen from './screens/auth/SignInScreen';
 import SocialSignIn from './screens/auth/SocialSignIn';
+import ForgotPassword from './screens/auth/ForgotPassword';
 
 // Home & Navigation
 import HomeScreen from './screens/home/HomeScreen';
@@ -52,6 +53,7 @@ function App() {
             <Route path="/create-account" element={<CreateAccountDetails />} />
             <Route path="/create-account/avatar" element={<CreateAccountAvatar />} />
             <Route path="/sign-in" element={<SignInScreen />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
 
             {/* Protected Routes - Require Authentication */}
             <Route path="/" element={<ProtectedRoute><DiscoveryFeed /></ProtectedRoute>} />
