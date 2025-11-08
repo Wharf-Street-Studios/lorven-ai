@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../components/ui';
+import { SparklesIcon, PaintBrush01Icon, StarIcon, Rocket01Icon } from 'hugeicons-react';
 
 const WelcomeScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -9,8 +10,8 @@ const WelcomeScreen: React.FC = () => {
     <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-b from-gray-50 via-white to-gray-50">
       {/* App Branding */}
       <div className="text-center mb-12 animate-fade-in">
-        <div className="w-28 h-28 bg-gradient-to-br from-primary-400 to-accent-400 rounded-full mx-auto mb-8 flex items-center justify-center shadow-strong animate-scale-in">
-          <span className="text-5xl">✨</span>
+        <div className="w-28 h-28 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full mx-auto mb-8 flex items-center justify-center shadow-strong animate-scale-in">
+          <SparklesIcon size={56} color="#ffffff" />
         </div>
         <h1 className="text-5xl font-bold text-gray-900 mb-4 tracking-tight">
           Lorven Studios AI
@@ -23,8 +24,8 @@ const WelcomeScreen: React.FC = () => {
       {/* Value Proposition */}
       <div className="w-full max-w-sm space-y-5 mb-12">
         <div className="flex items-start space-x-4 bg-white p-5 rounded-2xl shadow-medium hover:shadow-strong border-2 border-gray-200 hover:border-gray-300 transition-all duration-300 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-          <div className="w-12 h-12 bg-gradient-to-br from-primary-50 to-accent-50 rounded-xl flex items-center justify-center flex-shrink-0 shadow-medium border-2 border-primary-200">
-            <span className="text-2xl">🎨</span>
+          <div className="w-12 h-12 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl flex items-center justify-center flex-shrink-0 shadow-medium border-2 border-blue-200">
+            <PaintBrush01Icon size={24} color="#2563eb" />
           </div>
           <div>
             <h3 className="font-bold text-gray-900 mb-1">AI-Powered Tools</h3>
@@ -32,8 +33,8 @@ const WelcomeScreen: React.FC = () => {
           </div>
         </div>
         <div className="flex items-start space-x-4 bg-white p-5 rounded-2xl shadow-medium hover:shadow-strong border-2 border-gray-200 hover:border-gray-300 transition-all duration-300 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-          <div className="w-12 h-12 bg-gradient-to-br from-primary-50 to-accent-50 rounded-xl flex items-center justify-center flex-shrink-0 shadow-medium border-2 border-primary-200">
-            <span className="text-2xl">🌟</span>
+          <div className="w-12 h-12 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl flex items-center justify-center flex-shrink-0 shadow-medium border-2 border-blue-200">
+            <StarIcon size={24} color="#2563eb" />
           </div>
           <div>
             <h3 className="font-bold text-gray-900 mb-1">Discover & Share</h3>
@@ -41,8 +42,8 @@ const WelcomeScreen: React.FC = () => {
           </div>
         </div>
         <div className="flex items-start space-x-4 bg-white p-5 rounded-2xl shadow-medium hover:shadow-strong border-2 border-gray-200 hover:border-gray-300 transition-all duration-300 animate-slide-up" style={{ animationDelay: '0.3s' }}>
-          <div className="w-12 h-12 bg-gradient-to-br from-primary-50 to-accent-50 rounded-xl flex items-center justify-center flex-shrink-0 shadow-medium border-2 border-primary-200">
-            <span className="text-2xl">🚀</span>
+          <div className="w-12 h-12 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl flex items-center justify-center flex-shrink-0 shadow-medium border-2 border-blue-200">
+            <Rocket01Icon size={24} color="#2563eb" />
           </div>
           <div>
             <h3 className="font-bold text-gray-900 mb-1">Create in Seconds</h3>

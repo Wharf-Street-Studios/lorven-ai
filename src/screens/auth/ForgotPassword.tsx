@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Input } from '../../components/ui';
+import { LockPasswordIcon, Tick02Icon } from 'hugeicons-react';
 
 const ForgotPassword: React.FC = () => {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ const ForgotPassword: React.FC = () => {
         {/* Success Content */}
         <div className="p-6 max-w-md mx-auto flex flex-col items-center justify-center min-h-[80vh]">
           <div className="w-24 h-24 bg-gradient-to-br from-green-400 to-green-500 rounded-full mx-auto mb-6 flex items-center justify-center shadow-strong">
-            <span className="text-5xl">✓</span>
+            <Tick02Icon size={56} color="#ffffff" strokeWidth={3} />
           </div>
           <h1 className="text-4xl font-bold text-gray-900 text-center mb-4 tracking-tight">
             Check Your Email
@@ -99,8 +100,8 @@ const ForgotPassword: React.FC = () => {
       {/* Content */}
       <div className="p-6 max-w-md mx-auto">
         <div className="mb-10 animate-fade-in">
-          <div className="w-20 h-20 bg-gradient-to-br from-primary-400 to-accent-400 rounded-full mx-auto mb-6 flex items-center justify-center shadow-medium border-2 border-primary-500">
-            <span className="text-4xl">🔑</span>
+          <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full mx-auto mb-6 flex items-center justify-center shadow-medium border-2 border-blue-600">
+            <LockPasswordIcon size={40} color="#ffffff" />
           </div>
           <h1 className="text-4xl font-bold text-gray-900 text-center mb-3 tracking-tight">
             Forgot Password?

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { Button, Input } from '../../components/ui';
+import { SparklesIcon } from 'hugeicons-react';
 
 const SignInScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -56,8 +57,8 @@ const SignInScreen: React.FC = () => {
       {/* Content */}
       <div className="p-6 max-w-md mx-auto">
         <div className="mb-10 animate-fade-in">
-          <div className="w-20 h-20 bg-gradient-to-br from-primary-400 to-accent-400 rounded-full mx-auto mb-6 flex items-center justify-center shadow-medium">
-            <span className="text-4xl">✨</span>
+          <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full mx-auto mb-6 flex items-center justify-center shadow-medium">
+            <SparklesIcon size={40} color="#ffffff" />
           </div>
           <h1 className="text-4xl font-bold text-gray-900 text-center mb-3 tracking-tight">
             Welcome Back

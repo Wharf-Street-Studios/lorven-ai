@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BottomNavigation, Card } from '../../components/ui';
-import { Search01Icon } from 'hugeicons-react';
+import {
+  Search01Icon,
+  FavouriteIcon,
+  Message01Icon,
+  Share08Icon,
+  BookmarkAdd01Icon,
+  SparklesIcon,
+  MoreVerticalIcon
+} from 'hugeicons-react';
 
 interface Post {
   id: number;
@@ -131,7 +139,7 @@ const DiscoveryFeed: React.FC = () => {
                 </div>
               </button>
               <button className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 transition-all duration-300 text-gray-400 hover:text-gray-600 active:scale-90">
-                <span className="text-xl">⋯</span>
+                <MoreVerticalIcon size={20} color="#9ca3af" />
               </button>
             </div>
 
@@ -155,23 +163,30 @@ const DiscoveryFeed: React.FC = () => {
                     onClick={() => handleLike(post.id)}
                     className="flex items-center space-x-2 group"
                   >
-                    <span className={`text-2xl transition-all duration-300 ${post.isLiked ? 'scale-110 animate-pulse' : 'group-hover:scale-110'}`}>
-                      {post.isLiked ? '❤️' : '🤍'}
-                    </span>
+                    <FavouriteIcon
+                      size={24}
+                      color={post.isLiked ? '#ef4444' : '#9ca3af'}
+                      className={`transition-all duration-300 ${post.isLiked ? 'scale-110 fill-current' : 'group-hover:scale-110'}`}
+                    />
                     <span className="text-sm font-semibold text-gray-900">{post.likes}</span>
                   </button>
                   <button className="flex items-center space-x-2 group">
-                    <span className="text-2xl group-hover:scale-110 transition-all duration-300">💬</span>
+                    <Message01Icon size={24} color="#9ca3af" className="group-hover:scale-110 transition-all duration-300" />
                     <span className="text-sm font-semibold text-gray-900">{post.comments}</span>
                   </button>
-                  <button className="text-2xl hover:scale-110 transition-all duration-300 hover:rotate-12">🔗</button>
+                  <button className="hover:scale-110 transition-all duration-300">
+                    <Share08Icon size={24} color="#9ca3af" />
+                  </button>
                 </div>
-                <button className="text-2xl hover:scale-110 transition-all duration-300 hover:-rotate-12">🔖</button>
+                <button className="hover:scale-110 transition-all duration-300">
+                  <BookmarkAdd01Icon size={24} color="#9ca3af" />
+                </button>
               </div>
 
               {/* Tool Used */}
-              <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-full border border-gray-200 shadow-soft">
-                <span className="text-xs font-semibold text-gray-700">✨ {post.tool}</span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-full border border-gray-200 shadow-soft">
+                <SparklesIcon size={14} color="#374151" />
+                <span className="text-xs font-semibold text-gray-700">{post.tool}</span>
               </div>
             </div>
           </Card>
