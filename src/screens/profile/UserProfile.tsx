@@ -93,16 +93,6 @@ const UserProfile: React.FC = () => {
             AI content creator ✨ | Exploring the creative possibilities
           </p>
         </div>
-
-        {/* Edit Profile Button */}
-        <Button
-          variant="outline"
-          size="medium"
-          fullWidth
-          onClick={() => navigate('/settings')}
-        >
-          Edit Profile
-        </Button>
       </div>
 
       {/* Account Stats */}
