@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import {
+  FavouriteIcon,
+  Message01Icon,
+  Share08Icon,
+  BookmarkAdd01Icon,
+  Cancel01Icon,
+  ArrowLeft01Icon,
+} from 'hugeicons-react';
 
 const mockReel = {
   id: 1,
@@ -85,10 +93,13 @@ const ReelView: React.FC = () => {
       {/* Header */}
       <div className="absolute top-0 left-0 right-0 p-6 bg-gradient-to-b from-black/60 to-transparent">
         <div className="flex items-center justify-between">
-          <button onClick={() => navigate(-1)} className="text-white text-2xl">
-            ←
+          <button
+            onClick={() => navigate(-1)}
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-all duration-300"
+          >
+            <ArrowLeft01Icon size={24} color="#ffffff" />
           </button>
-          <span className="text-white text-sm font-medium bg-white/20 px-3 py-1 rounded-full">
+          <span className="text-white text-sm font-semibold bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30">
             {reel.content.tool}
           </span>
         </div>
@@ -125,25 +136,39 @@ const ReelView: React.FC = () => {
 
           {/* Action Buttons */}
           <div className="flex flex-col items-center space-y-6">
-            <button onClick={handleLike} className="text-center">
-              <span className={`text-4xl block ${reel.isLiked ? 'scale-110' : ''}`}>
-                {reel.isLiked ? '❤️' : '🤍'}
-              </span>
-              <span className="text-white text-sm font-medium">{reel.stats.likes}</span>
+            <button onClick={handleLike} className="text-center group">
+              <div className={`transition-all duration-300 ${reel.isLiked ? 'scale-110' : 'group-hover:scale-110'}`}>
+                <FavouriteIcon
+                  size={32}
+                  color={reel.isLiked ? '#ef4444' : '#ffffff'}
+                  className={reel.isLiked ? 'fill-current' : ''}
+                />
+              </div>
+              <span className="text-white text-sm font-semibold mt-1 block">{reel.stats.likes}</span>
             </button>
 
-            <button onClick={() => setShowComments(true)} className="text-center">
-              <span className="text-4xl block">💬</span>
-              <span className="text-white text-sm font-medium">{reel.stats.comments}</span>
+            <button onClick={() => setShowComments(true)} className="text-center group">
+              <div className="group-hover:scale-110 transition-all duration-300">
+                <Message01Icon size={32} color="#ffffff" />
+              </div>
+              <span className="text-white text-sm font-semibold mt-1 block">{reel.stats.comments}</span>
             </button>
 
-            <button className="text-center">
-              <span className="text-4xl block">🔗</span>
-              <span className="text-white text-sm font-medium">{reel.stats.shares}</span>
+            <button className="text-center group">
+              <div className="group-hover:scale-110 transition-all duration-300">
+                <Share08Icon size={32} color="#ffffff" />
+              </div>
+              <span className="text-white text-sm font-semibold mt-1 block">{reel.stats.shares}</span>
             </button>
 
-            <button onClick={handleSave} className="text-center">
-              <span className="text-4xl block">{reel.isSaved ? '🔖' : '📑'}</span>
+            <button onClick={handleSave} className="text-center group">
+              <div className={`transition-all duration-300 ${reel.isSaved ? 'scale-110' : 'group-hover:scale-110'}`}>
+                <BookmarkAdd01Icon
+                  size={32}
+                  color={reel.isSaved ? '#60a5fa' : '#ffffff'}
+                  className={reel.isSaved ? 'fill-current' : ''}
+                />
+              </div>
             </button>
           </div>
         </div>
@@ -157,12 +182,15 @@ const ReelView: React.FC = () => {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Comments Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b-2 border-gray-200">
-              <h3 className="text-lg font-bold text-gray-900">
+            <div className="flex items-center justify-between px-6 py-4 border-b-2 border-gray-200 bg-white">
+              <h3 className="text-xl font-bold text-gray-900">
                 Comments ({comments.length})
               </h3>
-              <button onClick={() => setShowComments(false)} className="text-2xl text-gray-400">
-                ✕
+              <button
+                onClick={() => setShowComments(false)}
+                className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 transition-all duration-300 active:scale-90"
+              >
+                <Cancel01Icon size={24} color="#9ca3af" />
               </button>
             </div>
 
@@ -179,9 +207,12 @@ const ReelView: React.FC = () => {
                       <span className="text-xs text-gray-500">2h ago</span>
                     </div>
                     <p className="text-gray-900 mb-2">{comment.text}</p>
-                    <div className="flex items-center space-x-4 text-xs text-gray-500">
-                      <button className="hover:text-gray-900">❤️ {comment.likes}</button>
-                      <button className="hover:text-gray-900">Reply</button>
+                    <div className="flex items-center space-x-4 text-xs">
+                      <button className="flex items-center space-x-1 text-gray-500 hover:text-gray-900 transition-colors">
+                        <FavouriteIcon size={14} color="currentColor" />
+                        <span className="font-semibold">{comment.likes}</span>
+                      </button>
+                      <button className="text-gray-500 hover:text-gray-900 font-semibold transition-colors">Reply</button>
                     </div>
                   </div>
                 </div>
@@ -189,7 +220,7 @@ const ReelView: React.FC = () => {
             </div>
 
             {/* Comment Input */}
-            <div className="px-6 py-4 border-t-2 border-gray-200 bg-white">
+            <div className="px-6 py-4 border-t-2 border-gray-200 bg-white shadow-strong">
               <div className="flex items-center space-x-3">
                 <input
                   type="text"
@@ -197,12 +228,12 @@ const ReelView: React.FC = () => {
                   value={newComment}
                   onChange={(e) => setNewComment(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleAddComment()}
-                  className="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-gray-900"
+                  className="flex-1 px-4 py-3.5 border-2 border-gray-400 rounded-xl focus:outline-none focus:border-blue-600 transition-all shadow-soft font-medium text-gray-900"
                 />
                 <button
                   onClick={handleAddComment}
                   disabled={!newComment.trim()}
-                  className="px-6 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-6 py-3.5 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-medium hover:shadow-strong disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95"
                 >
                   Post
                 </button>
