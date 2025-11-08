@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BottomNavigation, Card } from '../../components/ui';
+import { Search01Icon } from 'hugeicons-react';
 
 interface Post {
   id: number;
@@ -89,7 +90,7 @@ const DiscoveryFeed: React.FC = () => {
             onClick={() => navigate('/search')}
             className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-300 hover:scale-110 active:scale-95"
           >
-            <span className="text-xl">🔍</span>
+            <Search01Icon size={20} color="#374151" />
           </button>
         </div>
 

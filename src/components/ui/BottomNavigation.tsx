@@ -1,19 +1,18 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Home, Sparkles, User } from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
+import { Home01Icon, SparklesIcon, UserIcon } from 'hugeicons-react';
 
 interface NavItem {
   id: string;
   label: string;
   path: string;
-  icon: LucideIcon;
+  icon: React.ComponentType<{ size?: number; color?: string; strokeWidth?: number }>;
 }
 
 const navItems: NavItem[] = [
-  { id: 'feed', label: 'Feed', path: '/discover', icon: Home },
-  { id: 'create', label: 'Create', path: '/tools', icon: Sparkles },
-  { id: 'profile', label: 'Profile', path: '/profile', icon: User },
+  { id: 'feed', label: 'Feed', path: '/discover', icon: Home01Icon },
+  { id: 'create', label: 'Create', path: '/tools', icon: SparklesIcon },
+  { id: 'profile', label: 'Profile', path: '/profile', icon: UserIcon },
 ];
 
 const BottomNavigation: React.FC = () => {
@@ -39,10 +38,10 @@ const BottomNavigation: React.FC = () => {
               >
                 <div className={`p-2 rounded-xl transition-all duration-300 ${
                   active
-                    ? 'bg-gradient-to-br from-primary-50 to-accent-50 scale-110 shadow-soft'
+                    ? 'bg-gradient-to-br from-blue-50 to-blue-100 scale-110 shadow-soft'
                     : 'group-hover:bg-gray-50 group-hover:scale-105'
                 }`}>
-                  <Icon className="w-6 h-6" strokeWidth={active ? 2.5 : 2} />
+                  <Icon size={24} strokeWidth={active ? 2.5 : 2} color={active ? '#2563eb' : '#9ca3af'} />
                 </div>
                 <span className={`text-xs mt-1 font-semibold transition-all duration-300 ${
                   active ? 'opacity-100 scale-100' : 'opacity-70 scale-95 group-hover:opacity-100'

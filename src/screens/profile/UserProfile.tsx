@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useTokens } from '../../context/TokenContext';
 import { Button, BottomNavigation } from '../../components/ui';
-import { Settings } from 'lucide-react';
+import { Settings02Icon } from 'hugeicons-react';
 
 const mockUserCreations = [
   { id: 1, emoji: '🎨', likes: 45, tool: 'Face Swap' },
@@ -53,7 +53,7 @@ const UserProfile: React.FC = () => {
             onClick={() => navigate('/settings')}
             className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-300 hover:scale-110 active:scale-95"
           >
-            <Settings className="w-5 h-5 text-gray-700" />
+            <Settings02Icon size={20} color="#374151" />
           </button>
         </div>
       </header>

@@ -2,7 +2,15 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { Card, Button, BottomNavigation } from '../../components/ui';
-import { Edit, Wallet, Bell, Lock, LogOut, ChevronRight, ArrowLeft } from 'lucide-react';
+import {
+  PencilEdit01Icon,
+  Wallet01Icon,
+  Notification02Icon,
+  LockIcon,
+  Logout01Icon,
+  ArrowRight01Icon,
+  ArrowLeft01Icon
+} from 'hugeicons-react';
 
 const Settings: React.FC = () => {
   const navigate = useNavigate();
@@ -17,25 +25,25 @@ const Settings: React.FC = () => {
 
   const settingsOptions = [
     {
-      icon: Edit,
+      icon: PencilEdit01Icon,
       label: 'Edit Profile',
       description: 'Update your profile information',
       onClick: () => navigate('/profile/edit'),
     },
     {
-      icon: Wallet,
+      icon: Wallet01Icon,
       label: 'Wallet & Tokens',
       description: 'Manage your Epiko Tokens',
       onClick: () => navigate('/wallet'),
     },
     {
-      icon: Bell,
+      icon: Notification02Icon,
       label: 'Notifications',
       description: 'Manage notification preferences',
       onClick: () => navigate('/notifications'),
     },
     {
-      icon: Lock,
+      icon: LockIcon,
       label: 'Privacy & Security',
       description: 'Control your privacy settings',
       onClick: () => alert('Privacy settings coming soon'),
@@ -51,7 +59,7 @@ const Settings: React.FC = () => {
             onClick={() => navigate(-1)}
             className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-300 hover:scale-110 active:scale-95"
           >
-            <ArrowLeft className="w-5 h-5 text-gray-700" />
+            <ArrowLeft01Icon size={20} color="#374151" />
           </button>
           <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Settings</h1>
         </div>
@@ -74,14 +82,14 @@ const Settings: React.FC = () => {
                   className="w-full px-5 py-4 flex items-center gap-4 hover:bg-gray-50 transition-all duration-300 group first:rounded-t-2xl last:rounded-b-2xl"
                   style={{ animationDelay: `${index * 0.05}s` }}
                 >
-                  <div className="p-3 bg-gradient-to-br from-primary-50 to-accent-50 rounded-xl group-hover:scale-110 transition-transform duration-300 shadow-soft border border-gray-100">
-                    <Icon className="w-5 h-5 text-primary-600" />
+                  <div className="p-3 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl group-hover:scale-110 transition-transform duration-300 shadow-soft border border-gray-100">
+                    <Icon size={20} color="#2563eb" />
                   </div>
                   <div className="flex-1 text-left">
-                    <p className="font-bold text-gray-900 group-hover:text-primary-600 transition-colors">{option.label}</p>
+                    <p className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">{option.label}</p>
                     <p className="text-sm text-gray-600 mt-0.5">{option.description}</p>
                   </div>
-                  <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-primary-500 group-hover:translate-x-1 transition-all duration-300" />
+                  <ArrowRight01Icon size={20} color="#9ca3af" className="group-hover:text-blue-500 group-hover:translate-x-1 transition-all duration-300" />
                 </button>
               );
             })}
@@ -99,13 +107,13 @@ const Settings: React.FC = () => {
               className="w-full px-5 py-4 flex items-center gap-4 hover:bg-red-50 transition-all duration-300 text-red-600 group rounded-2xl"
             >
               <div className="p-3 bg-red-100 rounded-xl group-hover:scale-110 transition-transform duration-300 shadow-soft">
-                <LogOut className="w-5 h-5 text-red-600" />
+                <Logout01Icon size={20} color="#dc2626" />
               </div>
               <div className="flex-1 text-left">
                 <p className="font-bold">Sign Out</p>
                 <p className="text-sm text-red-500 mt-0.5">Sign out of your account</p>
               </div>
-              <ChevronRight className="w-5 h-5 text-red-400 group-hover:translate-x-1 transition-all duration-300" />
+              <ArrowRight01Icon size={20} color="#f87171" className="group-hover:translate-x-1 transition-all duration-300" />
             </button>
           </Card>
         </section>
