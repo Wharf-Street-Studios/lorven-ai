@@ -13,12 +13,16 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overscroll-behavior: none;
+    /* Prevent layout shift from scrollbar */
+    overflow-y: scroll;
   }
 
   #root {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    /* Prevent content shift */
+    width: 100%;
   }
 
   /* Mobile-first responsive breakpoints */
@@ -28,6 +32,17 @@
       margin: 0 auto;
       box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
     }
+  }
+
+  /* Hide scrollbar but keep functionality */
+  body::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+
+  body {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
   }
 }
 
