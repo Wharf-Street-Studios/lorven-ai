@@ -9,8 +9,8 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ children, onClick, className = '', hover = false, style }) => {
-  const baseStyles = 'bg-white rounded-2xl transition-all duration-300 shadow-soft';
-  const hoverStyles = hover ? 'hover:shadow-medium cursor-pointer active:scale-[0.98] transform' : '';
+  const baseStyles = 'bg-white rounded-2xl transition-all duration-300 shadow-medium border-2 border-gray-200';
+  const hoverStyles = hover ? 'hover:shadow-strong hover:border-gray-300 cursor-pointer active:scale-[0.98] transform' : '';
   const clickableStyles = onClick ? 'cursor-pointer' : '';
 
   return (

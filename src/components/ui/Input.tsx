@@ -39,12 +39,12 @@ const Input: React.FC<InputProps> = ({
         disabled={disabled}
         required={required}
         className={`w-full px-4 py-3.5 border-2 rounded-xl text-base transition-all duration-300
-          bg-white text-gray-900 placeholder:text-gray-400
-          focus:outline-none focus:ring-4 focus:ring-primary-200 focus:border-primary-500
-          hover:border-gray-400
+          bg-white text-gray-900 placeholder:text-gray-500
+          focus:outline-none focus:ring-4 focus:ring-primary-200 focus:border-primary-600
+          hover:border-gray-500
           disabled:bg-gray-100 disabled:cursor-not-allowed
-          shadow-soft focus:shadow-medium
-          ${error ? 'border-red-500 focus:ring-red-200 focus:border-red-500' : 'border-gray-300'}
+          shadow-medium focus:shadow-strong
+          ${error ? 'border-red-600 focus:ring-red-200 focus:border-red-600' : 'border-gray-400'}
         `}
       />
       {error && <p className="mt-2 text-sm text-red-600 font-medium">{error}</p>}

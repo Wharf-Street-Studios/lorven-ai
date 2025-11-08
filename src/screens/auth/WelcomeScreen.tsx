@@ -22,8 +22,8 @@ const WelcomeScreen: React.FC = () => {
 
       {/* Value Proposition */}
       <div className="w-full max-w-sm space-y-5 mb-12">
-        <div className="flex items-start space-x-4 bg-white p-5 rounded-2xl shadow-soft hover:shadow-medium transition-all duration-300 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-          <div className="w-12 h-12 bg-gradient-to-br from-primary-50 to-accent-50 rounded-xl flex items-center justify-center flex-shrink-0 shadow-soft">
+        <div className="flex items-start space-x-4 bg-white p-5 rounded-2xl shadow-medium hover:shadow-strong border-2 border-gray-200 hover:border-gray-300 transition-all duration-300 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+          <div className="w-12 h-12 bg-gradient-to-br from-primary-50 to-accent-50 rounded-xl flex items-center justify-center flex-shrink-0 shadow-medium border-2 border-primary-200">
             <span className="text-2xl">🎨</span>
           </div>
           <div>
@@ -31,8 +31,8 @@ const WelcomeScreen: React.FC = () => {
             <p className="text-sm text-gray-600 leading-relaxed">Face swap, scene swap, and colorize photos instantly</p>
           </div>
         </div>
-        <div className="flex items-start space-x-4 bg-white p-5 rounded-2xl shadow-soft hover:shadow-medium transition-all duration-300 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-          <div className="w-12 h-12 bg-gradient-to-br from-primary-50 to-accent-50 rounded-xl flex items-center justify-center flex-shrink-0 shadow-soft">
+        <div className="flex items-start space-x-4 bg-white p-5 rounded-2xl shadow-medium hover:shadow-strong border-2 border-gray-200 hover:border-gray-300 transition-all duration-300 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+          <div className="w-12 h-12 bg-gradient-to-br from-primary-50 to-accent-50 rounded-xl flex items-center justify-center flex-shrink-0 shadow-medium border-2 border-primary-200">
             <span className="text-2xl">🌟</span>
           </div>
           <div>
@@ -40,8 +40,8 @@ const WelcomeScreen: React.FC = () => {
             <p className="text-sm text-gray-600 leading-relaxed">Join a creative community of content creators</p>
           </div>
         </div>
-        <div className="flex items-start space-x-4 bg-white p-5 rounded-2xl shadow-soft hover:shadow-medium transition-all duration-300 animate-slide-up" style={{ animationDelay: '0.3s' }}>
-          <div className="w-12 h-12 bg-gradient-to-br from-primary-50 to-accent-50 rounded-xl flex items-center justify-center flex-shrink-0 shadow-soft">
+        <div className="flex items-start space-x-4 bg-white p-5 rounded-2xl shadow-medium hover:shadow-strong border-2 border-gray-200 hover:border-gray-300 transition-all duration-300 animate-slide-up" style={{ animationDelay: '0.3s' }}>
+          <div className="w-12 h-12 bg-gradient-to-br from-primary-50 to-accent-50 rounded-xl flex items-center justify-center flex-shrink-0 shadow-medium border-2 border-primary-200">
             <span className="text-2xl">🚀</span>
           </div>
           <div>

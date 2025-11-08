@@ -101,7 +101,7 @@ const UserProfile: React.FC = () => {
       </div>
 
       {/* Account Stats */}
-      <div className="mx-6 mb-6 p-5 bg-gradient-to-br from-primary-50 via-accent-50 to-amber-50 rounded-2xl shadow-soft border border-primary-100 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+      <div className="mx-6 mb-6 p-5 bg-gradient-to-br from-primary-50 via-accent-50 to-amber-50 rounded-2xl shadow-medium border-2 border-primary-200 animate-slide-up" style={{ animationDelay: '0.1s' }}>
         <div className="grid grid-cols-3 gap-4 text-center">
           <div className="group cursor-pointer">
             <p className="text-2xl font-bold text-gray-900 mb-1 group-hover:text-primary-600 transition-colors">5</p>

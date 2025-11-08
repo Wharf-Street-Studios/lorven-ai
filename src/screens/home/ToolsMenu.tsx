@@ -93,11 +93,11 @@ const ToolsMenu: React.FC = () => {
       <main className="p-6 space-y-8">
         {/* Popular Tools */}
         <section className="animate-slide-up">
-          <div className="flex items-center justify-between mb-5">
+          <div className="flex items-center justify-between mb-5 pb-3 border-b-2 border-gray-200">
             <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
               <span className="text-2xl">🔥</span> Popular Tools
             </h2>
-            <span className="text-sm text-gray-500 font-medium bg-gray-100 px-3 py-1.5 rounded-full">{popularTools.length} tools</span>
+            <span className="text-sm text-gray-700 font-semibold bg-gray-200 px-4 py-2 rounded-full border border-gray-300">{popularTools.length} tools</span>
           </div>
           <div className="grid grid-cols-1 gap-4">
             {popularTools.map((tool, index) => (
@@ -110,7 +110,7 @@ const ToolsMenu: React.FC = () => {
               >
                 <div className="flex items-start justify-between">
                   <div className="flex items-start space-x-5 flex-1">
-                    <div className="w-16 h-16 bg-gradient-to-br from-primary-50 to-accent-50 rounded-2xl flex items-center justify-center text-3xl shadow-soft group-hover:shadow-medium transition-all duration-300 transform group-hover:scale-110 border border-gray-100">
+                    <div className="w-16 h-16 bg-gradient-to-br from-primary-50 to-accent-50 rounded-2xl flex items-center justify-center text-3xl shadow-medium group-hover:shadow-strong transition-all duration-300 transform group-hover:scale-110 border-2 border-primary-200 group-hover:border-primary-300">
                       {tool.icon}
                     </div>
                     <div className="flex-1">
@@ -137,12 +137,12 @@ const ToolsMenu: React.FC = () => {
         </section>
 
         {/* Other Tools */}
-        <section className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
-          <div className="flex items-center justify-between mb-5">
+        <section className="animate-slide-up pt-4 border-t-4 border-gray-200" style={{ animationDelay: '0.2s' }}>
+          <div className="flex items-center justify-between mb-5 pb-3 border-b-2 border-gray-200">
             <h2 className="text-2xl font-bold text-gray-900">
               All Tools
             </h2>
-            <span className="text-sm text-gray-500 font-medium bg-gray-100 px-3 py-1.5 rounded-full">{otherTools.length} tools</span>
+            <span className="text-sm text-gray-700 font-semibold bg-gray-200 px-4 py-2 rounded-full border border-gray-300">{otherTools.length} tools</span>
           </div>
           <div className="grid grid-cols-2 gap-4">
             {otherTools.map((tool, index) => (
@@ -153,7 +153,7 @@ const ToolsMenu: React.FC = () => {
                 className="aspect-square flex flex-col items-center justify-center space-y-3.5 p-5 group"
                 style={{ animationDelay: `${0.3 + index * 0.05}s` }}
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-primary-50 to-accent-50 rounded-2xl flex items-center justify-center shadow-soft group-hover:shadow-medium transition-all duration-300 transform group-hover:scale-110 border border-gray-100">
+                <div className="w-16 h-16 bg-gradient-to-br from-primary-50 to-accent-50 rounded-2xl flex items-center justify-center shadow-medium group-hover:shadow-strong transition-all duration-300 transform group-hover:scale-110 border-2 border-primary-200 group-hover:border-primary-300">
                   <span className="text-4xl">{tool.icon}</span>
                 </div>
                 <div className="text-center">
@@ -171,7 +171,7 @@ const ToolsMenu: React.FC = () => {
         </section>
 
         {/* Get More Tokens CTA */}
-        <Card className="p-6 bg-gradient-to-br from-primary-50 via-accent-50 to-amber-50 border border-primary-100 animate-slide-up" style={{ animationDelay: '0.4s' }}>
+        <Card className="p-6 bg-gradient-to-br from-primary-50 via-accent-50 to-amber-50 border-2 border-primary-200 animate-slide-up" style={{ animationDelay: '0.4s' }}>
           <div className="flex items-center justify-between">
             <div>
               <h3 className="font-bold text-gray-900 mb-2 text-lg">Need more tokens?</h3>

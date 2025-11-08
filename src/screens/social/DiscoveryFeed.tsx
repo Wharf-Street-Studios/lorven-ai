@@ -114,7 +114,7 @@ const DiscoveryFeed: React.FC = () => {
       {/* Feed Content */}
       <main className="p-5 space-y-6">
         {posts.map((post, index) => (
-          <Card key={post.id} className="overflow-hidden p-0 animate-slide-up" style={{ animationDelay: `${index * 0.1}s` }}>
+          <Card key={post.id} className="overflow-hidden p-0 animate-slide-up border-2 border-gray-300" style={{ animationDelay: `${index * 0.1}s` }}>
             {/* Creator Info */}
             <div className="px-5 py-4 flex items-center justify-between">
               <button
