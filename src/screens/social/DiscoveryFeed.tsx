@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BottomNavigation, Card } from '../../components/ui';
+import { BottomNavigation } from '../../components/ui';
 import {
   Search01Icon,
   FavouriteIcon,
@@ -31,7 +31,7 @@ const mockPosts: Post[] = [
     creator: { username: 'sarah_creates', avatar: '👩‍🎨' },
     image: '🎨',
     tool: 'Face Swap',
-    timestamp: '2 hours ago',
+    timestamp: '2h',
     likes: 234,
     comments: 12,
     isLiked: false,
@@ -41,7 +41,7 @@ const mockPosts: Post[] = [
     creator: { username: 'john_ai', avatar: '👨‍💼' },
     image: '🌅',
     tool: 'Scene Swap',
-    timestamp: '5 hours ago',
+    timestamp: '5h',
     likes: 567,
     comments: 34,
     isLiked: true,
@@ -50,8 +50,8 @@ const mockPosts: Post[] = [
     id: 3,
     creator: { username: 'creative_mind', avatar: '🧑‍🎨' },
     image: '✨',
-    tool: 'Colorize',
-    timestamp: '1 day ago',
+    tool: 'AI Avatar',
+    timestamp: '1d',
     likes: 890,
     comments: 45,
     isLiked: false,
@@ -60,19 +60,19 @@ const mockPosts: Post[] = [
     id: 4,
     creator: { username: 'art_lover', avatar: '👩' },
     image: '🎭',
-    tool: 'Face Swap',
-    timestamp: '2 days ago',
+    tool: 'Gender Swap',
+    timestamp: '2d',
     likes: 1234,
     comments: 89,
     isLiked: false,
   },
 ];
 
-const filters = ['All', 'Following', 'Romantic Vibes', 'Trending', 'Face Swap', 'Scene Swap', 'Colorize'];
+const filters = ['For You', 'Following', 'Face Swap', 'Avatars', 'Trending'];
 
 const DiscoveryFeed: React.FC = () => {
   const navigate = useNavigate();
-  const [selectedFilter, setSelectedFilter] = useState('All');
+  const [selectedFilter, setSelectedFilter] = useState('For You');
   const [posts, setPosts] = useState<Post[]>(mockPosts);
 
   const handleLike = (postId: number) => {
@@ -89,124 +89,125 @@ const DiscoveryFeed: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white pb-20">
-      {/* Header */}
-      <header className="bg-white/80 backdrop-blur-xl border-b border-gray-200 px-6 py-5 sticky top-0 z-10 shadow-soft">
-        <div className="flex items-center justify-between mb-4 animate-fade-in">
-          <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Feed</h1>
+    <div className="min-h-screen bg-white pb-20">
+      {/* Header - Threads Style */}
+      <header className="bg-white border-b border-neutral-150 sticky top-0 z-10">
+        <div className="px-4 py-3 flex items-center justify-between">
+          <h1 className="text-2xl font-bold text-black">Epiko</h1>
           <button
             onClick={() => navigate('/search')}
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-300 hover:scale-110 active:scale-95"
+            className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-neutral-100 active:scale-95 transition-all duration-150"
           >
-            <Search01Icon size={20} color="#374151" />
+            <Search01Icon size={22} color="#000000" />
           </button>
         </div>
 
-        {/* Filter Chips */}
-        <div className="flex space-x-2 overflow-x-auto pb-2 -mx-6 px-6 scrollbar-hide">
+        {/* Filter Tabs - Threads Style */}
+        <div className="flex border-b border-neutral-150 overflow-x-auto scrollbar-hide">
           {filters.map((filter) => (
             <button
               key={filter}
               onClick={() => setSelectedFilter(filter)}
-              className={`px-5 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap transition-all duration-300 transform hover:scale-105 active:scale-95 ${
+              className={`flex-shrink-0 px-4 py-3 text-sm font-semibold transition-all relative ${
                 selectedFilter === filter
-                  ? 'bg-blue-600 text-white shadow-lg border-2 border-blue-700'
-                  : 'bg-white text-gray-700 hover:bg-gray-50 shadow-md hover:shadow-lg border-2 border-gray-300'
+                  ? 'text-black'
+                  : 'text-neutral-500'
               }`}
             >
               {filter}
+              {selectedFilter === filter && (
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-black" />
+              )}
             </button>
           ))}
         </div>
       </header>
 
-      {/* Feed Content */}
-      <main className="p-5 space-y-6">
+      {/* Feed Content - Threads Style */}
+      <main>
         {posts.map((post, index) => (
-          <Card key={post.id} className="overflow-hidden p-0 animate-slide-up border-2 border-gray-300" style={{ animationDelay: `${index * 0.1}s` }}>
-            {/* Creator Info */}
-            <div className="px-5 py-4 flex items-center justify-between">
+          <article
+            key={post.id}
+            className="border-b border-neutral-150 animate-fade-in"
+            style={{ animationDelay: `${index * 0.05}s` }}
+          >
+            {/* Creator Header */}
+            <div className="px-4 pt-3 pb-2 flex items-center justify-between">
               <button
                 onClick={() => navigate(`/profile/${post.creator.username}`)}
-                className="flex items-center space-x-3 group"
+                className="flex items-center gap-2.5 group"
               >
-                <div className="w-11 h-11 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full flex items-center justify-center text-xl shadow-soft group-hover:shadow-medium transition-all duration-300 transform group-hover:scale-105">
+                <div className="w-9 h-9 bg-neutral-200 rounded-full flex items-center justify-center text-lg">
                   {post.creator.avatar}
                 </div>
-                <div className="text-left">
-                  <p className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">{post.creator.username}</p>
-                  <p className="text-xs text-gray-500">{post.timestamp}</p>
+                <div className="flex items-baseline gap-2">
+                  <span className="font-semibold text-black text-sm group-hover:underline">
+                    {post.creator.username}
+                  </span>
+                  <span className="text-xs text-neutral-500">{post.timestamp}</span>
                 </div>
               </button>
-              <button className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 transition-all duration-300 text-gray-400 hover:text-gray-600 active:scale-90">
-                <MoreVerticalIcon size={20} color="#9ca3af" />
+              <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-100 active:scale-95 transition-all">
+                <MoreVerticalIcon size={18} color="#737373" />
               </button>
             </div>
 
             {/* Content Image */}
             <div
-              className="w-full aspect-square bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 flex items-center justify-center cursor-pointer relative overflow-hidden group"
+              className="w-full aspect-square bg-gradient-to-br from-neutral-50 to-neutral-100 flex items-center justify-center cursor-pointer border-y border-neutral-150"
               onClick={() => navigate(`/reel/${post.id}`)}
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="text-center relative z-10 transform group-hover:scale-105 transition-transform duration-300">
-                <span className="text-8xl drop-shadow-lg">{post.image}</span>
-                <p className="text-sm text-gray-600 mt-3 font-medium">AI Generated Content</p>
+              <div className="text-center">
+                <span className="text-8xl">{post.image}</span>
+                <p className="text-xs text-neutral-500 mt-2 font-medium">Tap to view</p>
               </div>
             </div>
 
-            {/* Metadata and Actions */}
-            <div className="px-5 py-4">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-5">
+            {/* Actions Bar */}
+            <div className="px-4 py-2.5">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-4">
                   <button
                     onClick={() => handleLike(post.id)}
-                    className="flex items-center space-x-2 group"
+                    className="flex items-center gap-1.5 group active:scale-95 transition-transform"
                   >
                     <FavouriteIcon
-                      size={24}
-                      color={post.isLiked ? '#ef4444' : '#9ca3af'}
-                      className={`transition-all duration-300 ${post.isLiked ? 'scale-110 fill-current' : 'group-hover:scale-110'}`}
+                      size={22}
+                      color={post.isLiked ? '#ef4444' : '#000000'}
+                      className={`transition-all ${post.isLiked ? 'fill-current' : ''}`}
                     />
-                    <span className="text-sm font-semibold text-gray-900">{post.likes}</span>
+                    <span className="text-sm text-neutral-700">{post.likes}</span>
                   </button>
+
                   <button
                     onClick={() => navigate(`/reel/${post.id}`)}
-                    className="flex items-center space-x-2 group"
+                    className="flex items-center gap-1.5 active:scale-95 transition-transform"
                   >
-                    <Message01Icon size={24} color="#9ca3af" className="group-hover:scale-110 transition-all duration-300" />
-                    <span className="text-sm font-semibold text-gray-900">{post.comments}</span>
+                    <Message01Icon size={22} color="#000000" />
+                    <span className="text-sm text-neutral-700">{post.comments}</span>
                   </button>
-                  <button
-                    onClick={() => navigate(`/share/${post.id}`)}
-                    className="hover:scale-110 transition-all duration-300"
-                  >
-                    <Share08Icon size={24} color="#9ca3af" />
+
+                  <button className="active:scale-95 transition-transform">
+                    <Share08Icon size={22} color="#000000" />
                   </button>
                 </div>
+
                 <button
-                  onClick={() => alert('Saved to bookmarks')}
-                  className="hover:scale-110 transition-all duration-300"
+                  onClick={() => alert('Saved')}
+                  className="active:scale-95 transition-transform"
                 >
-                  <BookmarkAdd01Icon size={24} color="#9ca3af" />
+                  <BookmarkAdd01Icon size={22} color="#000000" />
                 </button>
               </div>
 
-              {/* Tool Used */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-full border border-gray-200 shadow-soft">
-                <SparklesIcon size={14} color="#374151" />
-                <span className="text-xs font-semibold text-gray-700">{post.tool}</span>
+              {/* Tool Badge */}
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-neutral-100 rounded-full">
+                <SparklesIcon size={12} color="#525252" />
+                <span className="text-xs font-medium text-neutral-700">{post.tool}</span>
               </div>
             </div>
-          </Card>
+          </article>
         ))}
-
-        {/* Load More */}
-        <div className="py-8 text-center">
-          <button className="px-8 py-3.5 bg-white text-gray-900 font-semibold rounded-xl hover:bg-gray-50 transition-all duration-300 shadow-soft hover:shadow-medium border border-gray-200 transform hover:scale-105 active:scale-95">
-            Load More
-          </button>
-        </div>
       </main>
 
       {/* Bottom Navigation */}
