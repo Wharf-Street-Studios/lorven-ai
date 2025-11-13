@@ -27,17 +27,17 @@ const UserProfile: React.FC = () => {
   if (!user) {
     return (
       <div className="min-h-screen bg-black flex flex-col items-center justify-center p-6 pb-20">
-        <div className="text-center">
+        <div className="text-center max-w-sm">
           <div className="mx-auto mb-6 flex justify-center">
             <Avatar size="xlarge" />
           </div>
-          <h2 className="text-xl font-bold text-white mb-2">Sign In Required</h2>
-          <p className="text-sm text-dark-600 mb-8 max-w-xs mx-auto">
+          <h2 className="text-2xl font-bold text-white mb-2">Sign In Required</h2>
+          <p className="text-base text-dark-500 mb-8">
             Sign in to view your profile and creations
           </p>
           <button
             onClick={() => navigate('/sign-in')}
-            className="bg-white text-black font-semibold text-sm px-8 py-2.5 rounded-xl hover:bg-neutral-100 active:scale-95 transition-all"
+            className="bg-white text-black font-semibold text-base px-8 py-3 rounded-xl hover:bg-gray-100 active:scale-98 transition-all"
           >
             Sign In
           </button>
@@ -50,60 +50,60 @@ const UserProfile: React.FC = () => {
   return (
     <div className="min-h-screen bg-black pb-20">
       {/* Header */}
-      <header className="bg-black border-b border-dark-100 sticky top-0 z-10">
-        <div className="px-4 py-3 flex items-center justify-between">
-          <h1 className="text-lg font-semibold text-white">{user.username}</h1>
+      <header className="bg-black/95 backdrop-blur-sm border-b border-dark-100 sticky top-0 z-10">
+        <div className="px-4 py-4 flex items-center justify-between max-w-2xl mx-auto">
+          <h1 className="text-xl font-semibold text-white">{user.username}</h1>
           <button
             onClick={() => navigate('/settings')}
-            className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-dark-150 active:scale-95 transition-all"
+            className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-dark-100 active:bg-dark-150 transition-colors"
           >
-            <Settings02Icon size={22} color="#ffffff" />
+            <Settings02Icon size={24} color="#ffffff" />
           </button>
         </div>
       </header>
 
       {/* Profile Info */}
-      <div className="px-4 py-6">
+      <div className="px-4 py-6 max-w-2xl mx-auto">
         <div className="flex items-start justify-between mb-6">
           {/* Avatar */}
           <Avatar name={user.fullName} size="xlarge" />
 
           {/* Stats */}
-          <div className="flex gap-6 pt-2">
+          <div className="flex gap-8">
             <div className="text-center">
-              <div className="font-bold text-white text-base">{mockUserCreations.length}</div>
-              <div className="text-sm text-dark-600">Posts</div>
+              <div className="font-bold text-white text-lg mb-1">{mockUserCreations.length}</div>
+              <div className="text-sm text-dark-500">Posts</div>
             </div>
             <div className="text-center">
-              <div className="font-bold text-white text-base">1.2K</div>
-              <div className="text-sm text-dark-600">Followers</div>
+              <div className="font-bold text-white text-lg mb-1">1.2K</div>
+              <div className="text-sm text-dark-500">Followers</div>
             </div>
             <div className="text-center">
-              <div className="font-bold text-white text-base">890</div>
-              <div className="text-sm text-dark-600">Following</div>
+              <div className="font-bold text-white text-lg mb-1">890</div>
+              <div className="text-sm text-dark-500">Following</div>
             </div>
           </div>
         </div>
 
         {/* Name and Bio */}
-        <div className="mb-4">
-          <h2 className="font-semibold text-white text-base mb-1">{user.fullName}</h2>
-          <p className="text-sm text-dark-600">
+        <div className="mb-6">
+          <h2 className="font-bold text-white text-base mb-1.5">{user.fullName}</h2>
+          <p className="text-sm text-dark-500 leading-relaxed">
             Creating AI-powered content
           </p>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-2">
+        <div className="flex gap-3">
           <button
             onClick={() => navigate('/profile/edit')}
-            className="flex-1 bg-dark-100 text-white font-semibold text-sm py-2 rounded-xl hover:bg-dark-150 active:scale-98 transition-all"
+            className="flex-1 bg-dark-100 text-white font-semibold text-sm py-2.5 rounded-xl hover:bg-dark-150 active:scale-98 transition-all"
           >
             Edit Profile
           </button>
           <button
             onClick={() => navigate('/wallet')}
-            className="flex-1 bg-dark-100 text-white font-semibold text-sm py-2 rounded-xl hover:bg-dark-150 active:scale-98 transition-all"
+            className="flex-1 bg-dark-100 text-white font-semibold text-sm py-2.5 rounded-xl hover:bg-dark-150 active:scale-98 transition-all"
           >
             Wallet
           </button>
@@ -111,28 +111,28 @@ const UserProfile: React.FC = () => {
       </div>
 
       {/* Tabs */}
-      <div className="border-t border-dark-100">
-        <div className="flex">
+      <div className="border-y border-dark-100">
+        <div className="flex max-w-2xl mx-auto">
           <button
             onClick={() => setActiveTab('posts')}
-            className={`flex-1 py-3 flex items-center justify-center gap-2 transition-all relative ${
-              activeTab === 'posts' ? 'text-white' : 'text-dark-600'
+            className={`flex-1 py-4 flex items-center justify-center gap-2 transition-colors relative ${
+              activeTab === 'posts' ? 'text-white' : 'text-dark-500'
             }`}
           >
-            <GridIcon size={20} color={activeTab === 'posts' ? '#ffffff' : '#a3a3a3'} />
+            <GridIcon size={22} color={activeTab === 'posts' ? '#ffffff' : '#737373'} />
             {activeTab === 'posts' && (
               <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-white" />
             )}
           </button>
           <button
             onClick={() => setActiveTab('liked')}
-            className={`flex-1 py-3 flex items-center justify-center gap-2 transition-all relative ${
-              activeTab === 'liked' ? 'text-white' : 'text-dark-600'
+            className={`flex-1 py-4 flex items-center justify-center gap-2 transition-colors relative ${
+              activeTab === 'liked' ? 'text-white' : 'text-dark-500'
             }`}
           >
             <FavouriteIcon
-              size={20}
-              color={activeTab === 'liked' ? '#ffffff' : '#a3a3a3'}
+              size={22}
+              color={activeTab === 'liked' ? '#ffffff' : '#737373'}
               className={activeTab === 'liked' ? 'fill-current' : ''}
             />
             {activeTab === 'liked' && (
@@ -143,30 +143,30 @@ const UserProfile: React.FC = () => {
       </div>
 
       {/* Content Grid */}
-      <div className="grid grid-cols-3 gap-0.5 bg-dark-100">
-        {(activeTab === 'posts' ? mockUserCreations : mockLikedContent).map((item, index) => (
-          <div
+      <div className="grid grid-cols-3 gap-1 bg-black max-w-2xl mx-auto">
+        {(activeTab === 'posts' ? mockUserCreations : mockLikedContent).map((item) => (
+          <button
             key={item.id}
             onClick={() => navigate(`/reel/${item.id}`)}
-            className="aspect-square bg-dark-100 cursor-pointer active:opacity-70 transition-opacity overflow-hidden"
+            className="aspect-square bg-dark-100 overflow-hidden active:opacity-70 transition-opacity"
           >
             <img
               src={item.image}
               alt={`Post ${item.id}`}
               className="w-full h-full object-cover"
             />
-          </div>
+          </button>
         ))}
       </div>
 
       {/* Empty State */}
       {activeTab === 'posts' && mockUserCreations.length === 0 && (
-        <div className="py-16 text-center">
+        <div className="py-20 text-center max-w-2xl mx-auto">
           <div className="w-16 h-16 bg-dark-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <GridIcon size={28} color="#a3a3a3" />
+            <GridIcon size={28} color="#737373" />
           </div>
-          <p className="text-sm font-semibold text-white mb-1">No posts yet</p>
-          <p className="text-xs text-dark-600">
+          <p className="text-base font-semibold text-white mb-2">No posts yet</p>
+          <p className="text-sm text-dark-500">
             Start creating with AI tools
           </p>
         </div>

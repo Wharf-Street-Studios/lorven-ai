@@ -26,9 +26,9 @@ const Input: React.FC<InputProps> = ({
   return (
     <div className="w-full">
       {label && (
-        <label className="block text-sm font-semibold text-gray-900 mb-2.5">
+        <label className="block text-sm font-semibold text-white mb-2">
           {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
+          {required && <span className="text-red-400 ml-1">*</span>}
         </label>
       )}
       <input
@@ -38,17 +38,15 @@ const Input: React.FC<InputProps> = ({
         placeholder={placeholder}
         disabled={disabled}
         required={required}
-        className={`w-full px-4 py-3.5 border-2 rounded-xl text-base transition-all duration-300
-          bg-white text-gray-900 placeholder:text-gray-500
-          focus:outline-none focus:ring-4 focus:ring-primary-200 focus:border-primary-600
-          hover:border-gray-500
-          disabled:bg-gray-100 disabled:cursor-not-allowed
-          shadow-medium focus:shadow-strong
-          ${error ? 'border-red-600 focus:ring-red-200 focus:border-red-600' : 'border-gray-400'}
+        className={`w-full px-4 py-3 border rounded-xl text-base transition-all
+          bg-dark-100 text-white placeholder:text-dark-500
+          focus:outline-none focus:border-white
+          disabled:opacity-50 disabled:cursor-not-allowed
+          ${error ? 'border-red-500 focus:border-red-500' : 'border-dark-100 focus:border-white'}
         `}
       />
-      {error && <p className="mt-2 text-sm text-red-600 font-medium">{error}</p>}
-      {helperText && !error && <p className="mt-2 text-sm text-gray-500">{helperText}</p>}
+      {error && <p className="mt-1.5 text-sm text-red-400">{error}</p>}
+      {helperText && !error && <p className="mt-1.5 text-sm text-dark-600">{helperText}</p>}
     </div>
   );
 };
