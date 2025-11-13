@@ -139,7 +139,7 @@ const Rewards: React.FC = () => {
             </p>
           </div>
           <div className="bg-gray-100 p-4 rounded-lg mb-4 flex items-center justify-between">
-            <code className="text-sm text-gray-900 font-mono">lorven.ai/r/USER123</code>
+            <code className="text-sm text-gray-900 font-mono">epiko-ai-studios.ai/r/USER123</code>
             <button className="text-2xl">📋</button>
           </div>
           <Button variant="primary" size="large" fullWidth>

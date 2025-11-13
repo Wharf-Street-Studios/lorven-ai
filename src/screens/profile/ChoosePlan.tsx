@@ -78,7 +78,7 @@ const ChoosePlan: React.FC = () => {
 
   const handleSelectPlan = (planId: string) => {
     if (planId === 'enterprise') {
-      alert('Please contact sales@lorven.ai for Enterprise pricing');
+      alert('Please contact sales@epiko-ai-studios.ai for Enterprise pricing');
     } else if (planId === 'starter') {
       alert('You are already on the free Starter plan');
     } else {

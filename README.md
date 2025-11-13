@@ -1,4 +1,4 @@
-# Lorven Studios AI - Enhanced v2.0
+# Epiko AI Studios - Enhanced v2.0
 
 **Create Viral Content with AI Magic** ✨
 
@@ -6,7 +6,7 @@ AI-Powered Content Creation Platform - Mobile-First Web Application
 
 ## Overview
 
-Lorven Studios AI is a comprehensive AI-powered content creation platform designed for social media influencers and content creators. The platform combines 7 specialized AI tools with a social discovery feed, token economy, and gamification system to empower users to create viral-ready content in seconds.
+Epiko AI Studios is a comprehensive AI-powered content creation platform designed for social media influencers and content creators. The platform combines 7 specialized AI tools with a social discovery feed, token economy, and gamification system to empower users to create viral-ready content in seconds.
 
 **Current Version:** PRD v2.0 Enhanced
 **Status:** Development Complete
@@ -145,7 +145,7 @@ Lorven Studios AI is a comprehensive AI-powered content creation platform design
 ## 📂 Project Structure
 
 ```
-lorven-ai/
+epiko-ai-studios/
 ├── src/
 │   ├── App.tsx                    # Main router with providers
 │   ├── main.tsx                   # Entry point
@@ -340,15 +340,15 @@ npm run lint
 
 ## 📝 License
 
-Private - Lorven Studios AI © 2024
+Private - Epiko AI Studios © 2024
 
 ---
 
 ## 📞 Contact & Support
 
 For questions, support, or enterprise inquiries:
-- **Email:** support@lorven.ai
-- **Enterprise Sales:** sales@lorven.ai
+- **Email:** support@epiko-ai-studios.ai
+- **Enterprise Sales:** sales@epiko-ai-studios.ai
 - **GitHub Issues:** Report bugs and feature requests
 
 ---

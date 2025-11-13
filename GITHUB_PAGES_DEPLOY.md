@@ -1,4 +1,4 @@
-# 🚀 Deploy Lorven Studios AI to GitHub Pages
+# 🚀 Deploy Epiko AI Studios to GitHub Pages
 
 Your app is **ready to deploy**! Follow these simple steps to host it on GitHub Pages for FREE.
 
@@ -22,8 +22,8 @@ Your app is **ready to deploy**! Follow these simple steps to host it on GitHub 
 1. Go to [github.com](https://github.com)
 2. Click the **"+"** icon → **"New repository"**
 3. Fill in:
-   - **Repository name:** `Lorven-AI` (must match exactly!)
-   - **Description:** "Lorven Studios AI - AI-Powered Content Creation Platform"
+   - **Repository name:** `Epiko-AI-Studios` (must match exactly!)
+   - **Description:** "Epiko AI Studios - AI-Powered Content Creation Platform"
    - **Visibility:** Public (required for free GitHub Pages)
    - ❌ **DO NOT** initialize with README, .gitignore, or license (we already have these)
 4. Click **"Create repository"**
@@ -36,7 +36,7 @@ Copy and run these commands **one by one** in your terminal:
 
 ```bash
 # Replace 'YOUR_GITHUB_USERNAME' with your actual username
-git remote add origin https://github.com/YOUR_GITHUB_USERNAME/Lorven-AI.git
+git remote add origin https://github.com/YOUR_GITHUB_USERNAME/Epiko-AI-Studios.git
 
 # Verify the remote was added
 git remote -v
@@ -49,7 +49,7 @@ git push -u origin main
 **Example:**
 If your GitHub username is `johndoe`, the command would be:
 ```bash
-git remote add origin https://github.com/johndoe/Lorven-AI.git
+git remote add origin https://github.com/johndoe/Epiko-AI-Studios.git
 ```
 
 ---
@@ -59,11 +59,11 @@ git remote add origin https://github.com/johndoe/Lorven-AI.git
 1. Open `package.json`
 2. Find this line:
    ```json
-   "homepage": "https://aniket.github.io/Lorven-AI",
+   "homepage": "https://aniket.github.io/Epiko-AI-Studios",
    ```
 3. Replace `aniket` with **YOUR GitHub username**:
    ```json
-   "homepage": "https://YOUR_GITHUB_USERNAME.github.io/Lorven-AI",
+   "homepage": "https://YOUR_GITHUB_USERNAME.github.io/Epiko-AI-Studios",
    ```
 4. Save the file
 
@@ -97,14 +97,14 @@ This will:
    - Folder: `/ (root)`
 5. Click **"Save"**
 
-**GitHub will show:** "Your site is live at https://YOUR_USERNAME.github.io/Lorven-AI/"
+**GitHub will show:** "Your site is live at https://YOUR_USERNAME.github.io/Epiko-AI-Studios/"
 
 ---
 
 ### **Step 6: Wait & Visit Your App**
 
 - **Wait:** 2-3 minutes for initial deployment
-- **Visit:** `https://YOUR_USERNAME.github.io/Lorven-AI/`
+- **Visit:** `https://YOUR_USERNAME.github.io/Epiko-AI-Studios/`
 - **Share:** Copy the URL and share with users!
 
 ---
@@ -113,7 +113,7 @@ This will:
 
 ### **Your Live URL:**
 ```
-https://YOUR_GITHUB_USERNAME.github.io/Lorven-AI/
+https://YOUR_GITHUB_USERNAME.github.io/Epiko-AI-Studios/
 ```
 
 ### **What Users Will See:**
@@ -149,7 +149,7 @@ Your live site will update in 2-3 minutes!
 
 ### **Direct Link**
 ```
-https://YOUR_USERNAME.github.io/Lorven-AI/
+https://YOUR_USERNAME.github.io/Epiko-AI-Studios/
 ```
 
 ### **QR Code**
@@ -162,21 +162,21 @@ https://YOUR_USERNAME.github.io/Lorven-AI/
 
 **Twitter/X:**
 ```
-🎉 Just launched Lorven Studios AI!
+🎉 Just launched Epiko AI Studios!
 
 ✨ 7 AI Tools: Face Swap, Avatars, Couple Photos, Baby Predictor & more
 💎 Token Economy with Rewards
 🎮 Gamification System
 📱 Mobile-First Design
 
-Try it FREE: https://YOUR_USERNAME.github.io/Lorven-AI/
+Try it FREE: https://YOUR_USERNAME.github.io/Epiko-AI-Studios/
 
 #AI #ContentCreation #WebDev
 ```
 
 **LinkedIn:**
 ```
-Excited to share Lorven Studios AI - a comprehensive AI-powered content creation platform!
+Excited to share Epiko AI Studios - a comprehensive AI-powered content creation platform!
 
 🔥 Features:
 • 7 specialized AI tools
@@ -186,7 +186,7 @@ Excited to share Lorven Studios AI - a comprehensive AI-powered content creation
 • 26 fully functional screens
 
 Built with React, TypeScript & Tailwind CSS
-Live demo: https://YOUR_USERNAME.github.io/Lorven-AI/
+Live demo: https://YOUR_USERNAME.github.io/Epiko-AI-Studios/
 
 #WebDevelopment #AI #React
 ```
@@ -253,7 +253,7 @@ If you need better performance or features:
 - Deploy command: `netlify deploy --prod`
 
 ### **Custom Domain**
-Add your own domain (e.g., lorven.ai):
+Add your own domain (e.g., epiko-ai-studios.ai):
 1. Buy domain from Namecheap/GoDaddy ($10-15/year)
 2. GitHub Settings → Pages → Custom domain
 3. Add DNS records
@@ -298,7 +298,7 @@ Before sharing with users:
 
 ```bash
 # Initial setup
-git remote add origin https://github.com/YOUR_USERNAME/Lorven-AI.git
+git remote add origin https://github.com/YOUR_USERNAME/Epiko-AI-Studios.git
 git push -u origin main
 
 # Deploy/Update
@@ -339,6 +339,6 @@ npm run deploy
 
 ---
 
-**Your Lorven Studios AI app is production-ready and FREE to host!** 🚀
+**Your Epiko AI Studios app is production-ready and FREE to host!** 🚀
 
 Good luck with your launch! 🎊

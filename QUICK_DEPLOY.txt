@@ -1,5 +1,5 @@
 ═══════════════════════════════════════════════════════════════
-  🚀 LORVEN STUDIOS AI - GITHUB PAGES DEPLOYMENT QUICK GUIDE
+  🚀 EPIKO AI STUDIOS - GITHUB PAGES DEPLOYMENT QUICK GUIDE
 ═══════════════════════════════════════════════════════════════
 
 ✅ SETUP COMPLETE:
@@ -13,7 +13,7 @@
 📝 STEP 1: CREATE GITHUB REPOSITORY
 ────────────────────────────────────
 1. Go to: https://github.com/new
-2. Repository name: Lorven-AI
+2. Repository name: Epiko-AI-Studios
 3. Make it Public
 4. DON'T initialize with anything
 5. Click "Create repository"
@@ -24,7 +24,7 @@
 ────────────────────────────────────
 Run these commands (replace YOUR_USERNAME):
 
-git remote add origin https://github.com/YOUR_USERNAME/Lorven-AI.git
+git remote add origin https://github.com/YOUR_USERNAME/Epiko-AI-Studios.git
 git push -u origin main
 
 ═══════════════════════════════════════════════════════════════
@@ -33,8 +33,8 @@ git push -u origin main
 ────────────────────────────────────
 Edit package.json, line 7:
 
-FROM: "homepage": "https://aniket.github.io/Lorven-AI"
-TO:   "homepage": "https://YOUR_USERNAME.github.io/Lorven-AI"
+FROM: "homepage": "https://aniket.github.io/Epiko-AI-Studios"
+TO:   "homepage": "https://YOUR_USERNAME.github.io/Epiko-AI-Studios"
 
 ═══════════════════════════════════════════════════════════════
 
@@ -56,7 +56,7 @@ npm run deploy
 
 🎉 YOUR APP WILL BE LIVE AT:
 ────────────────────────────────────
-https://YOUR_USERNAME.github.io/Lorven-AI/
+https://YOUR_USERNAME.github.io/Epiko-AI-Studios/
 
 Wait 2-3 minutes after enabling Pages, then visit!
 
@@ -75,7 +75,7 @@ npm run deploy
 ────────────────────────────────────
 • Direct link: Share the GitHub Pages URL
 • QR Code: Use qr-code-generator.com
-• Social: "Just launched Lorven Studios AI!"
+• Social: "Just launched Epiko AI Studios!"
 
 ═══════════════════════════════════════════════════════════════
 

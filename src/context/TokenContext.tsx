@@ -30,7 +30,7 @@ const TOKEN_COSTS = {
   'enhance': { base: 15, creator: 12, pro: 9 },
 };
 
-const TOKEN_STORAGE_KEY = 'lorven_tokens';
+const TOKEN_STORAGE_KEY = 'epiko_tokens';
 const INITIAL_BONUS = 30;
 
 export const TokenProvider: React.FC<{ children: ReactNode }> = ({ children }) => {

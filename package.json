@@ -1,10 +1,10 @@
 {
-  "name": "lorven-ai",
+  "name": "epiko-ai-studios",
   "version": "1.0.0",
-  "description": "Lorven Studios AI - Mobile-First Content Platform",
+  "description": "Epiko AI Studios - Mobile-First Content Platform",
   "private": true,
   "type": "module",
-  "homepage": "https://wharf-street-studios.github.io/lorven-ai",
+  "homepage": "https://wharf-street-studios.github.io/epiko-ai-studios",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

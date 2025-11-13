@@ -1,4 +1,4 @@
-# 🚀 Lorven Studios AI - Deployment Guide
+# 🚀 Epiko AI Studios - Deployment Guide
 
 Your app is **build-ready** and can be deployed in minutes!
 
@@ -42,7 +42,7 @@ vercel
 4. Settings auto-detected ✅
 5. Click "Deploy"
 
-**Your URL:** `https://lorven-ai.vercel.app` (or custom name)
+**Your URL:** `https://epiko-ai-studios.vercel.app` (or custom name)
 
 **Features:**
 - ✅ Free HTTPS
@@ -81,7 +81,7 @@ netlify login
 netlify deploy --prod --dir=dist
 ```
 
-**Your URL:** `https://lorven-ai.netlify.app`
+**Your URL:** `https://epiko-ai-studios.netlify.app`
 
 ---
 
@@ -96,7 +96,7 @@ netlify deploy --prod --dir=dist
 git init
 git add .
 git commit -m "Initial commit"
-git remote add origin https://github.com/yourusername/lorven-ai.git
+git remote add origin https://github.com/yourusername/epiko-ai-studios.git
 git push -u origin main
 ```
 
@@ -110,7 +110,7 @@ npm install -D gh-pages
 
 ```json
 {
-  "homepage": "https://yourusername.github.io/lorven-ai",
+  "homepage": "https://yourusername.github.io/epiko-ai-studios",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
@@ -122,7 +122,7 @@ npm install -D gh-pages
 
 ```typescript
 export default defineConfig({
-  base: '/lorven-ai/',
+  base: '/epiko-ai-studios/',
   // ... rest
 });
 ```
@@ -133,7 +133,7 @@ export default defineConfig({
 npm run deploy
 ```
 
-**Your URL:** `https://yourusername.github.io/lorven-ai`
+**Your URL:** `https://yourusername.github.io/epiko-ai-studios`
 
 ---
 
@@ -146,7 +146,7 @@ npm run deploy
 5. Publish directory: `dist`
 6. Deploy!
 
-**Your URL:** `https://lorven-ai.onrender.com`
+**Your URL:** `https://epiko-ai-studios.onrender.com`
 
 ---
 
@@ -183,7 +183,7 @@ Generate QR code for mobile testing:
 
 **On Vercel:**
 1. Go to Project Settings → Domains
-2. Add your custom domain (e.g., lorven.ai)
+2. Add your custom domain (e.g., epiko-ai-studios.ai)
 3. Update DNS records as shown
 4. Done! (HTTPS auto-configured)
 
@@ -213,7 +213,7 @@ vercel
 vercel --prod
 ```
 
-That's it! Your app will be live at `https://lorven-ai-xxx.vercel.app`
+That's it! Your app will be live at `https://epiko-ai-studios-xxx.vercel.app`
 
 ---
 
@@ -253,7 +253,7 @@ Sample announcement posts:
 
 **Twitter/X:**
 ```
-🎉 Just launched Lorven Studios AI!
+🎉 Just launched Epiko AI Studios!
 
 Create viral AI content in seconds:
 ✨ 7 AI tools (Face Swap, Avatars, Couple Photos, Baby Predictor & more)
@@ -268,7 +268,7 @@ Try it now: [your-link]
 
 **LinkedIn:**
 ```
-Excited to share Lorven Studios AI - an AI-powered content creation platform!
+Excited to share Epiko AI Studios - an AI-powered content creation platform!
 
 Features:
 • 7 specialized AI tools
@@ -320,7 +320,7 @@ Live demo: [your-link]
 
 ## 🎉 You're Ready to Deploy!
 
-Your Lorven Studios AI app is production-ready. Choose your hosting platform and deploy in minutes!
+Your Epiko AI Studios app is production-ready. Choose your hosting platform and deploy in minutes!
 
 **Recommended Flow:**
 1. Deploy to Vercel (2 minutes)
