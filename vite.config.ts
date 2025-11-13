@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 
 export default defineConfig({
-  base: '/epiko-ai-studios/',
+  base: '/Epiko-AI-Studios/',
   plugins: [react()],
   resolve: {
     alias: {
