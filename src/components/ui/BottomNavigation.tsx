@@ -22,7 +22,7 @@ const BottomNavigation: React.FC = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-neutral-150 safe-area-bottom z-50">
+    <nav className="fixed bottom-0 left-0 right-0 bg-black border-t border-dark-100 safe-area-bottom z-50">
       <div className="max-w-md mx-auto">
         <div className="flex justify-around items-center h-16">
           {navItems.map((item) => {
@@ -36,9 +36,9 @@ const BottomNavigation: React.FC = () => {
               >
                 <Icon
                   size={26}
-                  color={active ? '#000000' : '#737373'}
+                  color={active ? '#ffffff' : '#737373'}
                 />
-                <span className={`text-xs ${active ? 'text-black font-semibold' : 'text-neutral-500'}`}>
+                <span className={`text-xs ${active ? 'text-white font-semibold' : 'text-dark-500'}`}>
                   {item.label}
                 </span>
               </button>

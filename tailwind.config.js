@@ -7,7 +7,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Threads-inspired neutral palette
+        // Dark theme palette
+        'dark': {
+          DEFAULT: '#000000',
+          50: '#1a1a1a',
+          100: '#262626',
+          150: '#2a2a2a',
+          200: '#333333',
+          300: '#404040',
+          400: '#525252',
+          500: '#737373',
+          600: '#a3a3a3',
+          700: '#d4d4d4',
+          800: '#e5e5e5',
+          900: '#f5f5f5',
+        },
+        // Keep neutral for reference
         'neutral': {
           50: '#fafafa',
           100: '#f5f5f5',
@@ -22,15 +37,10 @@ export default {
           900: '#171717',
           950: '#0a0a0a',
         },
-        // Brand colors
-        'brand': {
-          DEFAULT: '#000000',
-          light: '#1a1a1a',
-        },
         // Accent for interactions
         'accent': {
           DEFAULT: '#0095f6',
-          light: '#e7f3ff',
+          light: '#1da1f2',
           dark: '#0074cc',
         },
         // Keep legacy colors for compatibility

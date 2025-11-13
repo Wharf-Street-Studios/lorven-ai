@@ -103,16 +103,16 @@ const DiscoveryFeed: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white pb-20">
+    <div className="min-h-screen bg-black pb-20">
       {/* Header */}
-      <header className="bg-white border-b border-neutral-150 sticky top-0 z-10">
+      <header className="bg-black border-b border-dark-100 sticky top-0 z-10">
         <div className="px-4 py-3 flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-black">Feed</h1>
+          <h1 className="text-2xl font-bold text-white">Feed</h1>
           <button
             onClick={() => navigate('/search')}
-            className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-neutral-100 active:scale-95 transition-all duration-150"
+            className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-dark-100 active:scale-95 transition-all duration-150"
           >
-            <Search01Icon size={22} color="#000000" />
+            <Search01Icon size={22} color="#ffffff" />
           </button>
         </div>
       </header>
@@ -122,7 +122,7 @@ const DiscoveryFeed: React.FC = () => {
         {posts.map((post, index) => (
           <article
             key={post.id}
-            className="border-b border-neutral-150 animate-fade-in"
+            className="border-b border-dark-100 animate-fade-in"
             style={{ animationDelay: `${index * 0.05}s` }}
           >
             {/* Creator Header */}
@@ -131,24 +131,24 @@ const DiscoveryFeed: React.FC = () => {
                 onClick={() => navigate(`/profile/${post.creator.username}`)}
                 className="flex items-center gap-2.5 group"
               >
-                <div className="w-9 h-9 bg-neutral-200 rounded-full flex items-center justify-center text-lg">
+                <div className="w-9 h-9 bg-dark-200 rounded-full flex items-center justify-center text-lg">
                   {post.creator.avatar}
                 </div>
                 <div className="flex items-baseline gap-2">
-                  <span className="font-semibold text-black text-sm group-hover:underline">
+                  <span className="font-semibold text-white text-sm group-hover:underline">
                     {post.creator.username}
                   </span>
-                  <span className="text-xs text-neutral-500">{post.timestamp}</span>
+                  <span className="text-xs text-dark-500">{post.timestamp}</span>
                 </div>
               </button>
-              <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-100 active:scale-95 transition-all">
+              <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-dark-100 active:scale-95 transition-all">
                 <MoreVerticalIcon size={18} color="#737373" />
               </button>
             </div>
 
             {/* Content Image */}
             <div
-              className="w-full aspect-square bg-neutral-100 cursor-pointer"
+              className="w-full aspect-square bg-dark-100 cursor-pointer"
               onClick={() => navigate(`/reel/${post.id}`)}
             >
               <img
@@ -169,22 +169,22 @@ const DiscoveryFeed: React.FC = () => {
                   >
                     <FavouriteIcon
                       size={22}
-                      color={post.isLiked ? '#ef4444' : '#000000'}
+                      color={post.isLiked ? '#ef4444' : '#ffffff'}
                       className={`transition-all ${post.isLiked ? 'fill-current' : ''}`}
                     />
-                    <span className="text-sm text-neutral-700">{post.likes}</span>
+                    <span className="text-sm text-dark-700">{post.likes}</span>
                   </button>
 
                   <button
                     onClick={() => navigate(`/reel/${post.id}`)}
                     className="flex items-center gap-1.5 active:scale-95 transition-transform"
                   >
-                    <Message01Icon size={22} color="#000000" />
-                    <span className="text-sm text-neutral-700">{post.comments}</span>
+                    <Message01Icon size={22} color="#ffffff" />
+                    <span className="text-sm text-dark-700">{post.comments}</span>
                   </button>
 
                   <button className="active:scale-95 transition-transform">
-                    <Share08Icon size={22} color="#000000" />
+                    <Share08Icon size={22} color="#ffffff" />
                   </button>
                 </div>
 
@@ -194,16 +194,16 @@ const DiscoveryFeed: React.FC = () => {
                 >
                   <BookmarkAdd01Icon
                     size={22}
-                    color="#000000"
+                    color="#ffffff"
                     className={post.isBookmarked ? 'fill-current' : ''}
                   />
                 </button>
               </div>
 
               {/* Tool Badge */}
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-neutral-100 rounded-full">
-                <SparklesIcon size={12} color="#525252" />
-                <span className="text-xs font-medium text-neutral-700">{post.tool}</span>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-dark-100 rounded-full">
+                <SparklesIcon size={12} color="#ffffff" />
+                <span className="text-xs font-medium text-dark-700">{post.tool}</span>
               </div>
             </div>
           </article>

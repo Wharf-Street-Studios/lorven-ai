@@ -68,17 +68,17 @@ const ToolsMenu: React.FC = () => {
   const { balance } = useTokens();
 
   return (
-    <div className="min-h-screen bg-white pb-20">
+    <div className="min-h-screen bg-black pb-20">
       {/* Header */}
-      <header className="bg-white border-b border-neutral-150 sticky top-0 z-10">
+      <header className="bg-black border-b border-dark-100 sticky top-0 z-10">
         <div className="px-4 py-3 flex items-center justify-between">
-          <h1 className="text-xl font-bold text-black">Create</h1>
+          <h1 className="text-xl font-bold text-white">Create</h1>
           <button
             onClick={() => navigate('/wallet')}
-            className="flex items-center gap-2 px-3 py-1.5 bg-neutral-100 rounded-full hover:bg-neutral-150 active:scale-95 transition-all"
+            className="flex items-center gap-2 px-3 py-1.5 bg-dark-100 rounded-full hover:bg-dark-150 active:scale-95 transition-all"
           >
-            <Coins01Icon size={16} color="#000000" />
-            <span className="font-semibold text-black text-sm">{balance}</span>
+            <Coins01Icon size={16} color="#ffffff" />
+            <span className="font-semibold text-white text-sm">{balance}</span>
           </button>
         </div>
       </header>
@@ -90,18 +90,18 @@ const ToolsMenu: React.FC = () => {
             <button
               key={tool.id}
               onClick={() => navigate(tool.path)}
-              className="bg-white border border-neutral-150 rounded-2xl p-4 active:bg-neutral-50 transition-colors text-left"
+              className="bg-dark-100 border border-dark-100 rounded-2xl p-4 hover:bg-dark-150 active:bg-dark-150 transition-colors text-left"
             >
-              <div className="aspect-square bg-neutral-100 rounded-xl flex items-center justify-center mb-3">
+              <div className="aspect-square bg-dark-150 rounded-xl flex items-center justify-center mb-3">
                 <span className="text-5xl">{tool.icon}</span>
               </div>
-              <h3 className="font-semibold text-black text-sm mb-1">
+              <h3 className="font-semibold text-white text-sm mb-1">
                 {tool.name}
               </h3>
-              <p className="text-xs text-neutral-500 mb-2 line-clamp-1">
+              <p className="text-xs text-dark-600 mb-2 line-clamp-1">
                 {tool.description}
               </p>
-              <div className="flex items-center gap-1 text-xs text-neutral-700">
+              <div className="flex items-center gap-1 text-xs text-dark-500">
                 <span>💎</span>
                 <span className="font-medium">{tool.cost} tokens</span>
               </div>
@@ -110,9 +110,9 @@ const ToolsMenu: React.FC = () => {
         </div>
 
         {/* Get Tokens CTA */}
-        <div className="mt-6 bg-black text-white rounded-2xl p-5">
+        <div className="mt-6 bg-dark-100 text-white rounded-2xl p-5 border border-dark-100">
           <h3 className="font-semibold text-base mb-1">Need more tokens?</h3>
-          <p className="text-sm text-neutral-300 mb-4">
+          <p className="text-sm text-dark-600 mb-4">
             Unlock unlimited creativity
           </p>
           <button

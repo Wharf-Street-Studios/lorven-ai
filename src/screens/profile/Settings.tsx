@@ -48,17 +48,17 @@ const Settings: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white pb-20">
+    <div className="min-h-screen bg-black pb-20">
       {/* Header */}
-      <header className="bg-white border-b border-neutral-150 sticky top-0 z-10">
+      <header className="bg-black border-b border-dark-100 sticky top-0 z-10">
         <div className="px-4 py-3 flex items-center gap-3">
           <button
             onClick={() => navigate(-1)}
-            className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-neutral-100 active:scale-95 transition-all"
+            className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-dark-150 active:scale-95 transition-all"
           >
-            <ArrowLeft01Icon size={22} color="#000000" />
+            <ArrowLeft01Icon size={22} color="#ffffff" />
           </button>
-          <h1 className="text-xl font-bold text-black">Settings</h1>
+          <h1 className="text-xl font-bold text-white">Settings</h1>
         </div>
       </header>
 
@@ -66,7 +66,7 @@ const Settings: React.FC = () => {
       <main>
         {/* Account Section */}
         <div className="py-2">
-          <h2 className="text-xs font-semibold text-neutral-500 uppercase tracking-wide px-4 py-2">
+          <h2 className="text-xs font-semibold text-dark-600 uppercase tracking-wide px-4 py-2">
             Account
           </h2>
           <div>
@@ -76,13 +76,13 @@ const Settings: React.FC = () => {
                 <button
                   key={index}
                   onClick={option.onClick}
-                  className="w-full flex items-center justify-between px-4 py-4 border-b border-neutral-150 hover:bg-neutral-50 active:bg-neutral-100 transition-colors"
+                  className="w-full flex items-center justify-between px-4 py-4 border-b border-dark-100 hover:bg-dark-100 active:bg-dark-150 transition-colors"
                 >
                   <div className="flex items-center gap-3">
-                    <Icon size={22} color="#000000" />
-                    <span className="text-base text-black">{option.label}</span>
+                    <Icon size={22} color="#ffffff" />
+                    <span className="text-base text-white">{option.label}</span>
                   </div>
-                  <ArrowRight01Icon size={20} color="#a3a3a3" />
+                  <ArrowRight01Icon size={20} color="#737373" />
                 </button>
               );
             })}
@@ -91,16 +91,16 @@ const Settings: React.FC = () => {
 
         {/* App Info */}
         <div className="py-2 mt-4">
-          <h2 className="text-xs font-semibold text-neutral-500 uppercase tracking-wide px-4 py-2">
+          <h2 className="text-xs font-semibold text-dark-600 uppercase tracking-wide px-4 py-2">
             About
           </h2>
           <div>
-            <button className="w-full flex items-center justify-between px-4 py-4 border-b border-neutral-150">
+            <button className="w-full flex items-center justify-between px-4 py-4 border-b border-dark-100">
               <div className="flex items-center gap-3">
-                <InformationCircleIcon size={22} color="#000000" />
-                <span className="text-base text-black">About Epiko AI Studios</span>
+                <InformationCircleIcon size={22} color="#ffffff" />
+                <span className="text-base text-white">About Epiko AI Studios</span>
               </div>
-              <span className="text-sm text-neutral-500">v1.0.0</span>
+              <span className="text-sm text-dark-600">v1.0.0</span>
             </button>
           </div>
         </div>
@@ -109,9 +109,9 @@ const Settings: React.FC = () => {
         <div className="px-4 py-6">
           <button
             onClick={handleSignOut}
-            className="w-full flex items-center justify-center gap-2 bg-neutral-100 text-black font-semibold text-base py-3 rounded-xl hover:bg-neutral-150 active:scale-98 transition-all"
+            className="w-full flex items-center justify-center gap-2 bg-dark-100 text-white font-semibold text-base py-3 rounded-xl hover:bg-dark-150 active:scale-98 transition-all"
           >
-            <Logout01Icon size={20} color="#000000" />
+            <Logout01Icon size={20} color="#ffffff" />
             <span>Sign Out</span>
           </button>
         </div>

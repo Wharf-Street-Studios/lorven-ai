@@ -43,14 +43,14 @@ const SignInScreen: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-black flex flex-col">
       {/* Header */}
-      <div className="px-4 py-3 border-b border-neutral-150">
+      <div className="px-4 py-3 border-b border-dark-100">
         <button
           onClick={() => navigate(-1)}
-          className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-neutral-100 active:scale-95 transition-all"
+          className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-dark-150 active:scale-95 transition-all"
         >
-          <Cancel01Icon size={24} color="#000000" />
+          <Cancel01Icon size={24} color="#ffffff" />
         </button>
       </div>
 
@@ -58,20 +58,20 @@ const SignInScreen: React.FC = () => {
       <div className="flex-1 flex flex-col justify-center px-6 pb-12">
         <div className="max-w-sm mx-auto w-full">
           <div className="text-center mb-10">
-            <div className="w-16 h-16 bg-black rounded-3xl mx-auto mb-6 flex items-center justify-center">
-              <SparklesIcon size={28} color="#ffffff" />
+            <div className="w-16 h-16 bg-white rounded-3xl mx-auto mb-6 flex items-center justify-center">
+              <SparklesIcon size={28} color="#000000" />
             </div>
-            <h1 className="text-2xl font-bold text-black mb-2">
+            <h1 className="text-2xl font-bold text-white mb-2">
               Welcome Back
             </h1>
-            <p className="text-sm text-neutral-500">
+            <p className="text-sm text-dark-600">
               Sign in to continue creating
             </p>
           </div>
 
           {errors.form && (
-            <div className="mb-6 p-3 bg-red-50 border border-red-200 rounded-xl">
-              <p className="text-sm text-red-600">{errors.form}</p>
+            <div className="mb-6 p-3 bg-red-950 border border-red-800 rounded-xl">
+              <p className="text-sm text-red-400">{errors.form}</p>
             </div>
           )}
 
@@ -99,7 +99,7 @@ const SignInScreen: React.FC = () => {
             <div className="flex justify-end">
               <button
                 onClick={() => navigate('/forgot-password')}
-                className="text-sm text-neutral-700 hover:text-black font-medium transition-colors"
+                className="text-sm text-dark-600 hover:text-white font-medium transition-colors"
               >
                 Forgot password?
               </button>
@@ -109,16 +109,16 @@ const SignInScreen: React.FC = () => {
           <button
             onClick={handleSignIn}
             disabled={loading}
-            className="w-full bg-black text-white font-semibold text-base py-3 rounded-xl hover:bg-neutral-900 active:scale-98 transition-all disabled:opacity-50 disabled:cursor-not-allowed mb-6"
+            className="w-full bg-white text-black font-semibold text-base py-3 rounded-xl hover:bg-neutral-100 active:scale-98 transition-all disabled:opacity-50 disabled:cursor-not-allowed mb-6"
           >
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
 
           <div className="text-center">
-            <span className="text-sm text-neutral-600">Don't have an account? </span>
+            <span className="text-sm text-dark-600">Don't have an account? </span>
             <button
               onClick={() => navigate('/create-account')}
-              className="text-sm text-black font-semibold hover:underline"
+              className="text-sm text-white font-semibold hover:underline"
             >
               Sign up
             </button>
