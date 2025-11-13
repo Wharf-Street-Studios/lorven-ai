@@ -1,18 +1,17 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Home01Icon, Add01Icon, UserIcon, Search01Icon } from 'hugeicons-react';
+import { Home01Icon, SparklesIcon, UserIcon } from 'hugeicons-react';
 
 interface NavItem {
   id: string;
   label: string;
   path: string;
-  icon: React.ComponentType<{ size?: number; color?: string; variant?: string }>;
+  icon: React.ComponentType<{ size?: number; color?: string }>;
 }
 
 const navItems: NavItem[] = [
   { id: 'home', label: 'Home', path: '/discover', icon: Home01Icon },
-  { id: 'search', label: 'Search', path: '/search', icon: Search01Icon },
-  { id: 'create', label: 'Create', path: '/tools', icon: Add01Icon },
+  { id: 'create', label: 'Create', path: '/tools', icon: SparklesIcon },
   { id: 'profile', label: 'Profile', path: '/profile', icon: UserIcon },
 ];
 
@@ -33,14 +32,15 @@ const BottomNavigation: React.FC = () => {
               <button
                 key={item.id}
                 onClick={() => navigate(item.path)}
-                className="flex flex-col items-center justify-center flex-1 h-full group"
+                className="flex flex-col items-center justify-center flex-1 h-full group gap-1"
               >
                 <Icon
                   size={26}
                   color={active ? '#000000' : '#737373'}
                 />
-                {/* Minimal label hint - hidden by default, shown on press for accessibility */}
-                <span className="sr-only">{item.label}</span>
+                <span className={`text-xs ${active ? 'text-black font-semibold' : 'text-neutral-500'}`}>
+                  {item.label}
+                </span>
               </button>
             );
           })}

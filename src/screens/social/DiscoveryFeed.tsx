@@ -23,56 +23,58 @@ interface Post {
   likes: number;
   comments: number;
   isLiked: boolean;
+  isBookmarked: boolean;
 }
 
 const mockPosts: Post[] = [
   {
     id: 1,
     creator: { username: 'sarah_creates', avatar: '👩‍🎨' },
-    image: '🎨',
+    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop',
     tool: 'Face Swap',
     timestamp: '2h',
     likes: 234,
     comments: 12,
     isLiked: false,
+    isBookmarked: false,
   },
   {
     id: 2,
     creator: { username: 'john_ai', avatar: '👨‍💼' },
-    image: '🌅',
-    tool: 'Scene Swap',
+    image: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&h=400&fit=crop',
+    tool: 'AI Avatar',
     timestamp: '5h',
     likes: 567,
     comments: 34,
     isLiked: true,
+    isBookmarked: false,
   },
   {
     id: 3,
     creator: { username: 'creative_mind', avatar: '🧑‍🎨' },
-    image: '✨',
-    tool: 'AI Avatar',
+    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop',
+    tool: 'Enhancement',
     timestamp: '1d',
     likes: 890,
     comments: 45,
     isLiked: false,
+    isBookmarked: true,
   },
   {
     id: 4,
     creator: { username: 'art_lover', avatar: '👩' },
-    image: '🎭',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
     tool: 'Gender Swap',
     timestamp: '2d',
     likes: 1234,
     comments: 89,
     isLiked: false,
+    isBookmarked: false,
   },
 ];
 
-const filters = ['For You', 'Following', 'Face Swap', 'Avatars', 'Trending'];
-
 const DiscoveryFeed: React.FC = () => {
   const navigate = useNavigate();
-  const [selectedFilter, setSelectedFilter] = useState('For You');
   const [posts, setPosts] = useState<Post[]>(mockPosts);
 
   const handleLike = (postId: number) => {
@@ -88,12 +90,24 @@ const DiscoveryFeed: React.FC = () => {
     }));
   };
 
+  const handleBookmark = (postId: number) => {
+    setPosts(posts.map(post => {
+      if (post.id === postId) {
+        return {
+          ...post,
+          isBookmarked: !post.isBookmarked,
+        };
+      }
+      return post;
+    }));
+  };
+
   return (
     <div className="min-h-screen bg-white pb-20">
-      {/* Header - Threads Style */}
+      {/* Header */}
       <header className="bg-white border-b border-neutral-150 sticky top-0 z-10">
         <div className="px-4 py-3 flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-black">Epiko</h1>
+          <h1 className="text-2xl font-bold text-black">Feed</h1>
           <button
             onClick={() => navigate('/search')}
             className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-neutral-100 active:scale-95 transition-all duration-150"
@@ -101,29 +115,9 @@ const DiscoveryFeed: React.FC = () => {
             <Search01Icon size={22} color="#000000" />
           </button>
         </div>
-
-        {/* Filter Tabs - Threads Style */}
-        <div className="flex border-b border-neutral-150 overflow-x-auto scrollbar-hide">
-          {filters.map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setSelectedFilter(filter)}
-              className={`flex-shrink-0 px-4 py-3 text-sm font-semibold transition-all relative ${
-                selectedFilter === filter
-                  ? 'text-black'
-                  : 'text-neutral-500'
-              }`}
-            >
-              {filter}
-              {selectedFilter === filter && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-black" />
-              )}
-            </button>
-          ))}
-        </div>
       </header>
 
-      {/* Feed Content - Threads Style */}
+      {/* Feed Content */}
       <main>
         {posts.map((post, index) => (
           <article
@@ -154,13 +148,15 @@ const DiscoveryFeed: React.FC = () => {
 
             {/* Content Image */}
             <div
-              className="w-full aspect-square bg-gradient-to-br from-neutral-50 to-neutral-100 flex items-center justify-center cursor-pointer border-y border-neutral-150"
+              className="w-full aspect-square bg-neutral-100 cursor-pointer"
               onClick={() => navigate(`/reel/${post.id}`)}
             >
-              <div className="text-center">
-                <span className="text-8xl">{post.image}</span>
-                <p className="text-xs text-neutral-500 mt-2 font-medium">Tap to view</p>
-              </div>
+              <img
+                src={post.image}
+                alt="AI generated content"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
             </div>
 
             {/* Actions Bar */}
@@ -193,10 +189,14 @@ const DiscoveryFeed: React.FC = () => {
                 </div>
 
                 <button
-                  onClick={() => alert('Saved')}
+                  onClick={() => handleBookmark(post.id)}
                   className="active:scale-95 transition-transform"
                 >
-                  <BookmarkAdd01Icon size={22} color="#000000" />
+                  <BookmarkAdd01Icon
+                    size={22}
+                    color="#000000"
+                    className={post.isBookmarked ? 'fill-current' : ''}
+                  />
                 </button>
               </div>
 
