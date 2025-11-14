@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Card } from '../../components/ui';
+import { Button } from '../../components/ui';
+import { ArrowLeft01Icon, Tick02Icon } from 'hugeicons-react';
 
 const subscriptionPlans = [
   {
@@ -94,38 +95,39 @@ const ChoosePlan: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-black">
       {/* Header */}
-      <header className="bg-white border-b-2 border-gray-200 px-6 py-4 sticky top-0 z-10">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <button onClick={() => navigate(-1)} className="text-2xl mr-4">
-              ←
-            </button>
-            <h1 className="text-2xl font-bold text-gray-900">Choose Your Plan</h1>
-          </div>
+      <header className="bg-black/95 backdrop-blur-sm border-b border-dark-100 sticky top-0 z-10">
+        <div className="px-4 py-4 flex items-center max-w-2xl mx-auto">
+          <button
+            onClick={() => navigate(-1)}
+            className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-dark-100 active:scale-95 transition-all"
+          >
+            <ArrowLeft01Icon size={24} color="#ffffff" />
+          </button>
+          <h1 className="text-xl font-bold text-white ml-3">Choose Your Plan</h1>
         </div>
       </header>
 
       {/* Billing Toggle */}
-      <div className="p-6">
-        <div className="flex items-center justify-center space-x-4 mb-6">
+      <div className="px-4 py-6 max-w-2xl mx-auto">
+        <div className="flex items-center justify-center gap-3 mb-6">
           <button
             onClick={() => setBillingCycle('monthly')}
-            className={`px-6 py-3 rounded-lg font-medium transition-all ${
+            className={`px-6 py-3 rounded-xl font-semibold transition-all ${
               billingCycle === 'monthly'
-                ? 'bg-gray-900 text-white'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                ? 'bg-white text-black'
+                : 'bg-dark-100 text-white hover:bg-dark-150'
             }`}
           >
             Monthly
           </button>
           <button
             onClick={() => setBillingCycle('annual')}
-            className={`px-6 py-3 rounded-lg font-medium transition-all relative ${
+            className={`px-6 py-3 rounded-xl font-semibold transition-all relative ${
               billingCycle === 'annual'
-                ? 'bg-gray-900 text-white'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                ? 'bg-white text-black'
+                : 'bg-dark-100 text-white hover:bg-dark-150'
             }`}
           >
             Annual
@@ -136,31 +138,31 @@ const ChoosePlan: React.FC = () => {
         </div>
 
         {/* Plans Grid */}
-        <div className="space-y-6">
+        <div className="space-y-4">
           {subscriptionPlans.map((plan) => (
-            <Card
+            <div
               key={plan.id}
-              className={`p-6 relative ${
-                plan.popular ? 'border-4 border-gray-900' : ''
+              className={`bg-dark-100 rounded-3xl p-5 relative ${
+                plan.popular ? 'border-2 border-white' : ''
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gray-900 text-white px-4 py-1 rounded-full text-sm font-bold">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-black px-4 py-1 rounded-full text-sm font-bold">
                   MOST POPULAR
                 </div>
               )}
 
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-1">{plan.name}</h3>
-                  <p className="text-gray-600 text-sm">
+                  <h3 className="text-2xl font-bold text-white mb-1">{plan.name}</h3>
+                  <p className="text-dark-500 text-sm">
                     {typeof plan.tokens === 'string' ? plan.tokens : `${plan.tokens} tokens/month`}
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="text-3xl font-bold text-gray-900">{getPrice(plan)}</p>
+                  <p className="text-3xl font-bold text-white">{getPrice(plan)}</p>
                   {plan.id !== 'starter' && plan.id !== 'enterprise' && (
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-dark-500">
                       {billingCycle === 'annual' ? 'billed annually' : 'billed monthly'}
                     </p>
                   )}
@@ -169,9 +171,9 @@ const ChoosePlan: React.FC = () => {
 
               <div className="space-y-2 mb-6">
                 {plan.features.map((feature, index) => (
-                  <div key={index} className="flex items-center space-x-2">
-                    <span className="text-green-600 font-bold">✓</span>
-                    <span className="text-gray-700">{feature}</span>
+                  <div key={index} className="flex items-center gap-2">
+                    <Tick02Icon size={16} color="#22c55e" />
+                    <span className="text-white text-sm">{feature}</span>
                   </div>
                 ))}
               </div>
@@ -188,34 +190,26 @@ const ChoosePlan: React.FC = () => {
                   ? 'Contact Sales'
                   : `Choose ${plan.name}`}
               </Button>
-            </Card>
+            </div>
           ))}
         </div>
 
         {/* Features Comparison */}
-        <div className="mt-8 p-6 bg-white rounded-xl border-2 border-gray-200">
-          <h3 className="text-lg font-bold text-gray-900 mb-4">All Plans Include:</h3>
+        <div className="mt-8 p-5 bg-dark-100 rounded-3xl">
+          <h3 className="text-lg font-bold text-white mb-4">All Plans Include:</h3>
           <div className="space-y-2">
-            <div className="flex items-center space-x-2">
-              <span className="text-green-600">✓</span>
-              <span className="text-gray-700">All 7 AI tools</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <span className="text-green-600">✓</span>
-              <span className="text-gray-700">Discovery feed & social features</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <span className="text-green-600">✓</span>
-              <span className="text-gray-700">Rewards & missions</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <span className="text-green-600">✓</span>
-              <span className="text-gray-700">Community support</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <span className="text-green-600">✓</span>
-              <span className="text-gray-700">Regular updates</span>
-            </div>
+            {[
+              'All 7 AI tools',
+              'Discovery feed & social features',
+              'Rewards & missions',
+              'Community support',
+              'Regular updates',
+            ].map((feature, index) => (
+              <div key={index} className="flex items-center gap-2">
+                <Tick02Icon size={16} color="#22c55e" />
+                <span className="text-white text-sm">{feature}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>

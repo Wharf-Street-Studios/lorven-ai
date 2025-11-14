@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTokens } from '../../context/TokenContext';
-import { Button, Card } from './index';
+import { Button } from './index';
+import { ArrowLeft01Icon, Coins01Icon, Image02Icon, SparklesIcon, Download04Icon, Share08Icon, Rotate01Icon } from 'hugeicons-react';
 
 interface ToolConfig {
   name: string;
@@ -83,38 +84,41 @@ const AIToolTemplate: React.FC<AIToolTemplateProps> = ({ config }) => {
   };
 
   return (
-    <div className="min-h-screen bg-white pb-20">
+    <div className="min-h-screen bg-black pb-20">
       {/* Header */}
-      <header className="bg-white border-b-2 border-gray-200 px-6 py-4 sticky top-0 z-10">
-        <div className="flex items-center justify-between">
+      <header className="bg-black/95 backdrop-blur-sm border-b border-dark-100 sticky top-0 z-10">
+        <div className="px-4 py-4 flex items-center justify-between max-w-2xl mx-auto">
           <div className="flex items-center">
-            <button onClick={() => navigate(-1)} className="text-2xl mr-4">
-              ←
+            <button
+              onClick={() => navigate(-1)}
+              className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-dark-100 active:scale-95 transition-all"
+            >
+              <ArrowLeft01Icon size={24} color="#ffffff" />
             </button>
-            <h1 className="text-xl font-bold text-gray-900">{config.name}</h1>
+            <h1 className="text-xl font-bold text-white ml-3">{config.name}</h1>
           </div>
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-1 bg-gray-100 px-3 py-1 rounded-lg">
-              <span className="text-sm">💎</span>
-              <span className="text-sm font-bold">{balance}</span>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1.5 bg-dark-100 px-3 py-2 rounded-xl">
+              <Coins01Icon size={18} color="#3b82f6" />
+              <span className="text-sm font-bold text-white">{balance}</span>
             </div>
-            <div className="flex items-center space-x-1 text-sm text-gray-600">
+            <div className="flex items-center gap-1 text-sm text-dark-500">
               <span>Cost:</span>
-              <span className="font-bold">{toolCost}</span>
+              <span className="font-bold text-white">{toolCost}</span>
             </div>
           </div>
         </div>
       </header>
 
       {/* Content */}
-      <main className="p-6">
+      <main className="px-4 py-6 max-w-2xl mx-auto">
         {/* Upload Step */}
         {currentStep === 'upload' && (
           <div>
             <div className="text-center mb-6">
-              <span className="text-6xl block mb-4">{config.icon}</span>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">{config.instructions}</h2>
-              <p className="text-gray-600">{config.description}</p>
+              <div className="text-6xl mb-4">{config.icon}</div>
+              <h2 className="text-2xl font-bold text-white mb-2">{config.instructions}</h2>
+              <p className="text-dark-500">{config.description}</p>
             </div>
 
             <input
@@ -127,15 +131,15 @@ const AIToolTemplate: React.FC<AIToolTemplateProps> = ({ config }) => {
             />
             <label
               htmlFor="file-upload"
-              className="block w-full h-64 border-2 border-dashed border-gray-300 rounded-xl hover:border-gray-400 cursor-pointer transition-all"
+              className="block w-full h-64 border-2 border-dashed border-dark-100 bg-dark-100/50 rounded-3xl hover:border-white cursor-pointer transition-all"
             >
-              <div className="h-full flex flex-col items-center justify-center space-y-4">
-                <span className="text-6xl">📸</span>
+              <div className="h-full flex flex-col items-center justify-center gap-4">
+                <Image02Icon size={60} color="#ffffff" />
                 <div className="text-center">
-                  <p className="font-semibold text-gray-900">
+                  <p className="font-semibold text-white">
                     Upload {config.uploadCount} {config.uploadCount > 1 ? 'photos' : 'photo'}
                   </p>
-                  <p className="text-sm text-gray-500 mt-1">JPG or PNG, max 10MB each</p>
+                  <p className="text-sm text-dark-500 mt-1">JPG or PNG, max 10MB each</p>
                 </div>
               </div>
             </label>
@@ -145,37 +149,35 @@ const AIToolTemplate: React.FC<AIToolTemplateProps> = ({ config }) => {
         {/* Options Step */}
         {currentStep === 'options' && (config.templates || config.styles) && (
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            <h2 className="text-2xl font-bold text-white mb-6">
               Choose {config.templates ? 'Template' : 'Style'}
             </h2>
 
             <div className="grid grid-cols-2 gap-4 mb-6">
               {config.templates?.map((template) => (
-                <Card
+                <button
                   key={template.id}
                   onClick={() => setSelectedOption(template.id)}
-                  hover
-                  className={`aspect-square flex flex-col items-center justify-center space-y-2 ${
-                    selectedOption === template.id ? 'border-gray-900 bg-gray-50' : ''
+                  className={`bg-dark-100 rounded-3xl p-5 aspect-square flex flex-col items-center justify-center gap-2 transition-all ${
+                    selectedOption === template.id ? 'border-2 border-white bg-dark-150' : 'hover:bg-dark-150'
                   }`}
                 >
                   <span className="text-5xl">{template.emoji}</span>
-                  <span className="font-semibold text-gray-900 text-sm text-center">{template.name}</span>
-                  <span className="text-xs text-gray-500">{template.category}</span>
-                </Card>
+                  <span className="font-semibold text-white text-sm text-center">{template.name}</span>
+                  <span className="text-xs text-dark-500">{template.category}</span>
+                </button>
               ))}
               {config.styles?.map((style) => (
-                <Card
+                <button
                   key={style.id}
                   onClick={() => setSelectedOption(style.id)}
-                  hover
-                  className={`aspect-square flex flex-col items-center justify-center space-y-2 ${
-                    selectedOption === style.id ? 'border-gray-900 bg-gray-50' : ''
+                  className={`bg-dark-100 rounded-3xl p-5 aspect-square flex flex-col items-center justify-center gap-2 transition-all ${
+                    selectedOption === style.id ? 'border-2 border-white bg-dark-150' : 'hover:bg-dark-150'
                   }`}
                 >
                   <span className="text-5xl">{style.emoji}</span>
-                  <span className="font-semibold text-gray-900 text-sm text-center">{style.name}</span>
-                </Card>
+                  <span className="font-semibold text-white text-sm text-center">{style.name}</span>
+                </button>
               ))}
             </div>
 
@@ -190,7 +192,7 @@ const AIToolTemplate: React.FC<AIToolTemplateProps> = ({ config }) => {
                 {!canAfford ? `Need ${toolCost - balance} more tokens` : `Generate (${toolCost} tokens)`}
               </Button>
               <Button variant="outline" size="large" fullWidth onClick={() => setCurrentStep('upload')}>
-                ← Back
+                Back
               </Button>
             </div>
           </div>
@@ -199,20 +201,20 @@ const AIToolTemplate: React.FC<AIToolTemplateProps> = ({ config }) => {
         {/* Generate Step */}
         {currentStep === 'generate' && (
           <div className="text-center py-12">
-            <div className="w-32 h-32 bg-gray-100 rounded-full mx-auto mb-6 flex items-center justify-center animate-pulse">
-              <span className="text-6xl">{config.icon}</span>
+            <div className="w-32 h-32 bg-dark-100 rounded-full mx-auto mb-6 flex items-center justify-center animate-pulse">
+              <SparklesIcon size={64} color="#ffffff" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Creating Magic...</h2>
-            <p className="text-gray-600 mb-8">This usually takes 10-30 seconds</p>
+            <h2 className="text-2xl font-bold text-white mb-2">Creating Magic...</h2>
+            <p className="text-dark-500 mb-8">This usually takes 10-30 seconds</p>
 
             <div className="max-w-xs mx-auto">
-              <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+              <div className="w-full h-3 bg-dark-100 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-gray-900 transition-all duration-300"
+                  className="h-full bg-white transition-all duration-300"
                   style={{ width: `${progress}%` }}
                 />
               </div>
-              <p className="text-sm text-gray-600 mt-2">{progress}% complete</p>
+              <p className="text-sm text-dark-500 mt-2">{progress}% complete</p>
             </div>
           </div>
         )}
@@ -220,23 +222,30 @@ const AIToolTemplate: React.FC<AIToolTemplateProps> = ({ config }) => {
         {/* Result Step */}
         {currentStep === 'result' && (
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Your Creation</h2>
+            <h2 className="text-2xl font-bold text-white mb-6 text-center">Your Creation</h2>
 
-            <div className="w-full aspect-square bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl mb-6 flex items-center justify-center">
+            <div className="w-full aspect-square bg-dark-100 rounded-3xl mb-6 flex items-center justify-center">
               <div className="text-center">
                 <span className="text-8xl mb-4 block">{config.icon}</span>
-                <p className="text-gray-600 font-medium">Generated Result Preview</p>
+                <p className="text-dark-500 font-medium">Generated Result Preview</p>
               </div>
             </div>
 
             <div className="space-y-3">
               <Button variant="primary" size="large" fullWidth onClick={() => navigate('/discover')}>
-                📤 Publish to Feed
+                <Share08Icon size={20} color="#000000" className="mr-2" />
+                Publish to Feed
               </Button>
               <div className="grid grid-cols-3 gap-3">
-                <Button variant="outline" size="medium" fullWidth>💾 Save</Button>
-                <Button variant="outline" size="medium" fullWidth>🔗 Share</Button>
-                <Button variant="outline" size="medium" fullWidth onClick={handleTryAgain}>🔄 Again</Button>
+                <Button variant="outline" size="medium" fullWidth>
+                  <Download04Icon size={20} color="#ffffff" />
+                </Button>
+                <Button variant="outline" size="medium" fullWidth>
+                  <Share08Icon size={20} color="#ffffff" />
+                </Button>
+                <Button variant="outline" size="medium" fullWidth onClick={handleTryAgain}>
+                  <Rotate01Icon size={20} color="#ffffff" />
+                </Button>
               </div>
             </div>
           </div>

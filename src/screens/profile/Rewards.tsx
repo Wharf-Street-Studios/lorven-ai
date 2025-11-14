@@ -1,7 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTokens } from '../../context/TokenContext';
-import { Card, Button, BottomNavigation } from '../../components/ui';
+import { Button, BottomNavigation } from '../../components/ui';
+import { ArrowLeft01Icon, Coins01Icon, SparklesIcon, Award01Icon, Task01Icon, Share08Icon, UserAdd01Icon } from 'hugeicons-react';
 
 const dailyMissions = [
   { id: 1, title: 'Create 3 AI images', reward: 5, progress: 1, total: 3, completed: false },
@@ -10,10 +11,10 @@ const dailyMissions = [
 ];
 
 const achievements = [
-  { id: 1, title: 'First Creation', emoji: '🎨', reward: 10, progress: 100, unlocked: true },
-  { id: 2, title: 'Social Butterfly', emoji: '🦋', reward: 25, progress: 60, unlocked: false },
-  { id: 3, title: '7-Day Streak', emoji: '🔥', reward: 50, progress: 40, unlocked: false },
-  { id: 4, title: '100 Creations', emoji: '💯', reward: 100, progress: 25, unlocked: false },
+  { id: 1, title: 'First Creation', Icon: SparklesIcon, reward: 10, progress: 100, unlocked: true },
+  { id: 2, title: 'Social Butterfly', Icon: UserAdd01Icon, reward: 25, progress: 60, unlocked: false },
+  { id: 3, title: '7-Day Streak', Icon: SparklesIcon, reward: 50, progress: 40, unlocked: false },
+  { id: 4, title: '100 Creations', Icon: Award01Icon, reward: 100, progress: 25, unlocked: false },
 ];
 
 const Rewards: React.FC = () => {
@@ -26,57 +27,60 @@ const Rewards: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
+    <div className="min-h-screen bg-black pb-20">
       {/* Header */}
-      <header className="bg-white border-b-2 border-gray-200 px-6 py-4 sticky top-0 z-10">
-        <div className="flex items-center">
-          <button onClick={() => navigate(-1)} className="text-2xl mr-4">
-            ←
+      <header className="bg-black/95 backdrop-blur-sm border-b border-dark-100 sticky top-0 z-10">
+        <div className="px-4 py-4 flex items-center max-w-2xl mx-auto">
+          <button
+            onClick={() => navigate(-1)}
+            className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-dark-100 active:scale-95 transition-all"
+          >
+            <ArrowLeft01Icon size={24} color="#ffffff" />
           </button>
-          <h1 className="text-2xl font-bold text-gray-900">Rewards</h1>
+          <h1 className="text-xl font-bold text-white ml-3">Rewards</h1>
         </div>
       </header>
 
       {/* Streak Counter */}
-      <div className="p-6">
-        <Card className="p-6 bg-gradient-to-br from-orange-500 to-red-500 text-white text-center">
+      <div className="px-4 py-6 max-w-2xl mx-auto">
+        <div className="bg-gradient-to-br from-orange-500 to-red-500 rounded-3xl p-6 text-white text-center">
           <p className="text-sm opacity-90 mb-2">Daily Login Streak</p>
-          <div className="flex items-center justify-center space-x-2 mb-2">
-            <span className="text-5xl">🔥</span>
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <SparklesIcon size={56} color="#ffffff" />
             <span className="text-5xl font-bold">3</span>
           </div>
           <p className="text-sm opacity-90">days in a row</p>
-        </Card>
+        </div>
       </div>
 
       {/* Daily Missions */}
-      <div className="px-6 pb-6">
+      <div className="px-4 pb-6 max-w-2xl mx-auto">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-gray-900">Daily Missions</h2>
-          <span className="text-sm text-gray-500">Resets in 18h</span>
+          <h2 className="text-xl font-bold text-white">Daily Missions</h2>
+          <span className="text-sm text-dark-500">Resets in 18h</span>
         </div>
         <div className="space-y-3">
           {dailyMissions.map((mission) => (
-            <Card key={mission.id} className="p-4">
+            <div key={mission.id} className="bg-dark-100 rounded-3xl p-4">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex-1">
-                  <p className="font-semibold text-gray-900 mb-1">{mission.title}</p>
-                  <div className="flex items-center space-x-2">
-                    <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <p className="font-semibold text-white mb-1">{mission.title}</p>
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 h-2 bg-dark-150 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-gray-900 transition-all"
+                        className="h-full bg-white transition-all"
                         style={{ width: `${(mission.progress / mission.total) * 100}%` }}
                       />
                     </div>
-                    <span className="text-xs text-gray-600">
+                    <span className="text-xs text-dark-500">
                       {mission.progress}/{mission.total}
                     </span>
                   </div>
                 </div>
-                <div className="ml-4 text-right">
-                  <div className="flex items-center space-x-1 mb-2">
-                    <span className="text-sm">💎</span>
-                    <span className="font-bold text-gray-900">{mission.reward}</span>
+                <div className="ml-4 text-right flex flex-col items-end gap-2">
+                  <div className="flex items-center gap-1.5">
+                    <Coins01Icon size={16} color="#3b82f6" />
+                    <span className="font-bold text-white">{mission.reward}</span>
                   </div>
                   {mission.progress >= mission.total ? (
                     <Button
@@ -87,65 +91,67 @@ const Rewards: React.FC = () => {
                       Claim
                     </Button>
                   ) : (
-                    <span className="text-xs text-gray-500">In progress</span>
+                    <span className="text-xs text-dark-500">In progress</span>
                   )}
                 </div>
               </div>
-            </Card>
+            </div>
           ))}
         </div>
       </div>
 
       {/* Achievements */}
-      <div className="px-6 pb-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Achievements</h2>
-        <div className="grid grid-cols-2 gap-4">
+      <div className="px-4 pb-6 max-w-2xl mx-auto">
+        <h2 className="text-xl font-bold text-white mb-4">Achievements</h2>
+        <div className="grid grid-cols-2 gap-3">
           {achievements.map((achievement) => (
-            <Card
+            <div
               key={achievement.id}
-              className={`p-4 text-center ${
-                achievement.unlocked ? 'bg-gradient-to-br from-yellow-50 to-orange-50' : 'opacity-60'
+              className={`bg-dark-100 rounded-3xl p-4 text-center ${
+                achievement.unlocked ? 'border-2 border-yellow-500' : 'opacity-60'
               }`}
             >
-              <div className="text-5xl mb-2 filter grayscale-0">
-                {achievement.emoji}
-              </div>
-              <p className="font-semibold text-gray-900 text-sm mb-2">{achievement.title}</p>
-              <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden mb-2">
+              <achievement.Icon size={48} color={achievement.unlocked ? '#eab308' : '#ffffff'} className="mx-auto mb-2" />
+              <p className="font-semibold text-white text-sm mb-2">{achievement.title}</p>
+              <div className="w-full h-2 bg-dark-150 rounded-full overflow-hidden mb-2">
                 <div
-                  className="h-full bg-gray-900 transition-all"
+                  className="h-full bg-white transition-all"
                   style={{ width: `${achievement.progress}%` }}
                 />
               </div>
-              <p className="text-xs text-gray-600 mb-2">{achievement.progress}% Complete</p>
-              <div className="flex items-center justify-center space-x-1">
-                <span className="text-xs">💎</span>
-                <span className="text-xs font-bold text-gray-900">{achievement.reward}</span>
+              <p className="text-xs text-dark-500 mb-2">{achievement.progress}% Complete</p>
+              <div className="flex items-center justify-center gap-1">
+                <Coins01Icon size={14} color="#3b82f6" />
+                <span className="text-xs font-bold text-white">{achievement.reward}</span>
               </div>
-            </Card>
+            </div>
           ))}
         </div>
       </div>
 
       {/* Referral Program */}
-      <div className="px-6 pb-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Refer Friends</h2>
-        <Card className="p-6">
+      <div className="px-4 pb-6 max-w-2xl mx-auto">
+        <h2 className="text-xl font-bold text-white mb-4">Refer Friends</h2>
+        <div className="bg-dark-100 rounded-3xl p-6">
           <div className="text-center mb-4">
-            <span className="text-6xl block mb-4">🎁</span>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Earn 50 Tokens</h3>
-            <p className="text-gray-600 text-sm">
+            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+              <UserAdd01Icon size={32} color="#ffffff" />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-2">Earn 50 Tokens</h3>
+            <p className="text-dark-500 text-sm">
               For each friend who signs up using your referral link
             </p>
           </div>
-          <div className="bg-gray-100 p-4 rounded-lg mb-4 flex items-center justify-between">
-            <code className="text-sm text-gray-900 font-mono">epiko-ai-studios.ai/r/USER123</code>
-            <button className="text-2xl">📋</button>
+          <div className="bg-dark-150 p-4 rounded-xl mb-4 flex items-center justify-between">
+            <code className="text-sm text-white font-mono truncate flex-1">epiko-ai-studios.ai/r/USER123</code>
+            <button className="ml-3 w-10 h-10 flex items-center justify-center rounded-full hover:bg-dark-100 transition-colors">
+              <Share08Icon size={20} color="#ffffff" />
+            </button>
           </div>
           <Button variant="primary" size="large" fullWidth>
             Share Referral Link
           </Button>
-        </Card>
+        </div>
       </div>
 
       {/* Bottom Navigation */}

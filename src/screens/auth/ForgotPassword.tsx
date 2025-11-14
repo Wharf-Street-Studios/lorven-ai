@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Input } from '../../components/ui';
-import { LockPasswordIcon, Tick02Icon } from 'hugeicons-react';
+import { LockPasswordIcon, Tick02Icon, ArrowLeft01Icon } from 'hugeicons-react';
 
 const ForgotPassword: React.FC = () => {
   const navigate = useNavigate();
@@ -36,32 +36,34 @@ const ForgotPassword: React.FC = () => {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-black">
         {/* Header */}
-        <div className="px-6 py-5 border-b-2 border-gray-300 bg-white sticky top-0 z-10 shadow-medium">
-          <button
-            onClick={() => navigate('/sign-in')}
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-300 hover:scale-110 active:scale-95"
-          >
-            <span className="text-xl">←</span>
-          </button>
+        <div className="bg-black/95 backdrop-blur-sm border-b border-dark-100 sticky top-0 z-10">
+          <div className="px-4 py-4 flex items-center max-w-2xl mx-auto">
+            <button
+              onClick={() => navigate('/sign-in')}
+              className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-dark-100 active:scale-95 transition-all"
+            >
+              <ArrowLeft01Icon size={24} color="#ffffff" />
+            </button>
+          </div>
         </div>
 
         {/* Success Content */}
-        <div className="p-6 max-w-md mx-auto flex flex-col items-center justify-center min-h-[80vh]">
-          <div className="w-24 h-24 bg-gradient-to-br from-green-400 to-green-500 rounded-full mx-auto mb-6 flex items-center justify-center shadow-strong">
+        <div className="px-4 py-8 max-w-md mx-auto flex flex-col items-center justify-center min-h-[80vh]">
+          <div className="w-24 h-24 bg-gradient-to-br from-green-500 to-green-600 rounded-full mx-auto mb-6 flex items-center justify-center">
             <Tick02Icon size={56} color="#ffffff" strokeWidth={3} />
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 text-center mb-4 tracking-tight">
+          <h1 className="text-4xl font-bold text-white text-center mb-4">
             Check Your Email
           </h1>
-          <p className="text-gray-600 text-center text-lg mb-4 max-w-sm">
+          <p className="text-dark-500 text-center text-base mb-4 max-w-sm">
             We've sent a password reset link to:
           </p>
-          <p className="text-blue-600 font-semibold text-center mb-8">
+          <p className="text-blue-500 font-semibold text-center mb-8">
             {email}
           </p>
-          <p className="text-sm text-gray-500 text-center mb-8 max-w-sm">
+          <p className="text-sm text-dark-600 text-center mb-8 max-w-sm">
             Click the link in the email to reset your password. If you don't see it, check your spam folder.
           </p>
           <div className="w-full max-w-sm space-y-3">
@@ -75,7 +77,7 @@ const ForgotPassword: React.FC = () => {
             </Button>
             <button
               onClick={() => setSubmitted(false)}
-              className="w-full text-center text-gray-600 hover:text-gray-900 text-sm font-semibold transition-colors"
+              className="w-full text-center text-dark-500 hover:text-white text-sm font-semibold transition-colors"
             >
               Resend Email
             </button>
@@ -86,32 +88,34 @@ const ForgotPassword: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-black">
       {/* Header */}
-      <div className="px-6 py-5 border-b-2 border-gray-300 bg-white sticky top-0 z-10 shadow-medium">
-        <button
-          onClick={() => navigate(-1)}
-          className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-300 hover:scale-110 active:scale-95"
-        >
-          <span className="text-xl">←</span>
-        </button>
+      <div className="bg-black/95 backdrop-blur-sm border-b border-dark-100 sticky top-0 z-10">
+        <div className="px-4 py-4 flex items-center max-w-2xl mx-auto">
+          <button
+            onClick={() => navigate(-1)}
+            className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-dark-100 active:scale-95 transition-all"
+          >
+            <ArrowLeft01Icon size={24} color="#ffffff" />
+          </button>
+        </div>
       </div>
 
       {/* Content */}
-      <div className="p-6 max-w-md mx-auto">
-        <div className="mb-10 animate-fade-in">
-          <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full mx-auto mb-6 flex items-center justify-center shadow-medium border-2 border-blue-600">
+      <div className="px-4 py-8 max-w-md mx-auto">
+        <div className="mb-10">
+          <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full mx-auto mb-6 flex items-center justify-center">
             <LockPasswordIcon size={40} color="#ffffff" />
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 text-center mb-3 tracking-tight">
+          <h1 className="text-4xl font-bold text-white text-center mb-3">
             Forgot Password?
           </h1>
-          <p className="text-gray-600 text-center text-lg">
+          <p className="text-dark-500 text-center text-base">
             Enter your email to receive a reset link
           </p>
         </div>
 
-        <div className="space-y-5 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+        <div className="space-y-4 mb-8">
           <Input
             label="Email"
             type="email"
@@ -121,12 +125,12 @@ const ForgotPassword: React.FC = () => {
             error={error}
             required
           />
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-dark-500">
             We'll send you a link to reset your password
           </p>
         </div>
 
-        <div className="mt-8 space-y-3 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+        <div className="space-y-3">
           <Button
             variant="primary"
             size="large"
