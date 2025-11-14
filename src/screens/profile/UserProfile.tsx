@@ -101,13 +101,13 @@ const UserProfile: React.FC = () => {
         <div className="flex gap-3">
           <button
             onClick={() => navigate('/profile/edit')}
-            className="flex-1 bg-dark-100 text-white font-semibold text-sm py-2.5 rounded-xl hover:bg-dark-150 active:scale-98 transition-all"
+            className="flex-1 bg-dark-100 text-white font-semibold text-sm py-2.5 rounded-xl border border-dark-200 hover:bg-dark-150 active:scale-98 transition-all"
           >
             Edit Profile
           </button>
           <button
             onClick={() => navigate('/wallet')}
-            className="flex-1 bg-dark-100 text-white font-semibold text-sm py-2.5 rounded-xl hover:bg-dark-150 active:scale-98 transition-all"
+            className="flex-1 bg-dark-100 text-white font-semibold text-sm py-2.5 rounded-xl border border-dark-200 hover:bg-dark-150 active:scale-98 transition-all"
           >
             Wallet
           </button>
