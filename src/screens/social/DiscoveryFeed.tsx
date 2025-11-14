@@ -210,15 +210,17 @@ const DiscoveryFeed: React.FC = () => {
               </div>
 
               {/* Tool Badge Chip */}
-              <button
-                onClick={() => navigate('/tools')}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full hover:bg-white/20 active:scale-95 transition-all mb-2"
-              >
-                <SparklesIcon size={14} color="#ffffff" />
-                <span className="text-xs font-semibold text-white">
-                  {post.tool}
-                </span>
-              </button>
+              <div className="mb-3">
+                <button
+                  onClick={() => navigate('/tools')}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full hover:bg-white/20 active:scale-95 transition-all"
+                >
+                  <SparklesIcon size={14} color="#ffffff" />
+                  <span className="text-xs font-semibold text-white">
+                    {post.tool}
+                  </span>
+                </button>
+              </div>
 
               {/* Comments Link */}
               {post.comments > 0 && (

@@ -16,14 +16,14 @@ import ForgotPassword from './screens/auth/ForgotPassword';
 import HomeScreen from './screens/home/HomeScreen';
 import ToolsMenu from './screens/home/ToolsMenu';
 
-// AI Tools
+// AI Tools (v2.0 - 7 Launch Tools)
 import FaceSwapTool from './screens/tools/FaceSwapTool';
 import AIAvatarTool from './screens/tools/AIAvatarTool';
-import CouplePhotoTool from './screens/tools/CouplePhotoTool';
-import BabyPredictorTool from './screens/tools/BabyPredictorTool';
-import GenderSwapTool from './screens/tools/GenderSwapTool';
+import DuoPortraitTool from './screens/tools/CouplePhotoTool'; // Renamed from CouplePhoto
+import PosterMakerTool from './screens/tools/PosterMakerTool';
 import AgeTransformTool from './screens/tools/AgeTransformTool';
 import EnhanceTool from './screens/tools/EnhanceTool';
+// BabyPredictor and GenderSwap removed per PRD v2.0
 
 // Social Screens
 import DiscoveryFeed from './screens/social/DiscoveryFeed';
@@ -36,10 +36,9 @@ import UserProfile from './screens/profile/UserProfile';
 import EditProfile from './screens/profile/EditProfile';
 import Dashboard from './screens/profile/Dashboard';
 import Settings from './screens/profile/Settings';
-import ChoosePlan from './screens/profile/ChoosePlan';
 import Wallet from './screens/profile/Wallet';
-import Rewards from './screens/profile/Rewards';
 import Notifications from './screens/profile/Notifications';
+// Removed: ChoosePlan, Rewards (per PRD v2.0 - simplified to credits only)
 
 function App() {
   return (
@@ -61,15 +60,15 @@ function App() {
             <Route path="/discover" element={<ProtectedRoute><DiscoveryFeed /></ProtectedRoute>} />
             <Route path="/home" element={<Navigate to="/discover" replace />} />
 
-            {/* Tools */}
+            {/* Tools - 7 Launch Tools (PRD v2.0) */}
             <Route path="/tools" element={<ProtectedRoute><ToolsMenu /></ProtectedRoute>} />
             <Route path="/tools/face-swap" element={<ProtectedRoute><FaceSwapTool /></ProtectedRoute>} />
             <Route path="/tools/ai-avatar" element={<ProtectedRoute><AIAvatarTool /></ProtectedRoute>} />
-            <Route path="/tools/couple-photo" element={<ProtectedRoute><CouplePhotoTool /></ProtectedRoute>} />
-            <Route path="/tools/baby-predictor" element={<ProtectedRoute><BabyPredictorTool /></ProtectedRoute>} />
-            <Route path="/tools/gender-swap" element={<ProtectedRoute><GenderSwapTool /></ProtectedRoute>} />
+            <Route path="/tools/duo-portrait" element={<ProtectedRoute><DuoPortraitTool /></ProtectedRoute>} />
+            <Route path="/tools/poster-maker" element={<ProtectedRoute><PosterMakerTool /></ProtectedRoute>} />
             <Route path="/tools/age-transform" element={<ProtectedRoute><AgeTransformTool /></ProtectedRoute>} />
             <Route path="/tools/enhance" element={<ProtectedRoute><EnhanceTool /></ProtectedRoute>} />
+            {/* Removed: baby-predictor, gender-swap per PRD v2.0 */}
 
             {/* Social */}
             <Route path="/search" element={<ProtectedRoute><SearchExplore /></ProtectedRoute>} />
@@ -81,10 +80,10 @@ function App() {
             <Route path="/profile/edit" element={<ProtectedRoute><EditProfile /></ProtectedRoute>} />
             <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/plans" element={<ProtectedRoute><ChoosePlan /></ProtectedRoute>} />
             <Route path="/wallet" element={<ProtectedRoute><Wallet /></ProtectedRoute>} />
-            <Route path="/rewards" element={<ProtectedRoute><Rewards /></ProtectedRoute>} />
             <Route path="/notifications" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
+            {/* Removed: /plans, /rewards per PRD v2.0 */}
+            {/* TODO: Add /studio/:id route */}
 
             {/* Catch all - redirect to welcome if not authenticated */}
             <Route path="*" element={<Navigate to="/welcome" replace />} />

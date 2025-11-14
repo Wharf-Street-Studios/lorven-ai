@@ -1,35 +1,37 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useTokens } from '../../context/TokenContext';
+import { useCredits } from '../../context/TokenContext';
 import { BottomNavigation } from '../../components/ui';
 import {
   ArrowLeft01Icon,
   Coins01Icon,
   SparklesIcon,
-  CrownIcon,
-  ChartLineData01Icon,
-  CheckmarkCircle02Icon
+  Wallet03Icon
 } from 'hugeicons-react';
 
-const tokenPackages = [
-  { tokens: 100, price: 4.99, bonus: 0, popular: false },
-  { tokens: 500, price: 19.99, bonus: 50, popular: true },
-  { tokens: 1000, price: 34.99, bonus: 150, popular: false },
-  { tokens: 2500, price: 79.99, bonus: 500, popular: false },
+// Credit packages - user pays with EPIKO Tokens
+const creditPackages = [
+  { credits: 20, epikoTokens: 100, popular: false },
+  { credits: 50, epikoTokens: 200, popular: false },
+  { credits: 100, epikoTokens: 350, popular: true },
+  { credits: 250, epikoTokens: 750, popular: false },
+  { credits: 500, epikoTokens: 1400, popular: false },
 ];
 
 const Wallet: React.FC = () => {
   const navigate = useNavigate();
-  const { balance, transactions, purchaseTokens } = useTokens();
+  const { balance, transactions, purchaseCredits } = useCredits();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
-  const handlePurchase = (tokens: number, price: number) => {
-    if (confirm(`Purchase ${tokens} Epiko Tokens for $${price}?`)) {
-      purchaseTokens(tokens);
-      alert('Purchase successful!');
+  const handlePurchase = (credits: number, epikoTokens: number) => {
+    if (confirm(`Purchase ${credits} AI Credits for ${epikoTokens} EPIKO Tokens?\n\nThis will connect your wallet to complete the transaction.`)) {
+      // In production, this would integrate with WalletConnect
+      // For now, simulate the purchase
+      purchaseCredits(credits, epikoTokens);
+      alert(`✓ Purchase successful!\n\n${credits} AI Credits have been added to your balance.`);
     }
   };
 
@@ -55,97 +57,107 @@ const Wallet: React.FC = () => {
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
             <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2" />
             <div className="relative">
-              <p className="text-sm text-white/80 mb-2 font-medium">Current Balance</p>
+              <p className="text-sm text-white/80 mb-2 font-medium">AI Credits Balance</p>
               <div className="flex items-center justify-center gap-3 mb-2">
-                <Coins01Icon size={48} color="#ffffff" />
+                <SparklesIcon size={48} color="#ffffff" />
                 <span className="text-6xl font-bold text-white">{balance}</span>
               </div>
-              <p className="text-sm text-white/80 font-medium">Epiko Tokens</p>
+              <p className="text-sm text-white/80 font-medium">Available Credits</p>
             </div>
           </div>
         </div>
 
-        {/* Token Packages */}
+        {/* Wallet Connect Banner */}
         <div className="px-4 pb-6">
-          <h2 className="text-lg font-bold text-white mb-4">Purchase Tokens</h2>
+          <div className="bg-dark-100 rounded-3xl p-5 border border-dark-200">
+            <div className="flex items-center gap-3 mb-3">
+              <Wallet03Icon size={24} color="#ffffff" />
+              <h3 className="text-base font-bold text-white">EPIKO Token Payment</h3>
+            </div>
+            <p className="text-sm text-dark-500 mb-3">
+              Purchase AI Credits using EPIKO Tokens from your connected wallet
+            </p>
+            <button className="w-full bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold py-2.5 rounded-xl hover:bg-white/20 active:scale-98 transition-all">
+              Connect Wallet
+            </button>
+          </div>
+        </div>
+
+        {/* Credit Packages */}
+        <div className="px-4 pb-6">
+          <h2 className="text-lg font-bold text-white mb-4">Buy AI Credits</h2>
           <div className="grid grid-cols-2 gap-3">
-            {tokenPackages.map((pkg) => (
+            {creditPackages.map((pkg) => (
               <button
-                key={pkg.tokens}
-                onClick={() => handlePurchase(pkg.tokens + pkg.bonus, pkg.price)}
+                key={pkg.credits}
+                onClick={() => handlePurchase(pkg.credits, pkg.epikoTokens)}
                 className={`relative rounded-3xl p-5 text-center transition-all active:scale-95 ${
                   pkg.popular
                     ? 'bg-white text-black'
-                    : 'bg-dark-100 text-white border border-dark-100 hover:bg-dark-150'
+                    : 'bg-dark-100 text-white border border-dark-200 hover:bg-dark-150'
                 }`}
               >
                 {pkg.popular && (
                   <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold">
-                    POPULAR
+                    BEST VALUE
                   </div>
                 )}
                 <div className="mb-3">
-                  <Coins01Icon
+                  <SparklesIcon
                     size={40}
                     color={pkg.popular ? '#000000' : '#ffffff'}
                   />
                 </div>
                 <p className={`text-3xl font-bold mb-1 ${pkg.popular ? 'text-black' : 'text-white'}`}>
-                  {pkg.tokens}
-                  {pkg.bonus > 0 && (
-                    <span className="text-sm text-green-500"> +{pkg.bonus}</span>
-                  )}
+                  {pkg.credits}
                 </p>
-                <p className={`text-xs mb-4 ${pkg.popular ? 'text-gray-600' : 'text-dark-500'}`}>
-                  Epiko Tokens
+                <p className={`text-xs mb-3 ${pkg.popular ? 'text-gray-600' : 'text-dark-500'}`}>
+                  AI Credits
                 </p>
-                <div className={`font-bold text-lg ${pkg.popular ? 'text-black' : 'text-white'}`}>
-                  ${pkg.price}
+                <div className={`flex items-center justify-center gap-1.5 ${pkg.popular ? 'text-black' : 'text-white'}`}>
+                  <Coins01Icon size={16} color={pkg.popular ? '#000000' : '#3b82f6'} />
+                  <span className="font-bold text-base">{pkg.epikoTokens}</span>
                 </div>
+                <p className={`text-xs mt-1 ${pkg.popular ? 'text-gray-600' : 'text-dark-500'}`}>
+                  EPIKO Tokens
+                </p>
               </button>
             ))}
           </div>
         </div>
 
-        {/* Token Uses */}
+        {/* Credit Uses */}
         <div className="px-4 pb-6">
-          <h2 className="text-lg font-bold text-white mb-4">How to Use Tokens</h2>
-          <div className="bg-dark-100 rounded-3xl p-5 space-y-4 border border-dark-100">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-dark-150 rounded-2xl flex items-center justify-center flex-shrink-0">
-                <SparklesIcon size={24} color="#ffffff" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="font-semibold text-white text-sm mb-0.5">AI Tools</p>
-                <p className="text-sm text-dark-500">10-15 tokens per creation</p>
-              </div>
+          <h2 className="text-lg font-bold text-white mb-4">Credit Cost Per Tool</h2>
+          <div className="bg-dark-100 rounded-3xl p-5 space-y-3 border border-dark-100">
+            <div className="flex items-center justify-between">
+              <span className="text-white text-sm">Face Swap</span>
+              <span className="text-white font-bold">1 Credit</span>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-dark-150 rounded-2xl flex items-center justify-center flex-shrink-0">
-                <CrownIcon size={24} color="#ffffff" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="font-semibold text-white text-sm mb-0.5">Premium Templates</p>
-                <p className="text-sm text-dark-500">Unlock exclusive styles</p>
-              </div>
+            <div className="h-px bg-dark-150" />
+            <div className="flex items-center justify-between">
+              <span className="text-white text-sm">HD Enhance</span>
+              <span className="text-white font-bold">1 Credit</span>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-dark-150 rounded-2xl flex items-center justify-center flex-shrink-0">
-                <ChartLineData01Icon size={24} color="#ffffff" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="font-semibold text-white text-sm mb-0.5">Boost Visibility</p>
-                <p className="text-sm text-dark-500">Promote your creations</p>
-              </div>
+            <div className="h-px bg-dark-150" />
+            <div className="flex items-center justify-between">
+              <span className="text-white text-sm">AI Avatar</span>
+              <span className="text-white font-bold">2 Credits</span>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-dark-150 rounded-2xl flex items-center justify-center flex-shrink-0">
-                <CheckmarkCircle02Icon size={24} color="#ffffff" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="font-semibold text-white text-sm mb-0.5">Extra Generations</p>
-                <p className="text-sm text-dark-500">Beyond daily limits</p>
-              </div>
+            <div className="h-px bg-dark-150" />
+            <div className="flex items-center justify-between">
+              <span className="text-white text-sm">Age Transform</span>
+              <span className="text-white font-bold">2 Credits</span>
+            </div>
+            <div className="h-px bg-dark-150" />
+            <div className="flex items-center justify-between">
+              <span className="text-white text-sm">Duo Portrait</span>
+              <span className="text-white font-bold">3 Credits</span>
+            </div>
+            <div className="h-px bg-dark-150" />
+            <div className="flex items-center justify-between">
+              <span className="text-white text-sm">Poster Maker</span>
+              <span className="text-white font-bold">3 Credits</span>
             </div>
           </div>
         </div>

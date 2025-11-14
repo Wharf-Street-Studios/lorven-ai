@@ -1,78 +1,78 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-interface TokenTransaction {
+interface CreditTransaction {
   id: string;
   type: 'earn' | 'spend' | 'purchase';
   amount: number;
   description: string;
   timestamp: Date;
+  epikoTokensSpent?: number; // For purchase transactions
 }
 
-interface TokenContextType {
+interface CreditsContextType {
   balance: number;
-  transactions: TokenTransaction[];
-  spendTokens: (amount: number, description: string) => boolean;
-  earnTokens: (amount: number, description: string) => void;
-  purchaseTokens: (amount: number) => void;
-  getToolCost: (tool: string, tier: string) => number;
+  transactions: CreditTransaction[];
+  spendCredits: (amount: number, description: string) => boolean;
+  earnCredits: (amount: number, description: string) => void;
+  purchaseCredits: (credits: number, epikoTokens: number) => void;
+  getToolCost: (tool: string) => number;
 }
 
-const TokenContext = createContext<TokenContextType | undefined>(undefined);
+const CreditsContext = createContext<CreditsContextType | undefined>(undefined);
 
-// Token costs per tool
-const TOKEN_COSTS = {
-  'face-swap': { base: 10, creator: 8, pro: 6 },
-  'ai-avatar': { base: 10, creator: 8, pro: 6 },
-  'couple-photo': { base: 15, creator: 12, pro: 9 },
-  'baby-predictor': { base: 15, creator: 12, pro: 9 },
-  'gender-swap': { base: 10, creator: 8, pro: 6 },
-  'age-transform': { base: 10, creator: 8, pro: 6 },
-  'enhance': { base: 15, creator: 12, pro: 9 },
+// AI Credits cost per tool (simplified, no tiers)
+const CREDIT_COSTS = {
+  'face-swap': 1,
+  'ai-avatar': 2,
+  'poster-maker': 3,
+  'duo-portrait': 3,
+  'age-transform': 2,
+  'enhance': 1,
 };
 
-const TOKEN_STORAGE_KEY = 'epiko_tokens';
-const INITIAL_BONUS = 30;
+const CREDITS_STORAGE_KEY = 'epiko_credits';
+const INITIAL_FREE_CREDITS = 10; // Updated from 30 to 10 per PRD v2.0
 
-export const TokenProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const CreditsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [balance, setBalance] = useState<number>(() => {
     try {
-      const stored = localStorage.getItem(TOKEN_STORAGE_KEY);
+      const stored = localStorage.getItem(CREDITS_STORAGE_KEY);
       if (stored) {
         const data = JSON.parse(stored);
-        return data.balance || INITIAL_BONUS;
+        return data.balance || INITIAL_FREE_CREDITS;
       }
-      return INITIAL_BONUS;
+      return INITIAL_FREE_CREDITS;
     } catch {
-      return INITIAL_BONUS;
+      return INITIAL_FREE_CREDITS;
     }
   });
 
-  const [transactions, setTransactions] = useState<TokenTransaction[]>(() => {
+  const [transactions, setTransactions] = useState<CreditTransaction[]>(() => {
     try {
-      const stored = localStorage.getItem(TOKEN_STORAGE_KEY);
+      const stored = localStorage.getItem(CREDITS_STORAGE_KEY);
       if (stored) {
         const data = JSON.parse(stored);
         return data.transactions || [{
           id: '1',
           type: 'earn' as const,
-          amount: INITIAL_BONUS,
-          description: 'Sign up bonus',
+          amount: INITIAL_FREE_CREDITS,
+          description: 'Welcome bonus - 10 free credits',
           timestamp: new Date(),
         }];
       }
       return [{
         id: '1',
         type: 'earn' as const,
-        amount: INITIAL_BONUS,
-        description: 'Sign up bonus',
+        amount: INITIAL_FREE_CREDITS,
+        description: 'Welcome bonus - 10 free credits',
         timestamp: new Date(),
       }];
     } catch {
       return [{
         id: '1',
         type: 'earn' as const,
-        amount: INITIAL_BONUS,
-        description: 'Sign up bonus',
+        amount: INITIAL_FREE_CREDITS,
+        description: 'Welcome bonus - 10 free credits',
         timestamp: new Date(),
       }];
     }
@@ -81,24 +81,30 @@ export const TokenProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   // Persist to localStorage
   useEffect(() => {
     try {
-      localStorage.setItem(TOKEN_STORAGE_KEY, JSON.stringify({ balance, transactions }));
+      localStorage.setItem(CREDITS_STORAGE_KEY, JSON.stringify({ balance, transactions }));
     } catch (error) {
-      console.error('Failed to save token data:', error);
+      console.error('Failed to save credits data:', error);
     }
   }, [balance, transactions]);
 
-  const addTransaction = (type: 'earn' | 'spend' | 'purchase', amount: number, description: string) => {
-    const transaction: TokenTransaction = {
+  const addTransaction = (
+    type: 'earn' | 'spend' | 'purchase',
+    amount: number,
+    description: string,
+    epikoTokensSpent?: number
+  ) => {
+    const transaction: CreditTransaction = {
       id: Date.now().toString(),
       type,
       amount,
       description,
       timestamp: new Date(),
+      epikoTokensSpent,
     };
     setTransactions((prev) => [transaction, ...prev]);
   };
 
-  const spendTokens = (amount: number, description: string): boolean => {
+  const spendCredits = (amount: number, description: string): boolean => {
     if (balance >= amount) {
       setBalance((prev) => prev - amount);
       addTransaction('spend', amount, description);
@@ -107,45 +113,46 @@ export const TokenProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     return false;
   };
 
-  const earnTokens = (amount: number, description: string) => {
+  const earnCredits = (amount: number, description: string) => {
     setBalance((prev) => prev + amount);
     addTransaction('earn', amount, description);
   };
 
-  const purchaseTokens = (amount: number) => {
-    setBalance((prev) => prev + amount);
-    addTransaction('purchase', amount, 'Token purchase');
+  const purchaseCredits = (credits: number, epikoTokens: number) => {
+    setBalance((prev) => prev + credits);
+    addTransaction('purchase', credits, `Purchased ${credits} credits`, epikoTokens);
   };
 
-  const getToolCost = (tool: string, tier: string = 'base'): number => {
-    const toolCosts = TOKEN_COSTS[tool as keyof typeof TOKEN_COSTS];
-    if (!toolCosts) return 10; // Default cost
-
-    if (tier === 'creator') return toolCosts.creator;
-    if (tier === 'pro') return toolCosts.pro;
-    return toolCosts.base;
+  const getToolCost = (tool: string): number => {
+    return CREDIT_COSTS[tool as keyof typeof CREDIT_COSTS] || 1; // Default 1 credit
   };
 
   return (
-    <TokenContext.Provider
+    <CreditsContext.Provider
       value={{
         balance,
         transactions,
-        spendTokens,
-        earnTokens,
-        purchaseTokens,
+        spendCredits,
+        earnCredits,
+        purchaseCredits,
         getToolCost,
       }}
     >
       {children}
-    </TokenContext.Provider>
+    </CreditsContext.Provider>
   );
 };
 
-export const useTokens = () => {
-  const context = useContext(TokenContext);
+// Legacy export for backward compatibility
+export const TokenProvider = CreditsProvider;
+
+export const useCredits = () => {
+  const context = useContext(CreditsContext);
   if (context === undefined) {
-    throw new Error('useTokens must be used within a TokenProvider');
+    throw new Error('useCredits must be used within a CreditsProvider');
   }
   return context;
 };
+
+// Legacy export for backward compatibility
+export const useTokens = useCredits;

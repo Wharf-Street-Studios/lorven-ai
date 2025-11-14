@@ -12,9 +12,9 @@ const coupleTemplates = [
 
 const CouplePhotoTool: React.FC = () => {
   const config = {
-    name: 'Couple Photo',
+    name: 'Duo Portrait', // Updated per PRD v2.0
     icon: '💑',
-    toolId: 'couple-photo',
+    toolId: 'duo-portrait', // Updated to match CREDIT_COSTS
     description: 'Create romantic scenes with your partner',
     instructions: 'Upload 2 Photos',
     uploadCount: 2,

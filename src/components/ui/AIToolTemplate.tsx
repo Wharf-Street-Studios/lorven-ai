@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useTokens } from '../../context/TokenContext';
+import { useCredits } from '../../context/TokenContext';
 import { Button } from './index';
-import { ArrowLeft01Icon, Coins01Icon, Image02Icon, SparklesIcon, Download04Icon, Share08Icon, Rotate01Icon } from 'hugeicons-react';
+import { ArrowLeft01Icon, SparklesIcon, Image02Icon, Download04Icon, Share08Icon, Rotate01Icon, Coins01Icon } from 'hugeicons-react';
 
 interface ToolConfig {
   name: string;
@@ -23,13 +23,13 @@ type Step = 'upload' | 'options' | 'generate' | 'result';
 
 const AIToolTemplate: React.FC<AIToolTemplateProps> = ({ config }) => {
   const navigate = useNavigate();
-  const { balance, spendTokens, getToolCost } = useTokens();
+  const { balance, spendCredits, getToolCost } = useCredits();
   const [currentStep, setCurrentStep] = useState<Step>('upload');
   const [uploadedPhotos, setUploadedPhotos] = useState<string[]>([]);
   const [selectedOption, setSelectedOption] = useState<number | string | null>(null);
   const [progress, setProgress] = useState(0);
 
-  const toolCost = getToolCost(config.toolId, 'base');
+  const toolCost = getToolCost(config.toolId);
   const canAfford = balance >= toolCost;
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,7 +58,7 @@ const AIToolTemplate: React.FC<AIToolTemplateProps> = ({ config }) => {
       return;
     }
 
-    const success = spendTokens(toolCost, `${config.name} creation`);
+    const success = spendCredits(toolCost, `${config.name} creation`);
     if (!success) return;
 
     setCurrentStep('generate');

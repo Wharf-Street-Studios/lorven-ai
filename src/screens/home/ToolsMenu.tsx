@@ -1,18 +1,17 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useTokens } from '../../context/TokenContext';
+import { useCredits } from '../../context/TokenContext';
 import { BottomNavigation } from '../../components/ui';
 import {
-  Coins01Icon,
   UserIcon,
   SparklesIcon,
   FavouriteIcon,
-  Baby01Icon,
-  UserMultiple02Icon,
   Time01Icon,
-  MagicWand02Icon
+  MagicWand02Icon,
+  Image02Icon
 } from 'hugeicons-react';
 
+// PRD v2.0 - 7 Launch Tools
 const allTools = [
   {
     id: 'face-swap',
@@ -20,7 +19,7 @@ const allTools = [
     icon: UserIcon,
     image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=600&fit=crop',
     description: 'Replace faces in photos',
-    cost: 10,
+    cost: 1, // 1 credit per PRD v2.0
     path: '/tools/face-swap',
   },
   {
@@ -29,59 +28,51 @@ const allTools = [
     icon: SparklesIcon,
     image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&h=600&fit=crop',
     description: 'Stylized portraits',
-    cost: 10,
+    cost: 2, // 2 credits per PRD v2.0
     path: '/tools/ai-avatar',
   },
   {
-    id: 'couple-photo',
-    name: 'Couple Photo',
+    id: 'duo-portrait',
+    name: 'Duo Portrait',
     icon: FavouriteIcon,
     image: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&h=600&fit=crop',
-    description: 'Romantic scenes',
-    cost: 15,
-    path: '/tools/couple-photo',
+    description: 'Two-person AI scenes',
+    cost: 3, // 3 credits per PRD v2.0
+    path: '/tools/duo-portrait',
   },
   {
-    id: 'baby-predictor',
-    name: 'Baby Predictor',
-    icon: Baby01Icon,
-    image: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&h=600&fit=crop',
-    description: 'Future baby preview',
-    cost: 15,
-    path: '/tools/baby-predictor',
-  },
-  {
-    id: 'gender-swap',
-    name: 'Gender Swap',
-    icon: UserMultiple02Icon,
-    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&h=600&fit=crop',
-    description: 'Gender transformation',
-    cost: 10,
-    path: '/tools/gender-swap',
+    id: 'poster-maker',
+    name: 'Poster Maker',
+    icon: Image02Icon,
+    image: 'https://images.unsplash.com/photo-1594908900066-3f47337549d8?w=600&h=600&fit=crop',
+    description: 'Movie-style posters',
+    cost: 3, // 3 credits per PRD v2.0
+    path: '/tools/poster-maker', // TODO: Create this tool screen
   },
   {
     id: 'age-transform',
     name: 'Age Transform',
     icon: Time01Icon,
     image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&h=600&fit=crop',
-    description: 'Age progression',
-    cost: 10,
+    description: 'Age progression/regression',
+    cost: 2, // 2 credits per PRD v2.0
     path: '/tools/age-transform',
   },
   {
     id: 'enhance',
-    name: 'Enhance',
+    name: 'HD Enhance',
     icon: MagicWand02Icon,
     image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&h=600&fit=crop',
-    description: 'HD quality boost',
-    cost: 15,
+    description: 'AI upscale & sharpen',
+    cost: 1, // 1 credit per PRD v2.0
     path: '/tools/enhance',
   },
+  // Note: Studio Content Packs will be integrated into these tools
 ];
 
 const ToolsMenu: React.FC = () => {
   const navigate = useNavigate();
-  const { balance } = useTokens();
+  const { balance } = useCredits();
 
   return (
     <div className="min-h-screen bg-black pb-20">
@@ -93,7 +84,7 @@ const ToolsMenu: React.FC = () => {
             onClick={() => navigate('/wallet')}
             className="flex items-center gap-2 px-3 py-2 bg-dark-100 rounded-full hover:bg-dark-150 active:scale-95 transition-all"
           >
-            <Coins01Icon size={18} color="#ffffff" />
+            <SparklesIcon size={18} color="#ffffff" />
             <span className="font-semibold text-white text-sm">{balance}</span>
           </button>
         </div>
@@ -130,8 +121,8 @@ const ToolsMenu: React.FC = () => {
                       {tool.description}
                     </p>
                     <div className="flex items-center gap-1.5 text-white/90">
-                      <Coins01Icon size={14} color="#ffffff" />
-                      <span className="text-xs font-semibold">{tool.cost} tokens</span>
+                      <SparklesIcon size={14} color="#ffffff" />
+                      <span className="text-xs font-semibold">{tool.cost} {tool.cost === 1 ? 'credit' : 'credits'}</span>
                     </div>
                   </div>
                 </div>
@@ -140,22 +131,22 @@ const ToolsMenu: React.FC = () => {
           })}
         </div>
 
-        {/* Get Tokens CTA */}
+        {/* Get Credits CTA */}
         <div className="bg-dark-100 rounded-3xl p-6 border border-dark-100">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center flex-shrink-0">
-              <Coins01Icon size={24} color="#000000" />
+              <SparklesIcon size={24} color="#000000" />
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-bold text-white text-base mb-1">Need more tokens?</h3>
+              <h3 className="font-bold text-white text-base mb-1">Need more credits?</h3>
               <p className="text-sm text-dark-500 mb-4">
-                Unlock unlimited creativity with token packages
+                Purchase AI Credits with EPIKO Tokens
               </p>
               <button
                 onClick={() => navigate('/wallet')}
                 className="w-full bg-white text-black font-semibold text-sm py-3 rounded-xl hover:bg-gray-100 active:scale-98 transition-all"
               >
-                Get Tokens
+                Buy Credits
               </button>
             </div>
           </div>
