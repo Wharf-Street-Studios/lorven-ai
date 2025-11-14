@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { useToast } from '../../context/ToastContext';
 import { Input } from '../../components/ui';
-import { Cancel01Icon, SparklesIcon } from 'hugeicons-react';
+import { Cancel01Icon, SparklesIcon, GoogleIcon, AppleIcon } from 'hugeicons-react';
 
 const SignInScreen: React.FC = () => {
   const navigate = useNavigate();
-  const { signIn } = useAuth();
+  const { signIn, signInWithGoogle, signInWithApple } = useAuth();
+  const { showToast } = useToast();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
+  const [socialLoading, setSocialLoading] = useState<string | null>(null);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -39,6 +42,32 @@ const SignInScreen: React.FC = () => {
         setErrors({ form: 'Invalid email or password' });
         setLoading(false);
       }
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setSocialLoading('google');
+    try {
+      await signInWithGoogle();
+      showToast('Successfully signed in with Google!', 'success');
+      navigate('/discover');
+    } catch (error) {
+      showToast('Failed to sign in with Google', 'error');
+    } finally {
+      setSocialLoading(null);
+    }
+  };
+
+  const handleAppleSignIn = async () => {
+    setSocialLoading('apple');
+    try {
+      await signInWithApple();
+      showToast('Successfully signed in with Apple!', 'success');
+      navigate('/discover');
+    } catch (error) {
+      showToast('Failed to sign in with Apple', 'error');
+    } finally {
+      setSocialLoading(null);
     }
   };
 
@@ -108,11 +137,43 @@ const SignInScreen: React.FC = () => {
 
           <button
             onClick={handleSignIn}
-            disabled={loading}
+            disabled={loading || socialLoading !== null}
             className="w-full bg-white text-black font-semibold text-base py-3 rounded-xl hover:bg-neutral-100 active:scale-98 transition-all disabled:opacity-50 disabled:cursor-not-allowed mb-6"
           >
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
+
+          {/* Divider */}
+          <div className="flex items-center mb-6">
+            <div className="flex-1 h-px bg-dark-100"></div>
+            <span className="px-4 text-dark-500 text-sm">OR</span>
+            <div className="flex-1 h-px bg-dark-100"></div>
+          </div>
+
+          {/* Social Sign-In Buttons */}
+          <div className="space-y-3 mb-6">
+            <button
+              onClick={handleGoogleSignIn}
+              disabled={loading || socialLoading !== null}
+              className="w-full flex items-center justify-center gap-3 px-6 py-3 border border-dark-100 bg-dark-100 rounded-xl hover:bg-dark-150 active:scale-98 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <GoogleIcon size={20} color="#ffffff" />
+              <span className="font-semibold text-white text-sm">
+                {socialLoading === 'google' ? 'Signing in...' : 'Continue with Google'}
+              </span>
+            </button>
+
+            <button
+              onClick={handleAppleSignIn}
+              disabled={loading || socialLoading !== null}
+              className="w-full flex items-center justify-center gap-3 px-6 py-3 bg-white rounded-xl hover:bg-gray-100 active:scale-98 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <AppleIcon size={20} color="#000000" />
+              <span className="font-semibold text-black text-sm">
+                {socialLoading === 'apple' ? 'Signing in...' : 'Continue with Apple'}
+              </span>
+            </button>
+          </div>
 
           <div className="text-center">
             <span className="text-sm text-dark-600">Don't have an account? </span>

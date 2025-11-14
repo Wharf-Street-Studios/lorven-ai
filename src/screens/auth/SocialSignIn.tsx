@@ -1,16 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import { useToast } from '../../context/ToastContext';
 import { Button } from '../../components/ui';
 import { ArrowLeft01Icon, GoogleIcon, AppleIcon, Facebook02Icon, SecurityLockIcon } from 'hugeicons-react';
 
 const SocialSignIn: React.FC = () => {
   const navigate = useNavigate();
+  const { signInWithGoogle, signInWithApple, signInWithFacebook } = useAuth();
+  const { showToast } = useToast();
+  const [loading, setLoading] = useState<string | null>(null);
 
-  const handleSocialSignIn = (provider: string) => {
-    // Mock social sign-in - in real app, this would trigger OAuth flow
-    alert(`${provider} sign-in will be implemented with OAuth 2.0`);
-    // For demo purposes, navigate to home
-    // navigate('/home');
+  const handleGoogleSignIn = async () => {
+    setLoading('google');
+    try {
+      await signInWithGoogle();
+      showToast('Successfully signed in with Google!', 'success');
+      navigate('/discover');
+    } catch (error) {
+      showToast('Failed to sign in with Google', 'error');
+    } finally {
+      setLoading(null);
+    }
+  };
+
+  const handleAppleSignIn = async () => {
+    setLoading('apple');
+    try {
+      await signInWithApple();
+      showToast('Successfully signed in with Apple!', 'success');
+      navigate('/discover');
+    } catch (error) {
+      showToast('Failed to sign in with Apple', 'error');
+    } finally {
+      setLoading(null);
+    }
+  };
+
+  const handleFacebookSignIn = async () => {
+    setLoading('facebook');
+    try {
+      await signInWithFacebook();
+      showToast('Successfully signed in with Facebook!', 'success');
+      navigate('/discover');
+    } catch (error) {
+      showToast('Failed to sign in with Facebook', 'error');
+    } finally {
+      setLoading(null);
+    }
   };
 
   return (
@@ -44,27 +81,36 @@ const SocialSignIn: React.FC = () => {
         {/* Social Sign-In Buttons */}
         <div className="space-y-4 mb-8">
           <button
-            onClick={() => handleSocialSignIn('Google')}
-            className="w-full flex items-center justify-center gap-3 px-6 py-4 border border-dark-100 bg-dark-100 rounded-xl hover:bg-dark-150 transition-all"
+            onClick={handleGoogleSignIn}
+            disabled={loading !== null}
+            className="w-full flex items-center justify-center gap-3 px-6 py-4 border border-dark-100 bg-dark-100 rounded-xl hover:bg-dark-150 active:scale-98 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <GoogleIcon size={24} color="#ffffff" />
-            <span className="font-semibold text-white">Continue with Google</span>
+            <span className="font-semibold text-white">
+              {loading === 'google' ? 'Signing in...' : 'Continue with Google'}
+            </span>
           </button>
 
           <button
-            onClick={() => handleSocialSignIn('Apple')}
-            className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-white rounded-xl hover:bg-gray-100 transition-all"
+            onClick={handleAppleSignIn}
+            disabled={loading !== null}
+            className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-white rounded-xl hover:bg-gray-100 active:scale-98 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <AppleIcon size={24} color="#000000" />
-            <span className="font-semibold text-black">Continue with Apple</span>
+            <span className="font-semibold text-black">
+              {loading === 'apple' ? 'Signing in...' : 'Continue with Apple'}
+            </span>
           </button>
 
           <button
-            onClick={() => handleSocialSignIn('Facebook')}
-            className="w-full flex items-center justify-center gap-3 px-6 py-4 border border-dark-100 bg-dark-100 rounded-xl hover:bg-dark-150 transition-all"
+            onClick={handleFacebookSignIn}
+            disabled={loading !== null}
+            className="w-full flex items-center justify-center gap-3 px-6 py-4 border border-dark-100 bg-dark-100 rounded-xl hover:bg-dark-150 active:scale-98 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Facebook02Icon size={24} color="#ffffff" />
-            <span className="font-semibold text-white">Continue with Facebook</span>
+            <span className="font-semibold text-white">
+              {loading === 'facebook' ? 'Signing in...' : 'Continue with Facebook'}
+            </span>
           </button>
         </div>
 

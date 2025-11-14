@@ -6,12 +6,16 @@ interface User {
   email: string;
   username: string;
   avatar?: string;
+  authProvider?: 'email' | 'google' | 'apple' | 'facebook';
 }
 
 interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
   signIn: (email: string, password: string) => Promise<void>;
+  signInWithGoogle: () => Promise<void>;
+  signInWithApple: () => Promise<void>;
+  signInWithFacebook: () => Promise<void>;
   signUp: (fullName: string, email: string, username: string, password: string, avatar?: string) => Promise<void>;
   signOut: () => void;
 }
@@ -48,8 +52,57 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       email: email,
       username: 'johndoe',
       avatar: undefined,
+      authProvider: 'email',
     };
     setUser(mockUser);
+  };
+
+  const signInWithGoogle = async () => {
+    // Mock Google OAuth - in real app, this would use Google OAuth 2.0
+    // Example: window.location.href = 'https://accounts.google.com/o/oauth2/v2/auth?...'
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+
+    const mockGoogleUser: User = {
+      id: 'google_' + Date.now(),
+      fullName: 'Google User',
+      email: 'user@gmail.com',
+      username: 'googleuser',
+      avatar: 'https://lh3.googleusercontent.com/a/default-user',
+      authProvider: 'google',
+    };
+    setUser(mockGoogleUser);
+  };
+
+  const signInWithApple = async () => {
+    // Mock Apple OAuth - in real app, this would use Sign in with Apple
+    // Example: AppleID.auth.signIn()
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+
+    const mockAppleUser: User = {
+      id: 'apple_' + Date.now(),
+      fullName: 'Apple User',
+      email: 'user@icloud.com',
+      username: 'appleuser',
+      avatar: undefined,
+      authProvider: 'apple',
+    };
+    setUser(mockAppleUser);
+  };
+
+  const signInWithFacebook = async () => {
+    // Mock Facebook OAuth - in real app, this would use Facebook Login
+    // Example: FB.login()
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+
+    const mockFacebookUser: User = {
+      id: 'facebook_' + Date.now(),
+      fullName: 'Facebook User',
+      email: 'user@facebook.com',
+      username: 'fbuser',
+      avatar: undefined,
+      authProvider: 'facebook',
+    };
+    setUser(mockFacebookUser);
   };
 
   const signUp = async (
@@ -66,6 +119,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       email,
       username,
       avatar,
+      authProvider: 'email',
     };
     setUser(newUser);
   };
@@ -80,6 +134,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         user,
         isAuthenticated: !!user,
         signIn,
+        signInWithGoogle,
+        signInWithApple,
+        signInWithFacebook,
         signUp,
         signOut,
       }}
