@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { BottomNavigation } from '../../components/ui';
 import {
-  PencilEdit01Icon,
-  Wallet01Icon,
   Notification02Icon,
   LockIcon,
   Logout01Icon,
@@ -25,16 +23,6 @@ const Settings: React.FC = () => {
   };
 
   const settingsOptions = [
-    {
-      icon: PencilEdit01Icon,
-      label: 'Edit Profile',
-      onClick: () => navigate('/profile/edit'),
-    },
-    {
-      icon: Wallet01Icon,
-      label: 'Wallet & Tokens',
-      onClick: () => navigate('/wallet'),
-    },
     {
       icon: Notification02Icon,
       label: 'Notifications',
