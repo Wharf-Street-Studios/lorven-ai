@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useFollow } from '../../context/FollowContext';
 import { usePostInteraction } from '../../context/PostInteractionContext';
+import { useToast } from '../../context/ToastContext';
 import { Avatar } from '../../components/ui';
 import {
   FavouriteIcon,
@@ -99,6 +100,7 @@ const ReelView: React.FC = () => {
   const { id } = useParams();
   const { user } = useAuth();
   const { isFollowing, followUser, unfollowUser } = useFollow();
+  const { showToast } = useToast();
   const {
     isLiked,
     likePost,
@@ -115,6 +117,7 @@ const ReelView: React.FC = () => {
   const [showComments, setShowComments] = useState(false);
   const [newComment, setNewComment] = useState('');
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [imageScale, setImageScale] = useState(1);
 
   // Get the actual post ID from the URL param
   const postId = id ? (postIdMap[id] || id) : 'post_1';
@@ -168,9 +171,55 @@ const ReelView: React.FC = () => {
       }).catch(() => {});
     } else {
       navigator.clipboard.writeText(window.location.href);
-      alert('Link copied to clipboard!');
+      showToast('Link copied to clipboard!', 'success');
     }
   };
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      // Don't trigger if typing in input
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+        return;
+      }
+
+      switch (e.key.toLowerCase()) {
+        case 'escape':
+          if (showComments) {
+            setShowComments(false);
+          } else {
+            navigate(-1);
+          }
+          break;
+        case 'l':
+          handleLike();
+          break;
+        case 's':
+          handleSave();
+          break;
+        case 'c':
+          setShowComments(true);
+          break;
+        case 'f':
+          handleFollow();
+          break;
+        case '+':
+        case '=':
+          setImageScale((prev) => Math.min(prev + 0.2, 3));
+          break;
+        case '-':
+        case '_':
+          setImageScale((prev) => Math.max(prev - 0.2, 0.5));
+          break;
+        case '0':
+          setImageScale(1);
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [showComments, navigate, handleLike, handleSave, handleFollow]);
 
   const formatTimestamp = (timestamp: Date): string => {
     const now = new Date();
@@ -189,13 +238,17 @@ const ReelView: React.FC = () => {
   const commonEmojis = ['😊', '❤️', '🔥', '👍', '😍', '🎉', '💯', '✨', '👏', '🙌'];
 
   return (
-    <div className="h-screen bg-black relative">
+    <div className="h-screen bg-black relative overflow-hidden">
       {/* Content */}
-      <div className="w-full h-full flex items-center justify-center bg-black">
+      <div className="w-full h-full flex items-center justify-center bg-black overflow-hidden">
         <img
           src={reel.content.image}
           alt={reel.content.tool}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover transition-transform duration-300 cursor-zoom-in"
+          style={{ transform: `scale(${imageScale})` }}
+          onDoubleClick={() => {
+            setImageScale(imageScale === 1 ? 2 : 1);
+          }}
         />
       </div>
 

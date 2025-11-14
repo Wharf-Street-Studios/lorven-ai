@@ -3,6 +3,7 @@ import { AuthProvider } from './context/AuthContext';
 import { TokenProvider } from './context/TokenContext';
 import { FollowProvider } from './context/FollowContext';
 import { PostInteractionProvider } from './context/PostInteractionContext';
+import { ToastProvider } from './context/ToastContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import ErrorBoundary from './components/ErrorBoundary';
 
@@ -48,12 +49,13 @@ import SavedPosts from './screens/profile/SavedPosts';
 function App() {
   return (
     <ErrorBoundary>
-      <AuthProvider>
-        <TokenProvider>
-          <FollowProvider>
-            <PostInteractionProvider>
-              <div className="min-h-screen bg-white">
-                <Routes>
+      <ToastProvider>
+        <AuthProvider>
+          <TokenProvider>
+            <FollowProvider>
+              <PostInteractionProvider>
+                <div className="min-h-screen bg-white">
+                  <Routes>
             {/* Public Auth Routes */}
             <Route path="/welcome" element={<WelcomeScreen />} />
             <Route path="/social-sign-in" element={<SocialSignIn />} />
@@ -98,11 +100,12 @@ function App() {
             {/* Catch all - redirect to welcome if not authenticated */}
             <Route path="*" element={<Navigate to="/welcome" replace />} />
             </Routes>
-              </div>
-            </PostInteractionProvider>
-          </FollowProvider>
-        </TokenProvider>
-      </AuthProvider>
+                </div>
+              </PostInteractionProvider>
+            </FollowProvider>
+          </TokenProvider>
+        </AuthProvider>
+      </ToastProvider>
     </ErrorBoundary>
   );
 }

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { usePostInteraction } from '../../context/PostInteractionContext';
+import { useToast } from '../../context/ToastContext';
 import { BottomNavigation, Avatar } from '../../components/ui';
 import {
   Search01Icon,
@@ -67,6 +68,9 @@ const mockPosts: Post[] = [
 const DiscoveryFeed: React.FC = () => {
   const navigate = useNavigate();
   const { isLiked, likePost, unlikePost, getLikeCount, isSaved, savePost, unsavePost, getCommentCount } = usePostInteraction();
+  const { showToast } = useToast();
+  const [doubleTapPostId, setDoubleTapPostId] = useState<string | null>(null);
+  const [lastTap, setLastTap] = useState<number>(0);
 
   const handleLike = (postId: string) => {
     if (isLiked(postId)) {
@@ -90,14 +94,26 @@ const DiscoveryFeed: React.FC = () => {
         title: `Check out this ${post.tool} creation by @${post.creator.username}`,
         text: `Amazing AI creation using ${post.tool}`,
         url: window.location.origin + `/reel/${post.id}`,
-      }).catch(() => {
-        // User cancelled or error occurred
-      });
+      }).catch(() => {});
     } else {
-      // Fallback: copy link to clipboard
       navigator.clipboard.writeText(window.location.origin + `/reel/${post.id}`);
-      alert('Link copied to clipboard!');
+      showToast('Link copied to clipboard!', 'success');
     }
+  };
+
+  const handleDoubleTap = (postId: string) => {
+    const now = Date.now();
+    const DOUBLE_TAP_DELAY = 300;
+
+    if (now - lastTap < DOUBLE_TAP_DELAY) {
+      // Double tap detected
+      if (!isLiked(postId)) {
+        likePost(postId);
+        setDoubleTapPostId(postId);
+        setTimeout(() => setDoubleTapPostId(null), 1000);
+      }
+    }
+    setLastTap(now);
   };
 
   return (
@@ -153,8 +169,13 @@ const DiscoveryFeed: React.FC = () => {
 
             {/* Content Image */}
             <div
-              className="w-full aspect-square bg-dark-100 cursor-pointer"
-              onClick={() => navigate(`/reel/${post.id}`)}
+              className="w-full aspect-square bg-dark-100 cursor-pointer relative select-none"
+              onClick={(e) => {
+                handleDoubleTap(post.id);
+                if (Date.now() - lastTap >= 300) {
+                  navigate(`/reel/${post.id}`);
+                }
+              }}
             >
               <img
                 src={post.image}
@@ -162,6 +183,16 @@ const DiscoveryFeed: React.FC = () => {
                 className="w-full h-full object-cover"
                 loading="lazy"
               />
+              {/* Double Tap Like Animation */}
+              {doubleTapPostId === post.id && (
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <FavouriteIcon
+                    size={120}
+                    color="#ffffff"
+                    className="fill-current animate-like-burst drop-shadow-2xl"
+                  />
+                </div>
+              )}
             </div>
 
             {/* Actions Bar */}
@@ -243,6 +274,27 @@ const DiscoveryFeed: React.FC = () => {
 
       {/* Bottom Navigation */}
       <BottomNavigation />
+
+      {/* CSS Animations */}
+      <style>{`
+        @keyframes like-burst {
+          0% {
+            transform: scale(0);
+            opacity: 0;
+          }
+          50% {
+            transform: scale(1.2);
+            opacity: 1;
+          }
+          100% {
+            transform: scale(1);
+            opacity: 0;
+          }
+        }
+        .animate-like-burst {
+          animation: like-burst 0.6s ease-out;
+        }
+      `}</style>
     </div>
   );
 };
