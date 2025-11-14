@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { useFollow } from '../../context/FollowContext';
 import { BottomNavigation, Avatar } from '../../components/ui';
 import { Settings02Icon, GridIcon, FavouriteIcon, UserIcon } from 'hugeicons-react';
 
@@ -22,7 +23,11 @@ const mockLikedContent = [
 const UserProfile: React.FC = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { getFollowerCount, getFollowingCount } = useFollow();
   const [activeTab, setActiveTab] = useState<'posts' | 'liked'>('posts');
+
+  const followerCount = user ? getFollowerCount(user.id) : 0;
+  const followingCount = user ? getFollowingCount(user.id) : 0;
 
   if (!user) {
     return (
@@ -78,14 +83,20 @@ const UserProfile: React.FC = () => {
               <div className="font-bold text-white text-lg mb-1">{mockUserCreations.length}</div>
               <div className="text-sm text-dark-500">Posts</div>
             </div>
-            <div className="text-center">
-              <div className="font-bold text-white text-lg mb-1">1.2K</div>
+            <button
+              onClick={() => navigate('/profile/followers')}
+              className="text-center hover:opacity-70 transition-opacity"
+            >
+              <div className="font-bold text-white text-lg mb-1">{followerCount}</div>
               <div className="text-sm text-dark-500">Followers</div>
-            </div>
-            <div className="text-center">
-              <div className="font-bold text-white text-lg mb-1">890</div>
+            </button>
+            <button
+              onClick={() => navigate('/profile/following')}
+              className="text-center hover:opacity-70 transition-opacity"
+            >
+              <div className="font-bold text-white text-lg mb-1">{followingCount}</div>
               <div className="text-sm text-dark-500">Following</div>
-            </div>
+            </button>
           </div>
         </div>
 

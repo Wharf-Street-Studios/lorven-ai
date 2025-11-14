@@ -31,7 +31,8 @@
       "Bash(open -a \"Firefox\" \"http://localhost:3001/epiko-ai-studios/\")",
       "Bash(open -a \"Firefox\" \"https://wharf-street-studios.github.io/epiko-ai-studios/profile\")",
       "Bash(open:*)",
-      "Bash(git remote set-url:*)"
+      "Bash(git remote set-url:*)",
+      "Bash(node generate-prd.js:*)"
     ],
     "deny": [],
     "ask": []

@@ -1,26 +1,27 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useFollow } from '../../context/FollowContext';
 import { Button } from '../../components/ui';
 import { ArrowLeft01Icon, GridIcon, FavouriteIcon } from 'hugeicons-react';
 
 interface CreatorData {
+  id: string;
   username: string;
   avatar: string;
   bio: string;
   posts: number;
   followers: number;
   following: number;
-  isFollowing: boolean;
 }
 
 const mockCreatorData: CreatorData = {
+  id: '2',
   username: 'sarah_creates',
   avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=faces',
   bio: 'AI Artist & Content Creator\nLove creating romantic & dreamy content\nCheck out my latest creations',
   posts: 124,
   followers: 15600,
   following: 234,
-  isFollowing: false,
 };
 
 const mockCreations = [
@@ -35,15 +36,19 @@ const mockCreations = [
 const CreatorProfile: React.FC = () => {
   const navigate = useNavigate();
   const { username } = useParams();
-  const [creator, setCreator] = useState<CreatorData>(mockCreatorData);
+  const { isFollowing, followUser, unfollowUser, getFollowerCount } = useFollow();
+  const [creator] = useState<CreatorData>(mockCreatorData);
   const [activeTab, setActiveTab] = useState<'grid' | 'liked'>('grid');
 
+  const following = isFollowing(creator.id);
+  const followerCount = getFollowerCount(creator.id);
+
   const handleFollowToggle = () => {
-    setCreator({
-      ...creator,
-      isFollowing: !creator.isFollowing,
-      followers: creator.isFollowing ? creator.followers - 1 : creator.followers + 1,
-    });
+    if (following) {
+      unfollowUser(creator.id);
+    } else {
+      followUser(creator.id);
+    }
   };
 
   return (
@@ -81,7 +86,7 @@ const CreatorProfile: React.FC = () => {
                 <p className="text-dark-500">Posts</p>
               </div>
               <div className="text-center">
-                <p className="font-bold text-white">{creator.followers.toLocaleString()}</p>
+                <p className="font-bold text-white">{followerCount.toLocaleString()}</p>
                 <p className="text-dark-500">Followers</p>
               </div>
               <div className="text-center">
@@ -99,12 +104,12 @@ const CreatorProfile: React.FC = () => {
 
         {/* Follow Button */}
         <Button
-          variant={creator.isFollowing ? 'outline' : 'primary'}
+          variant={following ? 'outline' : 'primary'}
           size="medium"
           fullWidth
           onClick={handleFollowToggle}
         >
-          {creator.isFollowing ? 'Following' : 'Follow'}
+          {following ? 'Following' : 'Follow'}
         </Button>
       </div>
 
