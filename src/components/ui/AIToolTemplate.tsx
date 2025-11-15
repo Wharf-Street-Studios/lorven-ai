@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCredits } from '../../context/TokenContext';
 import { Button } from './index';
 import { ArrowLeft01Icon, SparklesIcon, Image02Icon, Download04Icon, Share08Icon, Rotate01Icon, Coins01Icon } from 'hugeicons-react';
+import { aiAPI } from '../../services/api';
 
 interface ToolConfig {
   name: string;
@@ -28,6 +29,8 @@ const AIToolTemplate: React.FC<AIToolTemplateProps> = ({ config }) => {
   const [uploadedPhotos, setUploadedPhotos] = useState<string[]>([]);
   const [selectedOption, setSelectedOption] = useState<number | string | null>(null);
   const [progress, setProgress] = useState(0);
+  const [generatedImage, setGeneratedImage] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const toolCost = getToolCost(config.toolId);
   const canAfford = balance >= toolCost;
@@ -52,28 +55,97 @@ const AIToolTemplate: React.FC<AIToolTemplateProps> = ({ config }) => {
     }
   };
 
-  const handleGenerate = () => {
+  const handleGenerate = async () => {
     if (!canAfford) {
       alert(`You need ${toolCost} tokens. Current balance: ${balance}`);
       return;
     }
 
-    const success = spendCredits(toolCost, `${config.name} creation`);
-    if (!success) return;
-
     setCurrentStep('generate');
     setProgress(0);
+    setError(null);
 
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
+    // Simulate progress animation
+    const progressInterval = setInterval(() => {
+      setProgress((prev) => Math.min(prev + 2, 90));
+    }, 200);
+
+    try {
+      let result;
+
+      // Call the appropriate API based on tool ID
+      switch (config.toolId) {
+        case 'ai-avatar':
+          result = await aiAPI.generateAvatar(
+            'User uploaded image',
+            selectedOption as string || 'professional'
+          );
+          break;
+
+        case 'face-swap':
+          result = await aiAPI.generateFaceSwap(
+            uploadedPhotos[0] || '',
+            uploadedPhotos[1] || ''
+          );
+          break;
+
+        case 'duo-portrait':
+          result = await aiAPI.generateDuoPortrait(
+            'Person 1',
+            'Person 2',
+            selectedOption as string || 'elegant'
+          );
+          break;
+
+        case 'poster-maker':
+          result = await aiAPI.generatePoster(
+            'Custom Theme',
+            'Custom Text',
+            selectedOption as string || 'modern'
+          );
+          break;
+
+        case 'age-transform':
+          result = await aiAPI.ageTransform(
+            uploadedPhotos[0] || '',
+            30 // Default age
+          );
+          break;
+
+        case 'enhance':
+          result = await aiAPI.enhanceImage(
+            uploadedPhotos[0] || '',
+            'professional enhancement'
+          );
+          break;
+
+        default:
+          throw new Error('Unknown tool type');
+      }
+
+      clearInterval(progressInterval);
+
+      if (result.success && result.imageUrl) {
+        setProgress(100);
+        setGeneratedImage(result.imageUrl);
+
+        // Deduct credits after successful generation
+        spendCredits(toolCost, `${config.name} creation`);
+
+        setTimeout(() => {
           setCurrentStep('result');
-          return 100;
-        }
-        return prev + 5;
-      });
-    }, 150);
+        }, 500);
+      } else {
+        throw new Error(result.message || result.error || 'Generation failed');
+      }
+    } catch (err: any) {
+      clearInterval(progressInterval);
+      console.error('Generation error:', err);
+      setError(err.message || 'Failed to generate image');
+      setProgress(0);
+      alert(`Error: ${err.message || 'Failed to generate image'}`);
+      setCurrentStep('upload');
+    }
   };
 
   const handleTryAgain = () => {
@@ -238,11 +310,23 @@ const AIToolTemplate: React.FC<AIToolTemplateProps> = ({ config }) => {
           <div>
             <h2 className="text-2xl font-bold text-white mb-6 text-center">Your Creation</h2>
 
-            <div className="w-full aspect-square bg-dark-100 rounded-3xl mb-6 flex items-center justify-center">
-              <div className="text-center">
-                <span className="text-8xl mb-4 block">{config.icon}</span>
-                <p className="text-dark-500 font-medium">Generated Result Preview</p>
-              </div>
+            <div className="w-full aspect-square bg-dark-100 rounded-3xl mb-6 flex items-center justify-center overflow-hidden">
+              {generatedImage ? (
+                <img
+                  src={generatedImage}
+                  alt="Generated result"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    console.error('Image load error');
+                    e.currentTarget.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>';
+                  }}
+                />
+              ) : (
+                <div className="text-center">
+                  <span className="text-8xl mb-4 block">{config.icon}</span>
+                  <p className="text-dark-500 font-medium">Generated Result Preview</p>
+                </div>
+              )}
             </div>
 
             <div className="space-y-3">

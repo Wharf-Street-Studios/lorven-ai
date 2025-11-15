@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../components/ui';
 import { ArrowLeft01Icon, Camera01Icon, Image02Icon, SparklesIcon, Download04Icon, Share08Icon, Rotate01Icon } from 'hugeicons-react';
+import { aiAPI } from '../../services/api';
 
 type Step = 'upload' | 'template' | 'generate' | 'result';
 
@@ -39,24 +40,38 @@ const FaceSwapTool: React.FC = () => {
     setSelectedTemplate(templateId);
   };
 
-  const handleGenerate = () => {
+  const handleGenerate = async () => {
     setCurrentStep('generate');
     setIsGenerating(true);
     setProgress(0);
 
-    // Simulate generation progress
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setIsGenerating(false);
-          setGeneratedImage('generated-mock-image');
-          setCurrentStep('result');
-          return 100;
-        }
-        return prev + 5;
-      });
-    }, 150);
+    try {
+      // Simulate progress
+      const progressInterval = setInterval(() => {
+        setProgress((prev) => Math.min(prev + 10, 90));
+      }, 300);
+
+      // Call real API
+      const result = await aiAPI.generateFaceSwap(
+        uploadedPhoto || '',
+        uploadedPhoto || ''
+      );
+
+      clearInterval(progressInterval);
+      setProgress(100);
+
+      if (result.success && result.imageUrl) {
+        setGeneratedImage(result.imageUrl);
+        setIsGenerating(false);
+        setCurrentStep('result');
+      } else {
+        throw new Error(result.error || 'Generation failed');
+      }
+    } catch (error: any) {
+      setIsGenerating(false);
+      alert(`Error generating image: ${error.message}`);
+      setCurrentStep('template');
+    }
   };
 
   const handlePublish = () => {
@@ -224,10 +239,18 @@ const FaceSwapTool: React.FC = () => {
 
             {/* Result Preview */}
             <div className="w-full aspect-square bg-dark-100 rounded-3xl mb-6 flex items-center justify-center overflow-hidden">
-              <div className="text-center">
-                <SparklesIcon size={80} color="#ffffff" className="mx-auto mb-4" />
-                <p className="text-dark-500 font-medium">Generated Image Preview</p>
-              </div>
+              {generatedImage ? (
+                <img
+                  src={generatedImage}
+                  alt="Generated face swap"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="text-center">
+                  <SparklesIcon size={80} color="#ffffff" className="mx-auto mb-4" />
+                  <p className="text-dark-500 font-medium">Generated Image Preview</p>
+                </div>
+              )}
             </div>
 
             {/* Action Buttons */}
