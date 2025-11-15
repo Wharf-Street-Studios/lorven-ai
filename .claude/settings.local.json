@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tailwindcss:*)",
+      "Bash(npm run dev)",
+      "Bash(npm run build:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(npm run deploy:*)",
+      "Bash(gh --version:*)",
+      "Bash(gh repo:*)",
+      "Bash(git fetch:*)",
+      "Bash(gh api:*)",
+      "Bash(git ls-tree:*)",
+      "WebFetch(domain:wharf-street-studios.github.io)",
+      "WebFetch(domain:supreme-adventure-ezgk48p.pages.github.io)",
+      "Bash(git checkout:*)",
+      "Bash(cat:*)",
+      "Bash(npx gh-pages -d dist)",
+      "Bash(curl:*)",
+      "Bash(npm run publish:*)",
+      "Bash(echo:*)",
+      "Bash(git log:*)",
+      "Bash(open -a \"Firefox\" \"http://localhost:3001/epiko-ai-studios/\")",
+      "Bash(open -a \"Firefox\" \"https://wharf-street-studios.github.io/epiko-ai-studios/profile\")",
+      "Bash(open:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(node generate-prd.js:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
