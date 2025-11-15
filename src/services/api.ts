@@ -1,5 +1,5 @@
 // API Service for backend communication
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+const API_BASE_URL = (import.meta as any).env?.VITE_API_URL || 'http://localhost:5001/api';
 
 // Get auth token from localStorage (Supabase session)
 const getAuthToken = (): string | null => {
@@ -22,9 +22,9 @@ async function apiRequest<T>(
 ): Promise<{ success: boolean; data?: T; message?: string; error?: string }> {
   const token = getAuthToken();
 
-  const headers: HeadersInit = {
+  const headers: Record<string, string> = {
     'Content-Type': 'application/json',
-    ...options.headers,
+    ...(options.headers as Record<string, string>),
   };
 
   if (token) {
